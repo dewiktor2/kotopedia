@@ -1,0 +1,74 @@
+{
+  "name": "baza-karm",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "projekty",
+  "sourceRoot": "apps/baza-karm/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/baza-karm",
+        "index": "apps/baza-karm/src/index.html",
+        "browser": "apps/baza-karm/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/baza-karm/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/baza-karm/src/favicon.ico",
+          "apps/baza-karm/src/assets"
+        ],
+        "styles": ["apps/baza-karm/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/baza-karm/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/baza-karm/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "baza-karm:build:production"
+        },
+        "development": {
+          "buildTarget": "baza-karm:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "baza-karm:build"
+      }
+    }
+  }
+}

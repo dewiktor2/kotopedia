@@ -2,7 +2,7 @@
   "name": "baza-karm",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "projekty",
+  "prefix": "bk",
   "sourceRoot": "apps/baza-karm/src",
   "tags": [],
   "targets": {

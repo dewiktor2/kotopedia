@@ -6,6 +6,11 @@ import {
   createClient,
 } from '@supabase/supabase-js';
 import { environment } from '../../env/environment';
+import {
+  ProductQueryFetch,
+  QueryFetch,
+  defaultQueryFetchValue,
+} from '../utility/syncfusion';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +20,10 @@ export class SupabaseService {
   _session: AuthSession | null = null;
 
   constructor() {
-    // console.log(environment.supabaseKey);
-    // console.log(environment.supabaseUrl);
+    this.init();
   }
 
-  init() {
+  private init() {
     const options = {
       auth: {
         autoRefreshToken: false,
@@ -27,18 +31,13 @@ export class SupabaseService {
       },
     } as SupabaseClientOptions<any>;
 
-    try {
-      // ANON_KEY and ANON_URL are string constants from your project
-      this.#supabase = createClient(
-        environment.supabaseUrl,
-        environment.supabaseKey,
-        {
-          auth: { persistSession: false, autoRefreshToken: false },
-        }
-      );
-    } catch (ex) {
-      console.log(ex);
-    }
+    this.#supabase = createClient(
+      environment.supabaseUrl,
+      environment.supabaseKey,
+      {
+        auth: { persistSession: false, autoRefreshToken: false },
+      }
+    );
   }
 
   get session() {
@@ -48,12 +47,74 @@ export class SupabaseService {
     return this._session;
   }
 
-  products() {
-    return this.#supabase
-      .from('Products')
-      .select(`*`)
-      .then((data: any) => {
-        console.log(data);
-      });
+  async products(options: ProductQueryFetch = defaultQueryFetchValue('nazwa')) {
+    const categoriesFilter = options.categoryFilter
+      ? `Categories!inner (
+      nazwa
+    )`
+      : `Categories (
+      nazwa
+    )`;
+
+    let query = this.#supabase.from('Products').select(`
+        *, 
+        Brands!products_firma_id_fkey(nazwa), 
+        Flavors (
+          smak
+        ),
+        ${categoriesFilter}
+      `);
+
+    const sortOrder = options.order;
+
+    // Conditionally add ordering to the query
+    if (sortOrder?.name) {
+      if (sortOrder?.name === 'Brands.nazwa') {
+        query = query.order('nazwa', {
+          referencedTable: 'Brands!products_firma_id_fkey(nazwa)',
+          ascending: sortOrder.ascending,
+        });
+      } else {
+        query = query.order(sortOrder.name, {
+          ascending: sortOrder?.ascending,
+        });
+      }
+    }
+
+    // Conditionally add limit to the query
+    if (options.startIndex) {
+      query = query.range(options?.startIndex, options.endIndex);
+    } else {
+      query = query.range(0, 20);
+    }
+
+    if (options.categoryFilter) {
+      query.eq('Categories.nazwa', options.categoryFilter);
+    }
+
+    // Execute the query
+    const { data, error } = await query;
+
+    const count = () => {
+      let queryCount = this.#supabase.from('Products').select(
+        `
+        *, 
+        Brands!products_firma_id_fkey(nazwa), 
+        Flavors (
+          smak
+        ),
+        ${categoriesFilter}
+      `,
+        { count: 'exact', head: true }
+      );
+      if (options.categoryFilter) {
+        queryCount.eq('Categories.nazwa', options.categoryFilter);
+      }
+      return queryCount;
+    };
+
+    const recordNumbers = await count();
+
+    return { data, error, recordNumbers };
   }
 }

@@ -20,7 +20,9 @@
           "apps/baza-karm/src/favicon.ico",
           "apps/baza-karm/src/assets"
         ],
-        "styles": ["apps/baza-karm/src/styles.scss"],
+        "styles": [
+          "apps/baza-karm/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/baza-karm/src/main.server.ts",
         "prerender": true,

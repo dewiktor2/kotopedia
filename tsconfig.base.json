@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
@@ -15,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@projekty/shared-ui": ["apps/src/index.ts"]
+      "@projekty/shared-ui": ["apps/src/index.ts"],
+      "@kotopedia/domains/feed": ["apps/baza-karm/src/app/domains/feed/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

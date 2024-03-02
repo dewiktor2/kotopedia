@@ -1,0 +1,52 @@
+<div class="control-section">
+
+    <bk-search-input (searchText)="search($event)"></bk-search-input>
+    <ejs-grid [dataSource]='data | async' height=700 allowPaging='true' [allowSorting]="true"
+        [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="true"
+        [allowMultiSorting]="false" width="auto" class="sortingenabled" [pageSettings]='initialPage'
+        [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
+        <e-columns>
+            <e-column field='nazwa' headerText='Nazwa' headerTextAlign="left" textAlign='Left'
+                clipMode='EllipsisWithTooltip' width=200 />
+            <e-column field='Brands.nazwa' headerText='Firma' headerTextAlign="left" textAlign='Left'
+                clipMode='EllipsisWithTooltip' width=150 />
+            <e-column headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150
+                [allowSorting]="false">
+                <ng-template #template let-data>
+                    <span *ngFor="let item of data.Flavors; let last = last">
+                        {{ item.smak }}<ng-container *ngIf="!last">, </ng-container>
+                    </span>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip' width=150
+                [allowSorting]="false">
+                <ng-template #template let-data>
+                    <span *ngFor="let item of data.Categories; let last = last">
+                        {{ item.nazwa }}<ng-container *ngIf="!last">, </ng-container>
+                    </span>
+                </ng-template>
+            </e-column>
+            <e-column field='wegle_sucha' headerText='Węglowodany' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=150 />
+            <e-column field='bialko_sucha' headerText='Białko' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=100 />
+            <e-column field='tluszcz_w_suchej' headerText='Tłuszcz' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=100 />
+            <e-column field='wlokno_surowe_w_suchej' headerText='Włokno' textAlign='right'
+                clipMode='EllipsisWithTooltip' width=100 />
+            <e-column field='fosfor_sucha' headerText='Fosfor' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=100 />
+            <e-column field='wapn' headerText='Wapń' textAlign='right' clipMode='EllipsisWithTooltip' width=100 />
+            <e-column field='wapn_fosfor' headerText='Wapń:Fosfor' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=100 />
+            <e-column field='kcal_100' headerText='Kcal/100g' textAlign='right' clipMode='EllipsisWithTooltip'
+                width=150 />
+            <e-column headerText='Data modyfikacji' headerTextAlign="left" textAlign='Left'
+                clipMode='EllipsisWithTooltip' width=150 [allowSorting]="false">
+                <ng-template #template let-data>
+                    <span> {{ data.updated_at | utcToLocal: 'fullDate' }}</span>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+</div>

@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedMenuComponent } from '@projekty/shared-ui';
 import { SupabaseService } from './services/supabase.service';
+import { CultureService } from './services/culture.service';
+
 
 @Component({
   standalone: true,
@@ -9,15 +11,14 @@ import { SupabaseService } from './services/supabase.service';
   selector: 'bk-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'baza-karm';
 
   private readonly supabase = inject(SupabaseService);
 
-  ngOnInit() {
-    this.supabase.init();
-    this.supabase.products();
+  constructor(private readonly cultureService: CultureService) {
+    // The culture will be set when the service is instantiated
   }
 }

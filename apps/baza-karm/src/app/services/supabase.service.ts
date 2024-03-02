@@ -56,6 +56,10 @@ export class SupabaseService {
       nazwa
     )`;
 
+
+    const dwa = await this.#supabase.from('v_products')
+    .select();
+
     let query = this.#supabase.from('Products').select(`
         *, 
         Brands!products_firma_id_fkey(nazwa), 

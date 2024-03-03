@@ -1,7 +1,10 @@
 <div class="control-section">
 
     <bk-search-input (searchText)="search($event)"></bk-search-input>
-    <ejs-grid [dataSource]='data | async' height=700 allowPaging='true' [allowSorting]="true"
+    <div *ngIf="(recordNumber$ | async) as recordNumber" class="record-number-display mb-2 mt-2">
+        Ilość karm: {{ recordNumber }}
+    </div>
+    <ejs-grid [dataSource]='data | async' height=700 [enableInfiniteScrolling]='true' [allowSorting]="true"
         [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="true"
         [allowMultiSorting]="false" width="auto" class="sortingenabled" [pageSettings]='initialPage'
         [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
@@ -10,9 +13,10 @@
                 clipMode='EllipsisWithTooltip' width=200 />
             <e-column field='brand_name' headerText='Firma' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=150 />
-            <e-column field='flavors'  headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
+            <e-column field='flavors' headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
             </e-column>
-            <e-column field='categories'  headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
+            <e-column field='categories' headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip'
+                width=150>
             </e-column>
             <e-column field='wegle_sucha' headerText='Węglowodany' textAlign='right' clipMode='EllipsisWithTooltip'
                 width=150 />

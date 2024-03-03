@@ -8,8 +8,7 @@ import {
 import { environment } from '../../env/environment';
 import {
   ProductQueryFetch,
-  QueryFetch,
-  defaultQueryFetchValue,
+  defaultQueryFetchValue
 } from '../utility/syncfusion';
 
 @Injectable({
@@ -55,7 +54,7 @@ export class SupabaseService {
     if (options.startIndex) {
       query = query.range(options?.startIndex, options.endIndex);
     } else {
-      query = query.range(0, 20);
+      query = query.range(0, 50);
     }
 
     const sortOrder = options.order;
@@ -71,7 +70,7 @@ export class SupabaseService {
     }
 
     if(options.search && options.search.key) {
-      query.textSearch(`name_brand_name`, `${options.search.key}`, {
+      query.textSearch(`name_brand_name`, `'${options.search.key}'`, {
         type: 'websearch',
         config: 'english'
       });
@@ -85,7 +84,7 @@ export class SupabaseService {
         queryCount.eq('categories', options.categoryFilter);
       }
       if(options.search && options.search.key) {
-        queryCount.textSearch(`name_brand_name`, `${options.search.key}`, {
+        queryCount.textSearch(`name_brand_name`, `'${options.search.key}'`, {
           type: 'websearch',
           config: 'english'
         });

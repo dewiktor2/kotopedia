@@ -8,9 +8,15 @@ export class SetCategoryFilter {
   constructor(public readonly payload: { categoryFitler: string }) {}
 }
 
+export class SetRecordCount {
+  static readonly type = '[Feed] SetRecordCount';
+  constructor(public readonly payload: { count: number }) {}
+}
+
 @State<FeedStateModel>({
   name: 'feed',
   defaults: {
+    recordCount: 0,
     categoryFilter: 'wszystkie',
   },
 })
@@ -21,6 +27,11 @@ export class FeedsState {
   @Selector() static categoryFilter(state: FeedStateModel) {
     return state.categoryFilter;
   }
+
+  @Selector() static recordCount(state: FeedStateModel) {
+    return state.recordCount;
+  }
+
 
   @Action(SetCategoryFilter)
   async setCategoryFilter(
@@ -36,6 +47,16 @@ export class FeedsState {
     };
     ctx.patchState({
       categoryFilter: dwa[action.payload.categoryFitler],
+    });
+  }
+
+  @Action(SetRecordCount)
+  async setRecordCount(
+    ctx: StateContext<FeedStateModel>,
+    action: SetRecordCount
+  ) {
+    ctx.patchState({
+      recordCount: action.payload.count
     });
   }
 }

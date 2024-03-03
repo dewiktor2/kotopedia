@@ -1,19 +1,18 @@
 import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngxs/store';
 import {
-  Sorts,
   DataStateChangeEventArgs,
-  actionBegin,
+  Sorts
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SupabaseService } from './supabase.service';
+import { FeedsState, SetRecordCount } from '../domains/feed/+state/feed.state';
 import {
   ProductQueryFetch,
   QueryFetch,
   defaultQueryFetchValue,
 } from '../utility/syncfusion';
-import { Store } from '@ngxs/store';
-import { FeedsState } from '../domains/feed/+state/feed.state';
+import { SupabaseService } from './supabase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +70,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       map((response: any) => {
         const result = response.data;
         const count = response.count;
+        this.store.dispatch(new SetRecordCount({
+          count
+        }));
         return { result, count } as DataStateChangeEventArgs;
       })
     );

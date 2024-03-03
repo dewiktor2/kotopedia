@@ -11,7 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
         placeholder="Szukaj"
         class="input input-bordered input-primary"
         #searchInput
-        (keyup.enter)="onSearchButtonClick(searchInput.value)"
+        (keydown.enter)="onSearchButtonClick(searchInput.value)"
       />
       <button
         class="btn btn-primary ml-2"

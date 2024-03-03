@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnInit,
+  ViewChild,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -10,21 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import {
   DataStateChangeEventArgs,
+  GridComponent,
   GridModule,
-  PageService,
-  SortService,
+  InfiniteScrollService,
+  SortService
 } from '@syncfusion/ej2-angular-grids';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FeedsService } from '../../services/feeds.service';
-import { CustomSupabaseAdaptor } from '../../utility/syncfusion/supabase.adapter';
-import { SetCategoryFilter } from './+state/feed.state';
-import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
+import { CustomSupabaseAdaptor } from '../../utility/syncfusion/supabase.adapter';
+import { FeedsState, SetCategoryFilter } from './+state/feed.state';
+import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 
 @Component({
   standalone: true,
   imports: [GridModule, CommonModule, UtcToLocalPipe, SearchInputComponent],
-  providers: [SortService, PageService],
+  providers: [SortService, InfiniteScrollService],
   selector: 'bk-feed',
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
@@ -37,12 +39,17 @@ export class FeedComponent implements OnInit {
   route = inject(ActivatedRoute);
 
   data!: Observable<DataStateChangeEventArgs>;
-  initialPage = { pageSizes: true, pageSize: 20 };
+  initialPage: object = { pageSize: 50 };
   sortOptions!: Object;
   loadingIndicator = { indicatorType: 'Shimmer' };
 
+  @ViewChild('GridComponent')
+  grid!: GridComponent;
+
   @Input()
   index: number = 1000;
+
+  recordNumber$ = of(0);
 
   constructor() {
     // Accessing the route data
@@ -55,10 +62,11 @@ export class FeedComponent implements OnInit {
     this.sortOptions = {
       columns: [{ field: 'brand_name', direction: 'Descending' }],
     };
+    this.recordNumber$ = this.store.select(FeedsState.recordCount);
   }
 
   public ngOnInit(): void {
-    this.service.execute({ skip: 0, take: 20 });
+    this.service.execute({ skip: 0, take: 50 });
   }
 
   public dataStateChange(state: DataStateChangeEventArgs): void {

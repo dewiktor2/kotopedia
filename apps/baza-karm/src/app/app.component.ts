@@ -1,10 +1,9 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedMenuComponent } from '@projekty/shared-ui';
-import { SupabaseService } from './services/supabase.service';
-import { CultureService } from './services/culture.service';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
+import { SharedMenuComponent } from '@projekty/shared-ui';
 import { tap } from 'rxjs';
+import { CultureService } from './services/culture.service';
 import { SeoService } from './services/seo.service';
 
 

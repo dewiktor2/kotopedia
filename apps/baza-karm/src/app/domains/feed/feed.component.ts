@@ -53,7 +53,7 @@ export class FeedComponent implements OnInit {
     });
     this.data = this.service;
     this.sortOptions = {
-      columns: [{ field: 'Brands.nazwa', direction: 'Descending' }],
+      columns: [{ field: 'brand_name', direction: 'Descending' }],
     };
   }
 
@@ -66,16 +66,15 @@ export class FeedComponent implements OnInit {
   }
 
   search(searchKey: string) {
-    if (searchKey) {
-      this.service.execute({
-        search: [
-          {
-            fields: ['all'],
-            operator: 'contains',
-            key: searchKey,
-          },
-        ],
-      } as DataStateChangeEventArgs);
-    }
+    searchKey = searchKey.replace(/\s+/g, ' ').trim();
+    this.service.execute({
+      search: [
+        {
+          fields: ['all'],
+          operator: 'contains',
+          key: searchKey,
+        },
+      ],
+    } as DataStateChangeEventArgs);
   }
 }

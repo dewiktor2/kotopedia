@@ -29,6 +29,6 @@ export class CustomSupabaseAdaptor extends CustomDataAdaptor {
 
   // Example usage for a 'getData' operation
   getData = (option: FetchOption) => {
-    this.handleSupabaseRequest(this.supabaseService.products(), option);
+    this.handleSupabaseRequest(this.supabaseService.productsV2(), option);
   };
 }

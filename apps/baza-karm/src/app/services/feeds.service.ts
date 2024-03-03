@@ -48,6 +48,12 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       };
     }
 
+    if(state && state?.search?.length && state.search[0].key) {
+      const search = state.search[0];
+
+      query.search = search;
+    }
+
     const categoryFilter = this.store.selectSnapshot(FeedsState.categoryFilter);
 
     query.categoryFilter = categoryFilter;
@@ -73,7 +79,7 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
   private fetchData(query: QueryFetch): Observable<any> {
     return new Observable((observer) => {
       this.client
-        .products(query)
+        .productsV2(query)
         .then((result: any) => {
           if (result.error) {
             throw new Error('Network response was not ok');

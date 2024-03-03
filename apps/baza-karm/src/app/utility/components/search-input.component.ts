@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   template: `
     <div class="form-control pb-4 flex">
       <input
-        type="text"
+        type="search"
         placeholder="Szukaj"
         class="input input-bordered input-primary"
         #searchInput

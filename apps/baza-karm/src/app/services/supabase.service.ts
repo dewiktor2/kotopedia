@@ -47,6 +47,60 @@ export class SupabaseService {
     return this._session;
   }
 
+  async productsV2(
+    options: ProductQueryFetch = defaultQueryFetchValue('nazwa')
+  ) {
+    let query = this.#supabase.from('v_products').select();
+    // Conditionally add limit to the query
+    if (options.startIndex) {
+      query = query.range(options?.startIndex, options.endIndex);
+    } else {
+      query = query.range(0, 20);
+    }
+
+    const sortOrder = options.order;
+
+    if (sortOrder?.name) {
+      query = query.order(sortOrder.name, {
+        ascending: sortOrder?.ascending,
+      });
+    }
+
+    if (options.categoryFilter) {
+      query.eq('categories', options.categoryFilter);
+    }
+
+    if(options.search && options.search.key) {
+      query.textSearch(`name_brand_name`, `${options.search.key}`, {
+        type: 'websearch',
+        config: 'english'
+      });
+    }
+
+    const count = () => {
+      let queryCount = this.#supabase
+        .from('v_products')
+        .select(`*`, { count: 'exact', head: true });
+      if (options.categoryFilter) {
+        queryCount.eq('categories', options.categoryFilter);
+      }
+      if(options.search && options.search.key) {
+        queryCount.textSearch(`name_brand_name`, `${options.search.key}`, {
+          type: 'websearch',
+          config: 'english'
+        });
+      }
+      return queryCount;
+    };
+
+    const recordNumbers = await count();
+
+    // Execute the query
+    const { data, error } = await query;
+
+    return { data, error, recordNumbers };
+  }
+
   async products(options: ProductQueryFetch = defaultQueryFetchValue('nazwa')) {
     const categoriesFilter = options.categoryFilter
       ? `Categories!inner (
@@ -56,9 +110,7 @@ export class SupabaseService {
       nazwa
     )`;
 
-
-    const dwa = await this.#supabase.from('v_products')
-    .select();
+    const dwa = await this.#supabase.from('v_products').select();
 
     let query = this.#supabase.from('Products').select(`
         *, 

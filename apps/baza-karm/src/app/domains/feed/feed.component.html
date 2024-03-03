@@ -8,23 +8,11 @@
         <e-columns>
             <e-column field='nazwa' headerText='Nazwa' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=200 />
-            <e-column field='Brands.nazwa' headerText='Firma' headerTextAlign="left" textAlign='Left'
+            <e-column field='brand_name' headerText='Firma' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=150 />
-            <e-column headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150
-                [allowSorting]="false">
-                <ng-template #template let-data>
-                    <span *ngFor="let item of data.Flavors; let last = last">
-                        {{ item.smak }}<ng-container *ngIf="!last">, </ng-container>
-                    </span>
-                </ng-template>
+            <e-column field='flavors'  headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
             </e-column>
-            <e-column headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip' width=150
-                [allowSorting]="false">
-                <ng-template #template let-data>
-                    <span *ngFor="let item of data.Categories; let last = last">
-                        {{ item.nazwa }}<ng-container *ngIf="!last">, </ng-container>
-                    </span>
-                </ng-template>
+            <e-column field='categories'  headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
             </e-column>
             <e-column field='wegle_sucha' headerText='Węglowodany' textAlign='right' clipMode='EllipsisWithTooltip'
                 width=150 />

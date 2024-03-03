@@ -1,3 +1,5 @@
+import { SearchSettingsModel } from "@syncfusion/ej2-angular-grids";
+
 export interface QueryFetch {
   startIndex: number;
   endIndex: number;
@@ -17,6 +19,7 @@ export interface ProductQueryFetch extends QueryFetch {
   startIndex: number;
   endIndex: number;
   take: number;
+  search?: SearchSettingsModel;
   categoryFilter?: string;
   order: { name: string; ascending?: boolean, data?: { referencedTable: string, ascending: false } };
 }

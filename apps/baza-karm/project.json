@@ -18,7 +18,10 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/baza-karm/src/favicon.ico",
-          "apps/baza-karm/src/assets"
+          "apps/baza-karm/src/assets",
+          "apps/baza-karm/src/manifest.webmanifest",
+          "apps/baza-karm/src/robots.txt",
+          "apps/baza-karm/src/sitemap.xml"
         ],
         "styles": [
           "apps/baza-karm/src/styles.scss"
@@ -28,7 +31,8 @@
         "prerender": true,
         "ssr": {
           "entry": "apps/baza-karm/server.ts"
-        }
+        },
+        "serviceWorker": "apps/baza-karm/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -36,7 +40,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "7mb"
             },
             {
               "type": "anyComponentStyle",
@@ -47,8 +51,8 @@
           "outputHashing": "all",
           "fileReplacements": [
             {
-              "replace": "src/env/environments/environment.ts",
-              "with": "src/env/environments/environment.prod.ts"
+              "replace": "apps/baza-karm/src/env/environment.ts",
+              "with": "apps/baza-karm/src/env/environment.prod.ts"
             }
           ]
         },

@@ -70,10 +70,7 @@ export class SupabaseService {
     }
 
     if(options.search && options.search.key) {
-      query.textSearch(`name_brand_name`, `'${options.search.key}'`, {
-        type: 'websearch',
-        config: 'english'
-      });
+      query.ilike('name_brand_name', `%${options.search.key}%`);
     }
 
     const count = () => {
@@ -84,10 +81,7 @@ export class SupabaseService {
         queryCount.eq('categories', options.categoryFilter);
       }
       if(options.search && options.search.key) {
-        queryCount.textSearch(`name_brand_name`, `'${options.search.key}'`, {
-          type: 'websearch',
-          config: 'english'
-        });
+        queryCount.ilike('name_brand_name', `%${options.search.key}%`);
       }
       return queryCount;
     };

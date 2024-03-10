@@ -5,11 +5,12 @@ import { SharedMenuComponent } from '@projekty/shared-ui';
 import { tap } from 'rxjs';
 import { CultureService } from './services/culture.service';
 import { SeoService } from './services/seo.service';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 @Component({
   standalone: true,
-  imports: [RouterModule, SharedMenuComponent],
+  imports: [RouterModule, SharedMenuComponent, AdsenseModule],
   selector: 'bk-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

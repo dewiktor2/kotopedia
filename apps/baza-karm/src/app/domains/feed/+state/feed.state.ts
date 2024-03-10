@@ -13,11 +13,23 @@ export class SetRecordCount {
   constructor(public readonly payload: { count: number }) {}
 }
 
+export class SetCurrentFilter {
+  static readonly type = '[Feed] SetCurrentFilter';
+  constructor(public readonly payload: { currentFilter: string }) {}
+}
+
+export class SetSearchInProgress {
+  static readonly type = '[Feed] SetSearchInProgress';
+  constructor(public readonly payload: { searchInProgress: boolean }) {}
+}
+
 @State<FeedStateModel>({
   name: 'feed',
   defaults: {
     recordCount: 0,
+    currentFilter: '',
     categoryFilter: 'wszystkie',
+    searchInProgress: false,
   },
 })
 @Injectable()
@@ -32,6 +44,13 @@ export class FeedsState {
     return state.recordCount;
   }
 
+  @Selector() static currentFilter(state: FeedStateModel) {
+    return state.currentFilter;
+  }
+
+  @Selector() static searchInProgress(state: FeedStateModel) {
+    return state.searchInProgress;
+  }
 
   @Action(SetCategoryFilter)
   async setCategoryFilter(
@@ -56,7 +75,27 @@ export class FeedsState {
     action: SetRecordCount
   ) {
     ctx.patchState({
-      recordCount: action.payload.count
+      recordCount: action.payload.count,
+    });
+  }
+
+  @Action(SetCurrentFilter)
+  async setCurrentFilter(
+    ctx: StateContext<FeedStateModel>,
+    action: SetCurrentFilter
+  ) {
+    ctx.patchState({
+      currentFilter: action.payload.currentFilter,
+    });
+  }
+
+  @Action(SetSearchInProgress)
+  async setSearchInProgress(
+    ctx: StateContext<FeedStateModel>,
+    action: SetSearchInProgress
+  ) {
+    ctx.patchState({
+      searchInProgress: action.payload.searchInProgress,
     });
   }
 }

@@ -1,13 +1,9 @@
-<div class="control-section">
-
+<div *ngIf="(data | async) as grid; else other;" class="control-section">
     <bk-search-input (searchText)="search($event)"></bk-search-input>
-    <div *ngIf="(recordNumber$ | async) as recordNumber" class="record-number-display mb-2 mt-2">
-        Ilość karm: {{ recordNumber }}
-    </div>
-    <ejs-grid [dataSource]='data | async' height=700 [enableInfiniteScrolling]='true' [allowSorting]="true"
-        [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="true"
-        [allowMultiSorting]="false" width="auto" class="sortingenabled" [pageSettings]='initialPage'
-        [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
+    <ejs-grid [dataSource]='grid' height=700 allowPaging='true' [allowSorting]="true" [sortSettings]='sortOptions'
+        [loadingIndicator]='loadingIndicator' [allowFiltering]="true" [allowMultiSorting]="false" width="auto"
+        class="sortingenabled" [pageSettings]='initialPage' [gridLines]="'Both'"
+        (dataStateChange)='dataStateChange($event)'>
         <e-columns>
             <e-column field='nazwa' headerText='Nazwa' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=200 />
@@ -42,3 +38,9 @@
         </e-columns>
     </ejs-grid>
 </div>
+<ng-template #other>
+    <div class="flex flex-col gap-4">
+        <div class="skeleton h-10 w-45"></div>
+        <div class="skeleton h-128 w-full"></div>
+    </div>
+</ng-template>

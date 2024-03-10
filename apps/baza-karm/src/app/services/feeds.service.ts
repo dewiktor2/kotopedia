@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { DataStateChangeEventArgs, Sorts } from '@syncfusion/ej2-angular-grids';
+import { Observable, Subject, of } from 'rxjs';
+import { catchError, finalize, map } from 'rxjs/operators';
 import {
-  DataStateChangeEventArgs,
-  Sorts
-} from '@syncfusion/ej2-angular-grids';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { FeedsState, SetRecordCount } from '../domains/feed/+state/feed.state';
+  FeedsState,
+  SetRecordCount,
+  SetSearchInProgress,
+} from '../domains/feed/+state/feed.state';
 import {
   ProductQueryFetch,
   QueryFetch,
@@ -35,7 +36,6 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
   ): Observable<DataStateChangeEventArgs> {
     // const pageQuery = `$skip=${state.skip}&$top=${state.take}`;
     // let sortQuery: string = '';
-
     const query = defaultQueryFetchValue('') as ProductQueryFetch;
 
     if (state && (state.sorted || []).length) {
@@ -47,8 +47,17 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       };
     }
 
-    if(state && state?.search?.length && state.search[0].key) {
-      const search = state.search[0];
+    const currentFilter = this.store.selectSnapshot(FeedsState.currentFilter);
+
+    if (
+      (state && state?.search?.length && state.search[0].key) ||
+      currentFilter
+    ) {
+      const search = state?.search?.[0] ?? {
+        key: currentFilter,
+        fields: ['all'],
+        operator: 'contains',
+      };
 
       query.search = search;
     }
@@ -63,17 +72,23 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       query.endIndex = action.currentPage * action.pageSize - 1;
     }
 
-    return this.fetchData(
-      // `${this.BASE_URL}?${pageQuery}${sortQuery}&$count=true`
-      query
-    ).pipe(
+    this.store.dispatch(new SetSearchInProgress({ searchInProgress: true }));
+
+    return this.fetchData(query).pipe(
       map((response: any) => {
         const result = response.data;
         const count = response.count;
-        this.store.dispatch(new SetRecordCount({
-          count
-        }));
+        this.store.dispatch(
+          new SetRecordCount({
+            count,
+          })
+        );
         return { result, count } as DataStateChangeEventArgs;
+      }),
+      finalize(() => {
+        this.store.dispatch(
+          new SetSearchInProgress({ searchInProgress: false })
+        );
       })
     );
   }
@@ -84,11 +99,14 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
         .productsV2(query)
         .then((result: any) => {
           if (result.error) {
-            throw new Error('Network response was not ok');
+            return {
+              data: [],
+              count: 0,
+            };
           }
           return {
             data: result.data,
-            count: result?.recordNumbers?.count ?? 0
+            count: result?.recordNumbers?.count ?? 0,
           };
         })
         .then((data) => {

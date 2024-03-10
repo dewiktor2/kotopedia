@@ -14,8 +14,8 @@
     "@angular/platform-browser-dynamic": "~17.1.0",
     "@angular/platform-server": "~17.1.0",
     "@angular/pwa": "~17.1.0",
-    "@angular/service-worker": "~17.1.0",
     "@angular/router": "~17.1.0",
+    "@angular/service-worker": "~17.1.0",
     "@angular/ssr": "~17.1.0",
     "@ngxs/store": "^3.8.2",
     "@nx/angular": "18.0.4",
@@ -24,6 +24,7 @@
     "daisyui": "^4.7.2",
     "ej2-locale": "^17.1.48",
     "express": "~4.18.2",
+    "ng2-adsense": "^13.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -10,6 +10,7 @@ import { NgxsModule } from '@ngxs/store';
 import { FeedsState } from '@kotopedia/domains/feed';
 import { provideServiceWorker } from '@angular/service-worker';
 import '@angular/common/locales/global/pl';
+import { AdsenseModule } from 'ng2-adsense';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,9 @@ export const appConfig: ApplicationConfig = {
       registrationStrategy: 'registerWhenStable:30000',
     }),
     importProvidersFrom(
+      AdsenseModule.forRoot({
+        adClient: 'ca-pub-4829562881799420'
+      }),
       NgxsModule.forRoot([FeedsState], {
         developmentMode: isDevMode(),
         selectorOptions: {

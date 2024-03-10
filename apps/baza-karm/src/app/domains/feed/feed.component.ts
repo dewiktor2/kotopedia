@@ -13,20 +13,24 @@ import {
   DataStateChangeEventArgs,
   GridComponent,
   GridModule,
-  InfiniteScrollService,
-  SortService
+  PageService,
+  SortService,
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, of } from 'rxjs';
 import { FeedsService } from '../../services/feeds.service';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
 import { CustomSupabaseAdaptor } from '../../utility/syncfusion/supabase.adapter';
-import { FeedsState, SetCategoryFilter } from './+state/feed.state';
+import {
+  FeedsState,
+  SetCategoryFilter,
+  SetCurrentFilter,
+} from './+state/feed.state';
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 
 @Component({
   standalone: true,
   imports: [GridModule, CommonModule, UtcToLocalPipe, SearchInputComponent],
-  providers: [SortService, InfiniteScrollService],
+  providers: [SortService, PageService],
   selector: 'bk-feed',
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
@@ -75,6 +79,7 @@ export class FeedComponent implements OnInit {
 
   search(searchKey: string) {
     searchKey = searchKey.replace(/\s+/g, ' ').trim();
+    this.store.dispatch(new SetCurrentFilter({ currentFilter: searchKey }));
     this.service.execute({
       search: [
         {

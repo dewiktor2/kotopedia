@@ -16,7 +16,10 @@
                         </svg>
                     </label>
                     <div class="flex-1 px-2 mx-2">
-                        <img src="assets/img/logo.webp" alt="Kotopedia" class="h-12 w-auto">
+                        <div class="flex items-center">
+                            <img src="assets/img/logo.webp" alt="Kotopedia" class="h-12 w-auto">
+                            <h1>Baza karm dla kotów</h1>
+                        </div>                  
                     </div>
                 </div>
             </div>
@@ -29,7 +32,7 @@
                         <a>Karmy</a>
                         <ul class="pl-4">
                             <li class="pb-1"><a [routerLink]="['/wszystkie']"
-                                    [ngClass]="{'active-link': router.url === '/wszystkie' }">Wszystkie</a></li>
+                                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }">Wszystkie</a></li>
                             <li class="pb-1"><a [routerLink]="['/monobialkowe']"
                                     [ngClass]="{'active-link': router.url === '/monobialkowe' }">Monobiałkowe</a></li>
                             <li class="pb-1"><a [routerLink]="['/polecane']"
@@ -52,12 +55,15 @@
         <div class="flex items-center p-4 bg-base-100 lg:justify-between">
             <!-- Brand Name -->
             <div class="flex-1">
-                <img src="assets/img/logo.webp" alt="Kotopedia" class="h-12 w-auto">
+                <div class="flex items-center">
+                    <img src="assets/img/logo.webp" alt="Kotopedia" class="h-12 w-auto">
+                    <h1>Baza karm dla kotów</h1>
+                </div>
             </div>
 
             <!-- Horizontal Menu for Desktop -->
             <div class="flex-1 flex justify-start">
-                <a [routerLink]="['/wszystkie']" [ngClass]="{'active-link': router.url === '/wszystkie' }"
+                <a [routerLink]="['/wszystkie']" [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }"
                     routerLinkActive="active-link" class="btn btn-ghost">Wszystkie</a>
                 <a [routerLink]="['/monobialkowe']" [ngClass]="{'active-link': router.url === '/monobialkowe' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Monobiałkowe</a>

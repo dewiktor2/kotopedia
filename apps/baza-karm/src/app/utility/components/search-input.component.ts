@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           <svg
+            *ngIf="!(searchInProgress$ | async); else other"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
@@ -33,10 +34,13 @@ import { CommonModule } from '@angular/common';
               clip-rule="evenodd"
             />
           </svg>
+          <ng-template #other>
+            <span class="loading loading-ring loading-xs"></span>
+          </ng-template>
         </label>
         <!-- Information Icon with Tooltip -->
         <div
-          class="flex items-center ml-2 tooltip"
+          class="flex ml-2 tooltip tooltip-left"
           data-tip="Szukaj po nazwie lub firmie"
         >
           <svg

@@ -26,10 +26,11 @@ import {
   SetCurrentFilter,
 } from './+state/feed.state';
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
+import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
 
 @Component({
   standalone: true,
-  imports: [GridModule, CommonModule, UtcToLocalPipe, SearchInputComponent],
+  imports: [GridModule, CommonModule, UtcToLocalPipe, SearchInputComponent, DismissableTooltipComponent],
   providers: [SortService, PageService],
   selector: 'bk-feed',
   templateUrl: './feed.component.html',
@@ -50,6 +51,9 @@ export class FeedComponent implements OnInit {
   @ViewChild('GridComponent')
   grid!: GridComponent;
 
+  @ViewChild('tooltip')
+  tooltip!: DismissableTooltipComponent;
+  
   @Input()
   index: number = 1000;
 

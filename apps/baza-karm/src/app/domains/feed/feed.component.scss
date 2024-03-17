@@ -3,3 +3,11 @@
     color: #333;
     /* Adjust the styling as per your design requirements */
 }
+
+.ellipsis-style {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block; /* Ensure it behaves as a block-level element */
+    width: 100%; /* Use the full width of the container */
+}

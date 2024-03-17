@@ -5,30 +5,89 @@
         class="sortingenabled" [pageSettings]='initialPage' [gridLines]="'Both'"
         (dataStateChange)='dataStateChange($event)'>
         <e-columns>
-            <e-column field='nazwa' headerText='Nazwa' headerTextAlign="left" textAlign='Left'
-                clipMode='EllipsisWithTooltip' width=200 />
-            <e-column field='brand_name' headerText='Firma' headerTextAlign="left" textAlign='Left'
-                clipMode='EllipsisWithTooltip' width=150 />
-            <e-column field='flavors' headerText='Smaki' textAlign='Left' clipMode='EllipsisWithTooltip' width=150>
+            <e-column headerText='Firma' headerTextAlign="left" textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.brand_name}}'>
+                        {{data.brand_name}}
+                    </div>
+                </ng-template>
             </e-column>
-            <e-column field='categories' headerText='Kategorie' textAlign='Left' clipMode='EllipsisWithTooltip'
-                width=150>
+            <e-column headerText='Nazwa' headerTextAlign="left" textAlign='Left' width=200>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.nazwa}}'>
+                        {{data.nazwa}}
+                    </div>
+                </ng-template>
             </e-column>
-            <e-column field='wegle_sucha' headerText='Węglowodany' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=150 />
-            <e-column field='bialko_sucha' headerText='Białko' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=100 />
-            <e-column field='tluszcz_w_suchej' headerText='Tłuszcz' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=100 />
-            <e-column field='wlokno_surowe_w_suchej' headerText='Włokno' textAlign='right'
-                clipMode='EllipsisWithTooltip' width=100 />
-            <e-column field='fosfor_sucha' headerText='Fosfor' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=100 />
-            <e-column field='wapn' headerText='Wapń' textAlign='right' clipMode='EllipsisWithTooltip' width=100 />
-            <e-column field='wapn_fosfor' headerText='Wapń:Fosfor' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=100 />
-            <e-column field='kcal_100' headerText='Kcal/100g' textAlign='right' clipMode='EllipsisWithTooltip'
-                width=150 />
+            <e-column headerText='Smaki' headerTextAlign="left" textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.flavors}}'>
+                        {{data.flavors}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='categories' headerTextAlign="left" headerText='Kategorie' textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.flavors}}'>
+                        {{data.flavors}}
+                    </div>
+                </ng-template>
+
+            </e-column>
+            <e-column headerText='Węglowodany' textAlign='right' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.wegle_sucha}}'>
+                        {{data.wegle_sucha}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Białko' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.bialko_sucha}}'>
+                        <span [ngClass]="{'text-red-500': data.bialko_sucha < 40, 'text-black': data.bialko_sucha > 40}">
+                            {{ data.bialko_sucha }}
+                        </span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Tłuszcz' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.tluszcz_w_suchej}}'>
+                        {{data.tluszcz_w_suchej}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Fosfor' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.fosfor_sucha}}'>
+                        {{data.fosfor_sucha}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Wapń:Fosfor' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.wapn_fosfor}}'>
+                        {{data.wapn_fosfor}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Kcal/100g' textAlign='right' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.kcal_100}}'>
+                        {{data.kcal_100}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='opis' headerText='Opis' headerTextAlign="left" textAlign='left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" (click)="tooltip.showModal()">
+                        <span class="cursor-pointer">{{data.opis}}</span>
+                        <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis">
+
+                        </bk-dismissable-tooltip>
+                    </div>
+                </ng-template>
+            </e-column>
             <e-column headerText='Data modyfikacji' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=150 [allowSorting]="false">
                 <ng-template #template let-data>

@@ -11,6 +11,8 @@ import {
   defaultQueryFetchValue,
 } from '../utility/syncfusion';
 
+import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -52,10 +54,11 @@ export class SupabaseService {
     let query = this.#supabase.from('v_products').select();
 
     if (options.categoryFilter) {
-      query.eq('categories', options.categoryFilter);
+      // query.eq('categories', options.categoryFilter);
+      query = this.filterQueryByCategory(query, options.categoryFilter);
     }
 
-    if ((options.search && options.search.key)) {
+    if (options.search && options.search.key) {
       query.ilike('name_brand_name', `%${options.search.key}%`);
     }
 
@@ -64,7 +67,10 @@ export class SupabaseService {
         .from('v_products')
         .select(`*`, { count: 'exact', head: true });
       if (options.categoryFilter) {
-        queryCount.eq('categories', options.categoryFilter);
+        queryCount = this.filterQueryByCategory(
+          queryCount,
+          options.categoryFilter
+        );
       }
       if (options.search && options.search.key) {
         queryCount.ilike('name_brand_name', `%${options.search.key}%`);
@@ -96,76 +102,20 @@ export class SupabaseService {
     return { data, error, recordNumbers };
   }
 
-  // async products(options: ProductQueryFetch = defaultQueryFetchValue('nazwa')) {
-  //   const categoriesFilter = options.categoryFilter
-  //     ? `Categories!inner (
-  //     nazwa
-  //   )`
-  //     : `Categories (
-  //     nazwa
-  //   )`;
-
-  //   const dwa = await this.#supabase.from('v_products').select();
-
-  //   let query = this.#supabase.from('Products').select(`
-  //       *, 
-  //       Brands!products_firma_id_fkey(nazwa), 
-  //       Flavors (
-  //         smak
-  //       ),
-  //       ${categoriesFilter}
-  //     `);
-
-  //   const sortOrder = options.order;
-
-  //   // Conditionally add ordering to the query
-  //   if (sortOrder?.name) {
-  //     if (sortOrder?.name === 'Brands.nazwa') {
-  //       query = query.order('nazwa', {
-  //         referencedTable: 'Brands!products_firma_id_fkey(nazwa)',
-  //         ascending: sortOrder.ascending,
-  //       });
-  //     } else {
-  //       query = query.order(sortOrder.name, {
-  //         ascending: sortOrder?.ascending,
-  //       });
-  //     }
-  //   }
-
-  //   // Conditionally add limit to the query
-  //   if (options.startIndex) {
-  //     query = query.range(options?.startIndex, options.endIndex);
-  //   } else {
-  //     query = query.range(0, 20);
-  //   }
-
-  //   if (options.categoryFilter) {
-  //     query.eq('Categories.nazwa', options.categoryFilter);
-  //   }
-
-  //   // Execute the query
-  //   const { data, error } = await query;
-
-  //   const count = () => {
-  //     let queryCount = this.#supabase.from('Products').select(
-  //       `
-  //       *, 
-  //       Brands!products_firma_id_fkey(nazwa), 
-  //       Flavors (
-  //         smak
-  //       ),
-  //       ${categoriesFilter}
-  //     `,
-  //       { count: 'exact', head: true }
-  //     );
-  //     if (options.categoryFilter) {
-  //       queryCount.eq('Categories.nazwa', options.categoryFilter);
-  //     }
-  //     return queryCount;
-  //   };
-
-  //   const recordNumbers = await count();
-
-  //   return { data, error, recordNumbers };
-  // }
+  filterQueryByCategory(
+    query: PostgrestFilterBuilder<any, any, any[], 'v_products', unknown>,
+    categoryFilter: string
+  ): PostgrestFilterBuilder<any, any, any[], 'v_products', unknown> {
+    if (categoryFilter === 'Polecane') {
+      query = query.lt('fosfor_sucha', 1);
+      query = query.lt('tluszcz_w_suchej', 30);
+      query = query.lt('wegle_sucha', 5);
+      query = query.gt('bialko_sucha', 45);
+    }
+    if (categoryFilter === 'Monobiałkowe') {
+      query = query.not('flavors', 'like', '%,%');
+      query = query.not('flavors', 'is', null)
+    }
+    return query;
+  }
 }

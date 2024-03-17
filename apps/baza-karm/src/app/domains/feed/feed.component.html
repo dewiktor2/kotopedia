@@ -1,25 +1,26 @@
 <div *ngIf="(data | async) as grid; else other;" class="control-section">
+    <!-- <bk-filter-dialog></bk-filter-dialog> -->
     <bk-search-input (searchText)="search($event)"></bk-search-input>
     <ejs-grid [dataSource]='grid' height=700 allowPaging='true' [allowSorting]="true" [sortSettings]='sortOptions'
         [loadingIndicator]='loadingIndicator' [allowFiltering]="true" [allowMultiSorting]="false" width="auto"
         class="sortingenabled" [pageSettings]='initialPage' [gridLines]="'Both'"
         (dataStateChange)='dataStateChange($event)'>
         <e-columns>
-            <e-column headerText='Firma' headerTextAlign="left" textAlign='Left' width=150>
+            <e-column field="brand_name" headerText='Firma' headerTextAlign="left" textAlign='Left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.brand_name}}'>
                         {{data.brand_name}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Nazwa' headerTextAlign="left" textAlign='Left' width=200>
+            <e-column field="nazwa" headerText='Nazwa' headerTextAlign="left" textAlign='Left' width=200>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.nazwa}}'>
                         {{data.nazwa}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Smaki' headerTextAlign="left" textAlign='Left' width=150>
+            <e-column  field="flavors" headerText='Smaki' headerTextAlign="left" textAlign='Left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.flavors}}'>
                         {{data.flavors}}
@@ -28,50 +29,51 @@
             </e-column>
             <e-column field='categories' headerTextAlign="left" headerText='Kategorie' textAlign='Left' width=150>
                 <ng-template #template let-data>
-                    <div class="ellipsis-style" title='{{data.flavors}}'>
-                        {{data.flavors}}
+                    <div class="ellipsis-style" title='{{data.categories}}'>
+                        {{data.categories}}
                     </div>
                 </ng-template>
 
             </e-column>
-            <e-column headerText='Węglowodany' textAlign='right' width=150>
+            <e-column field="wegle_sucha" headerText='Węglowodany' textAlign='right' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.wegle_sucha}}'>
                         {{data.wegle_sucha}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Białko' textAlign='right' width=100>
+            <e-column field="bialko_sucha" headerText='Białko' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.bialko_sucha}}'>
-                        <span [ngClass]="{'text-red-500': data.bialko_sucha < 40, 'text-black': data.bialko_sucha > 40}">
+                        <span
+                            [ngClass]="{'text-red-700': data.bialko_sucha < 40, 'text-black': data.bialko_sucha > 40}">
                             {{ data.bialko_sucha }}
                         </span>
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Tłuszcz' textAlign='right' width=100>
+            <e-column field="tluszcz_w_suchej" headerText='Tłuszcz' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.tluszcz_w_suchej}}'>
                         {{data.tluszcz_w_suchej}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Fosfor' textAlign='right' width=100>
+            <e-column field="fosfor_sucha" headerText='Fosfor' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.fosfor_sucha}}'>
                         {{data.fosfor_sucha}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Wapń:Fosfor' textAlign='right' width=100>
+            <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.wapn_fosfor}}'>
                         {{data.wapn_fosfor}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Kcal/100g' textAlign='right' width=150>
+            <e-column field="kcal_100" headerText='Kcal/100g' textAlign='right' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.kcal_100}}'>
                         {{data.kcal_100}}
@@ -89,7 +91,7 @@
                 </ng-template>
             </e-column>
             <e-column headerText='Data modyfikacji' headerTextAlign="left" textAlign='Left'
-                clipMode='EllipsisWithTooltip' width=150 [allowSorting]="false">
+                clipMode='EllipsisWithTooltip' width=120 [allowSorting]="false">
                 <ng-template #template let-data>
                     <span> {{ data.updated_at | utcToLocal: 'fullDate' }}</span>
                 </ng-template>

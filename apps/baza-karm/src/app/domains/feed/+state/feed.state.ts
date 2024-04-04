@@ -61,6 +61,7 @@ export class FeedsState {
       ['wszystkie']: undefined,
       ['polecane']: 'Polecane',
       ['monobialkowe']: 'Monobiałkowe',
+      ['obnizony-fosfor']: 'Obnizony fosfor',
       ['koty-chore']: 'Koty chore',
       ['smaczki']: 'Smaczki',
     };

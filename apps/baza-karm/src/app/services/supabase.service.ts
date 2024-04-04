@@ -107,14 +107,18 @@ export class SupabaseService {
     categoryFilter: string
   ): PostgrestFilterBuilder<any, any, any[], 'v_products', unknown> {
     if (categoryFilter === 'Polecane') {
-      query = query.lt('fosfor_sucha', 1);
-      query = query.lt('tluszcz_w_suchej', 30);
-      query = query.lt('wegle_sucha', 5);
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
+      query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
       query = query.gt('bialko_sucha', 45);
+      query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 10);
+      query = query.or('categories.is.null,categories.not.ilike.%Niejasny skład%')
     }
     if (categoryFilter === 'Monobiałkowe') {
       query = query.not('flavors', 'like', '%,%');
       query = query.not('flavors', 'is', null)
+    }
+    if (categoryFilter === 'Obnizony fosfor') {
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 0.7)
     }
     return query;
   }

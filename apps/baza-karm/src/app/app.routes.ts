@@ -20,6 +20,12 @@ export const appRoutes: Route[] = [
     data: { type: 'monobialkowe' },
   },
   {
+    path: 'obnizony-fosfor',
+    loadComponent: () =>
+      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
+    data: { type: 'obnizony-fosfor' },
+  },
+  {
     path: 'koty-chore',
     loadComponent: () =>
       import('@kotopedia/domains/feed').then((m) => m.FeedComponent),

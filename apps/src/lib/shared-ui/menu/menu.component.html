@@ -19,7 +19,7 @@
                         <div class="flex items-center">
                             <img src="assets/img/logo.webp" alt="Kotopedia" class="h-12 w-auto">
                             <h1>Baza karm dla kotów</h1>
-                        </div>                  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,13 +32,16 @@
                         <a>Karmy</a>
                         <ul class="pl-4">
                             <li class="pb-1"><a [routerLink]="['/wszystkie']"
-                                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }">Wszystkie</a></li>
+                                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }">Wszystkie</a>
+                            </li>
                             <li class="pb-1"><a [routerLink]="['/monobialkowe']"
                                     [ngClass]="{'active-link': router.url === '/monobialkowe' }">Monobiałkowe</a></li>
                             <li class="pb-1"><a [routerLink]="['/polecane']"
                                     [ngClass]="{'active-link': router.url === '/polecane' }">Polecane</a></li>
-                            <li class="pb-1"><a [routerLink]="['/koty-chore']"
-                                    [ngClass]="{'active-link': router.url === '/koty-chore' }">Koty chore</a></li>
+                            <li class="pb-1"><a [routerLink]="['/obnizony-fosfor']"
+                                    [ngClass]="{'active-link': router.url === '/obnizony-fosfor' }">Obniżony fosfor</a></li>
+                            <!-- <li class="pb-1"><a [routerLink]="['/koty-chore']"
+                                    [ngClass]="{'active-link': router.url === '/koty-chore' }">Koty chore</a></li> -->
 
                         </ul>
                     </li>
@@ -63,17 +66,20 @@
 
             <!-- Horizontal Menu for Desktop -->
             <div class="flex-1 flex justify-start">
-                <a [routerLink]="['/wszystkie']" [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }"
+                <a [routerLink]="['/wszystkie']"
+                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }"
                     routerLinkActive="active-link" class="btn btn-ghost">Wszystkie</a>
                 <a [routerLink]="['/monobialkowe']" [ngClass]="{'active-link': router.url === '/monobialkowe' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Monobiałkowe</a>
                 <a [routerLink]="['/polecane']" [ngClass]="{'active-link': router.url === '/polecane' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Polecane</a>
-                <a [routerLink]="['/koty-chore']" [ngClass]="{'active-link': router.url === '/koty-chore' }"
+                <a [routerLink]="['/obnizony-fosfor']" [ngClass]="{'active-link': router.url === '/obnizony-fosfor' }"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Obniżony fosfor</a>
+                <!-- <a [routerLink]="['/koty-chore']" [ngClass]="{'active-link': router.url === '/koty-chore' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Koty
                     chore</a>
                 <a [routerLink]="['/smaczki']" [ngClass]="{'active-link': router.url === '/smaczki' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Smaczki</a>
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Smaczki</a> -->
             </div>
 
             <!-- Right Aligned Items, e.g., Theme Switcher -->

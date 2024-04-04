@@ -20,25 +20,20 @@
                     </div>
                 </ng-template>
             </e-column>
-            <e-column  field="flavors" headerText='Smaki' headerTextAlign="left" textAlign='Left' width=150>
+            <e-column  field="flavors" headerText='Smak' headerTextAlign="left" textAlign='Left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.flavors}}'>
                         {{data.flavors}}
                     </div>
                 </ng-template>
             </e-column>
-            <e-column field='categories' headerTextAlign="left" headerText='Kategorie' textAlign='Left' width=150>
-                <ng-template #template let-data>
-                    <div class="ellipsis-style" title='{{data.categories}}'>
-                        {{data.categories}}
-                    </div>
-                </ng-template>
-
-            </e-column>
             <e-column field="wegle_sucha" headerText='Węglowodany' textAlign='right' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.wegle_sucha}}'>
-                        {{data.wegle_sucha}}
+                        <span
+                            [ngClass]="{'text-red-700': data.wegle_sucha > 10, 'text-orange-600': data.wegle_sucha > 5 && data.wegle_sucha <= 10, 'text-black': data.wegle_sucha <= 5 }">
+                            {{ data.wegle_sucha }}
+                        </span>
                     </div>
                 </ng-template>
             </e-column>
@@ -46,7 +41,7 @@
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.bialko_sucha}}'>
                         <span
-                            [ngClass]="{'text-red-700': data.bialko_sucha < 40, 'text-black': data.bialko_sucha > 40}">
+                            [ngClass]="{'text-red-700': data.bialko_sucha < 40, 'text-black': data.bialko_sucha >= 40}">
                             {{ data.bialko_sucha }}
                         </span>
                     </div>
@@ -55,24 +50,30 @@
             <e-column field="tluszcz_w_suchej" headerText='Tłuszcz' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.tluszcz_w_suchej}}'>
-                        {{data.tluszcz_w_suchej}}
+                        <span
+                        [ngClass]="{'text-red-700': data.tluszcz_w_suchej > 30, 'text-black': data.tluszcz_w_suchej <= 30}">
+                        {{ data.tluszcz_w_suchej }}
+                    </span>
                     </div>
                 </ng-template>
             </e-column>
             <e-column field="fosfor_sucha" headerText='Fosfor' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.fosfor_sucha}}'>
-                        {{data.fosfor_sucha}}
+                        <span
+                            [ngClass]="{'text-red-700': data.fosfor_sucha > 1 || data.fosfor_sucha === 0, 'text-black': data.fosfor_sucha <= 1 && data.fosfor_sucha !== 0}">
+                            {{ data.fosfor_sucha }}
+                        </span>
                     </div>
                 </ng-template>
             </e-column>
-            <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
+            <!-- <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.wapn_fosfor}}'>
                         {{data.wapn_fosfor}}
                     </div>
                 </ng-template>
-            </e-column>
+            </e-column> -->
             <e-column field="kcal_100" headerText='Kcal/100g' textAlign='right' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.kcal_100}}'>
@@ -80,7 +81,7 @@
                     </div>
                 </ng-template>
             </e-column>
-            <e-column field='opis' headerText='Opis' headerTextAlign="left" textAlign='left' width=150>
+            <e-column field='opis' headerText='Skład (Opis)' headerTextAlign="left" textAlign='left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" (click)="tooltip.showModal()">
                         <span class="cursor-pointer">{{data.opis}}</span>
@@ -90,7 +91,14 @@
                     </div>
                 </ng-template>
             </e-column>
-            <e-column headerText='Data modyfikacji' headerTextAlign="left" textAlign='Left'
+            <e-column field='categories' headerTextAlign="left" headerText='Uwagi' textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.categories}}'>
+                        {{data.categories}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Data edycji' headerTextAlign="left" textAlign='Left'
                 clipMode='EllipsisWithTooltip' width=120 [allowSorting]="false">
                 <ng-template #template let-data>
                     <span> {{ data.updated_at | utcToLocal: 'fullDate' }}</span>

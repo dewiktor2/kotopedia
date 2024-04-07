@@ -13,7 +13,7 @@
       <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://karmy.kotopedia.pl/obnizony-fosfor</loc>
+      <loc>https://karmy.kotopedia.pl/chore-nerki</loc>
       <lastmod>2024-03-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.9</priority>
@@ -25,6 +25,20 @@
       <priority>0.8</priority>
    </url>
    <url>
+      <loc>https://karmy.kotopedia.pl/chora-trzustka</loc>
+      <lastmod>2024-03-10</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://karmy.kotopedia.pl/kocięta</loc>
+      <lastmod>2024-03-10</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+   </url>
+
+
+   <!-- <url>
       <loc>https://karmy.kotopedia.pl/koty-chore</loc>
       <lastmod>2024-03-10</lastmod>
       <changefreq>weekly</changefreq>
@@ -35,6 +49,6 @@
       <lastmod>2024-03-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.6</priority>
-   </url>
+   </url> -->
    <!-- Add more URLs here -->
 </urlset>

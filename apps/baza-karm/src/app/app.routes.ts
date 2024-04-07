@@ -20,10 +20,10 @@ export const appRoutes: Route[] = [
     data: { type: 'monobialkowe' },
   },
   {
-    path: 'obnizony-fosfor',
+    path: 'chore-nerki',
     loadComponent: () =>
       import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'obnizony-fosfor' },
+    data: { type: 'chore-nerki' },
   },
   {
     path: 'koty-chore',
@@ -36,6 +36,18 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
     data: { type: 'polecane' },
+  },
+  {
+    path: 'chora-trzustka',
+    loadComponent: () =>
+      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
+    data: { type: 'chora-trzustka' },
+  },
+  {
+    path: 'kocięta',
+    loadComponent: () =>
+      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
+    data: { type: 'kocięta' },
   },
   {
     path: 'smaczki',

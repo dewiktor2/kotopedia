@@ -109,16 +109,29 @@ export class SupabaseService {
     if (categoryFilter === 'Polecane') {
       query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
-      query = query.gt('bialko_sucha', 45);
       query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 10);
-      query = query.or('categories.is.null,categories.not.ilike.%Niejasny skład%')
+
+      //to bedzie fitlr na przycisk
+      // query = query.or('categories.is.null,categories.not.ilike.%Niejasny skład%')
     }
     if (categoryFilter === 'Monobiałkowe') {
       query = query.not('flavors', 'like', '%,%');
       query = query.not('flavors', 'is', null)
     }
-    if (categoryFilter === 'Obnizony fosfor') {
+    if (categoryFilter === 'Chore nerki') {
       query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 0.7)
+      query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
+      query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 15);
+    }
+    if (categoryFilter === 'Kocięta') {
+      query = query.gt('bialko_sucha', 40);
+      query = query.gt('fosfor_sucha', 0).gte('fosfor_sucha', 0.84)
+      query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 10);
+    }
+    if (categoryFilter === 'Chora trzustka') {
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
+      query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 25);
+      query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 5);
     }
     return query;
   }

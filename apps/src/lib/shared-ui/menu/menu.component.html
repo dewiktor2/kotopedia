@@ -34,20 +34,25 @@
                             <li class="pb-1"><a [routerLink]="['/wszystkie']"
                                     [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }">Wszystkie</a>
                             </li>
-                            <li class="pb-1"><a [routerLink]="['/monobialkowe']"
-                                    [ngClass]="{'active-link': router.url === '/monobialkowe' }">Monobiałkowe</a></li>
                             <li class="pb-1"><a [routerLink]="['/polecane']"
                                     [ngClass]="{'active-link': router.url === '/polecane' }">Polecane</a></li>
-                            <li class="pb-1"><a [routerLink]="['/obnizony-fosfor']"
-                                    [ngClass]="{'active-link': router.url === '/obnizony-fosfor' }">Obniżony fosfor</a></li>
+                            <li class="pb-1"><a [routerLink]="['/monobialkowe']"
+                                    [ngClass]="{'active-link': router.url === '/monobialkowe' }">Monobiałkowe</a></li>
+                            <li class="pb-1"><a [routerLink]="['/chore-nerki']"
+                                    [ngClass]="{'active-link': router.url === '/chore-nerki' }">Chore nerki</a></li>
+                            <li class="pb-1"><a [routerLink]="['/chora-trzustka']"
+                                    [ngClass]="{'active-link': router.url === '/chora-trzustka' }">Chora trzustka</a>
+                            </li>
+                            <li class="pb-1"><a [routerLink]="['/kocięta']"
+                                    [ngClass]="{'active-link': router.url === '/kocięta' }">Kocięta</a></li>
                             <!-- <li class="pb-1"><a [routerLink]="['/koty-chore']"
                                     [ngClass]="{'active-link': router.url === '/koty-chore' }">Koty chore</a></li> -->
 
                         </ul>
                     </li>
                     <!-- Separate Drawer item for Smaczki -->
-                    <li><a [routerLink]="['/smaczki']"
-                            [ngClass]="{'active-link': router.url === '/smaczki' }">Smaczki</a></li>
+                    <!-- <li><a [routerLink]="['/smaczki']"
+                            [ngClass]="{'active-link': router.url === '/smaczki' }">Smaczki</a></li> -->
                 </ul>
             </div>
         </div>
@@ -69,12 +74,16 @@
                 <a [routerLink]="['/wszystkie']"
                     [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }"
                     routerLinkActive="active-link" class="btn btn-ghost">Wszystkie</a>
-                <a [routerLink]="['/monobialkowe']" [ngClass]="{'active-link': router.url === '/monobialkowe' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Monobiałkowe</a>
                 <a [routerLink]="['/polecane']" [ngClass]="{'active-link': router.url === '/polecane' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Polecane</a>
-                <a [routerLink]="['/obnizony-fosfor']" [ngClass]="{'active-link': router.url === '/obnizony-fosfor' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Obniżony fosfor</a>
+                <a [routerLink]="['/monobialkowe']" [ngClass]="{'active-link': router.url === '/monobialkowe' }"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Monobiałkowe</a>
+                <a [routerLink]="['/chore-nerki']" [ngClass]="{'active-link': router.url === '/chore-nerki' }"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Chore nerki</a>
+                <a [routerLink]="['/chora-trzustka']" [ngClass]="{'active-link': router.url === '/chora-trzustka' }"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Chora trzustka</a>
+                <a [routerLink]="['/kocięta']" [ngClass]="{'active-link': router.url === '/kocięta' }"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Kocięta</a>
                 <!-- <a [routerLink]="['/koty-chore']" [ngClass]="{'active-link': router.url === '/koty-chore' }"
                     routerLinkActive="active-link" class="btn btn-ghost ml-1">Koty
                     chore</a>

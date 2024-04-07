@@ -132,6 +132,7 @@ export class SupabaseService {
       query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 25);
       query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 5);
+      query = query.is('produkty_pochodzenia_zwierzecego', null);
     }
     return query;
   }

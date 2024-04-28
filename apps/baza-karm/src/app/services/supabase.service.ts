@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AuthSession,
   SupabaseClient,
@@ -12,6 +12,9 @@ import {
 } from '../utility/syncfusion';
 
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
+import { categoryValue } from '../domains/feed/models/category.model';
+import { Store } from '@ngxs/store';
+import { FeedsState } from '../domains/feed/+state/feed.state';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +22,8 @@ import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 export class SupabaseService {
   #supabase!: SupabaseClient;
   _session: AuthSession | null = null;
+
+  private readonly store = inject(Store);
 
   constructor() {
     this.init();
@@ -104,36 +109,41 @@ export class SupabaseService {
 
   filterQueryByCategory(
     query: PostgrestFilterBuilder<any, any, any[], 'v_products', unknown>,
-    categoryFilter: string
+    categoryFilter: categoryValue
   ): PostgrestFilterBuilder<any, any, any[], 'v_products', unknown> {
+    const extraFilters = this.store
+      .selectSnapshot(FeedsState.extraFilters)
+      .find((x) => x.category === categoryFilter);
     if (categoryFilter === 'Polecane') {
-      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1);
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
       query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 10);
-
-      //to bedzie fitlr na przycisk
-      // query = query.or('categories.is.null,categories.not.ilike.%Niejasny skład%')
     }
     if (categoryFilter === 'Monobiałkowe') {
       query = query.not('flavors', 'like', '%,%');
-      query = query.not('flavors', 'is', null)
+      query = query.not('flavors', 'is', null);
     }
     if (categoryFilter === 'Chore nerki') {
-      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 0.7)
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 0.7);
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
-      query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 15);
     }
     if (categoryFilter === 'Kocięta') {
       query = query.gt('bialko_sucha', 40);
-      query = query.gt('fosfor_sucha', 0).gte('fosfor_sucha', 0.84)
+      query = query.gt('fosfor_sucha', 0).gte('fosfor_sucha', 0.84);
       query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 10);
     }
     if (categoryFilter === 'Chora trzustka') {
-      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1)
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1);
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 25);
       query = query.gt('wegle_sucha', 0).lte('wegle_sucha', 5);
       query = query.is('produkty_pochodzenia_zwierzecego', null);
     }
+
+    if (extraFilters) {
+      const extraFilter = this.store.selectSnapshot(FeedsState.extraFilter);
+      query = extraFilters.filters(query, extraFilter === 'on');
+    }
+
     return query;
   }
 }

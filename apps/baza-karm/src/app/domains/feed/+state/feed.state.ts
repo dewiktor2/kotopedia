@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { FeedStateModel } from './feed.model';
 import { SupabaseService } from '../../../services/supabase.service';
+import { categories, category, categoryValue } from '../models/category.model';
+import { FeedStateModel, extraFilters } from './feed.model';
 
 export class SetCategoryFilter {
   static readonly type = '[Feed] SetCategoryFilter';
-  constructor(public readonly payload: { categoryFitler: string }) {}
+  constructor(public readonly payload: { categoryFitler: category }) {}
 }
 
 export class SetRecordCount {
@@ -23,6 +24,10 @@ export class SetSearchInProgress {
   constructor(public readonly payload: { searchInProgress: boolean }) {}
 }
 
+export class ChangeExtraFilter {
+  static readonly type = '[Feed] ChangeExtraFilter';
+}
+
 @State<FeedStateModel>({
   name: 'feed',
   defaults: {
@@ -30,6 +35,8 @@ export class SetSearchInProgress {
     currentFilter: '',
     categoryFilter: 'wszystkie',
     searchInProgress: false,
+    extraFilters: extraFilters,
+    extraFilter: 'disabled',
   },
 })
 @Injectable()
@@ -52,24 +59,32 @@ export class FeedsState {
     return state.searchInProgress;
   }
 
+  @Selector() static extraFilters(state: FeedStateModel) {
+    return state.extraFilters;
+  }
+
+  @Selector() static extraFilter(state: FeedStateModel) {
+    return state.extraFilter;
+  }
+
   @Action(SetCategoryFilter)
   async setCategoryFilter(
     ctx: StateContext<FeedStateModel>,
     action: SetCategoryFilter
   ) {
-    const dwa: Record<string, string | undefined> = {
-      ['wszystkie']: undefined,
-      ['polecane']: 'Polecane',
-      ['monobialkowe']: 'Monobiałkowe',
-      ['chore-nerki']: 'Chore nerki',
-      ['chora-trzustka']: 'Chora trzustka',
-      ['kocięta']: 'Kocięta',
+    const value = categories[action.payload.categoryFitler];
 
-      ['koty-chore']: 'Koty chore',
-      ['smaczki']: 'Smaczki',
-    };
+    const modulesWithExtraFilters: categoryValue[] = [
+      'Kocięta',
+      'Chore nerki',
+      'Monobiałkowe',
+      'Polecane',
+    ];
     ctx.patchState({
-      categoryFilter: dwa[action.payload.categoryFitler],
+      categoryFilter: value,
+      extraFilter: modulesWithExtraFilters.includes(value as categoryValue)
+        ? 'off'
+        : 'disabled',
     });
   }
 
@@ -90,6 +105,20 @@ export class FeedsState {
   ) {
     ctx.patchState({
       currentFilter: action.payload.currentFilter,
+    });
+  }
+
+  @Action(ChangeExtraFilter)
+  async extraFilter(ctx: StateContext<FeedStateModel>) {
+    let filter = ctx.getState().extraFilter;
+
+    if (filter === 'on') {
+      filter = 'off';
+    } else {
+      filter = 'on';
+    }
+    ctx.patchState({
+      extraFilter: filter,
     });
   }
 

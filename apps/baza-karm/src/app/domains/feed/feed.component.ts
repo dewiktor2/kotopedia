@@ -21,6 +21,7 @@ import { FeedsService } from '../../services/feeds.service';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
 import { CustomSupabaseAdaptor } from '../../utility/syncfusion/supabase.adapter';
 import {
+  ChangeExtraFilter,
   FeedsState,
   SetCategoryFilter,
   SetCurrentFilter,
@@ -28,6 +29,7 @@ import {
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
 import { FilterDialogComponent } from './filter/filter-dialog.component';
+import { categories, category, categoryValue } from './models/category.model';
 
 @Component({
   standalone: true,
@@ -67,12 +69,34 @@ export class FeedComponent implements OnInit {
 
   recordNumber$ = of(0);
 
+  filter: Observable<string> = of('disabled');
+  filterName = '';
+
+  buildPackageFunc = (data: any) => {
+    // Utworzenie tablicy z kluczami i wartościami, które spełniają kryteria
+    const filteredEntries = Object.entries(data).filter(
+      ([key, value]) => key.startsWith('opak_') && value === true
+    );
+
+    // Przekształcenie filtrowanych wpisów do postaci tekstowej
+    const resultText = filteredEntries
+      .map(([key, value]) => `${key}`)
+      .join(', ');
+
+    return resultText;
+  };
+
   constructor() {
     // Accessing the route data
     this.route.data.subscribe((data) => {
       this.store.dispatch(
         new SetCategoryFilter({ categoryFitler: data['type'] })
       );
+      const type = data['type'] as category;
+      this.filterName =
+        this.store
+          .selectSnapshot(FeedsState.extraFilters)
+          .find((x) => x.category === categories[type])?.filterName ?? '';
     });
     this.data = this.service;
     this.sortOptions = {
@@ -83,10 +107,16 @@ export class FeedComponent implements OnInit {
 
   public ngOnInit(): void {
     this.service.execute({ skip: 0, take: 50 });
+    this.filter = this.store.select(FeedsState.extraFilter);
   }
 
   public dataStateChange(state: DataStateChangeEventArgs): void {
     this.service.execute(state);
+  }
+
+  changeCheckboxState() {
+    this.store.dispatch(new ChangeExtraFilter());
+    this.service.execute({ skip: 0, take: 50 });
   }
 
   search(searchKey: string) {

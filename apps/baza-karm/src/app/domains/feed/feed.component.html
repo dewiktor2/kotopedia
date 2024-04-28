@@ -94,7 +94,10 @@
             <e-column field='opis' headerText='Skład (Opis)' headerTextAlign="left" textAlign='left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" (click)="tooltip.showModal()">
-                        <span class="cursor-pointer">{{data.opis}}</span>
+                        <span class="cursor-pointer text-blue-400">
+
+                            {{data.opis}}
+                        </span>
                         <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis" label="Skład karmy">
 
                         </bk-dismissable-tooltip>
@@ -105,8 +108,10 @@
                 [allowFiltering]="false">
                 <ng-template #template let-data>
                     <div class="ellipsis-style" (click)="tooltip.showModal(buildPackageFunc(data))">
-                        <span class="cursor-pointer">Pokaż opakowania</span>
-                        <bk-dismissable-tooltip #tooltip [identifier]="data.id + 1" label="Opakowania">
+                        <span class="cursor-pointer text-blue-400">
+                            Pokaż opakowania
+                        </span>
+                        <bk-dismissable-tooltip #tooltip [identifier]="data.id + 'opak'" label="Opakowania">
 
                         </bk-dismissable-tooltip>
                     </div>

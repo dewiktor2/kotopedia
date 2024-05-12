@@ -86,6 +86,13 @@ export class FeedComponent implements OnInit {
     return resultText;
   };
 
+  buildProblemFunc = (data: any) => {
+    return `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl, z dodatkowymi informacjami o karmie. , 
+    , 
+    Kod karmy: ${data.id}, 
+    Firma: ${data.brand_name}`;
+  };
+
   constructor() {
     // Accessing the route data
     this.route.data.subscribe((data) => {

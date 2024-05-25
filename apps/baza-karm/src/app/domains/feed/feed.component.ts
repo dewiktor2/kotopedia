@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -46,7 +47,7 @@ import { UtcToLocalPipe } from './pipes/utc-local.pipe';
   styleUrl: './feed.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnDestroy {
   @Input()
   index: number = 1000;
 
@@ -115,6 +116,10 @@ export class FeedComponent implements OnInit {
   public ngOnInit(): void {
     this.service.execute({ skip: 0, take: 50 });
     this.filter = this.store.select(FeedsState.extraFilter);
+  }
+
+  public ngOnDestroy(): void {
+    this.store.dispatch(new SetCurrentFilter({ currentFilter: '' }));
   }
 
   public dataStateChange(state: DataStateChangeEventArgs): void {

@@ -104,19 +104,7 @@
                     </div>
                 </ng-template>
             </e-column>
-            <e-column field='opis' headerText='Rodzaj opakowania' headerTextAlign="left" textAlign='left' width=150
-                [allowFiltering]="false">
-                <ng-template #template let-data>
-                    <div class="ellipsis-style" (click)="tooltip.showModal(buildPackageFunc(data))">
-                        <span class="cursor-pointer text-blue-400">
-                            Pokaż opakowania
-                        </span>
-                        <bk-dismissable-tooltip #tooltip [identifier]="data.id + 'opak'" label="Opakowania">
 
-                        </bk-dismissable-tooltip>
-                    </div>
-                </ng-template>
-            </e-column>
             <e-column field='categories' headerTextAlign="left" headerText='Uwagi' textAlign='Left' width=150>
                 <ng-template #template let-data>
                     <div class="ellipsis-style" title='{{data.categories}}'>
@@ -128,17 +116,6 @@
                 width=120 [allowSorting]="false">
                 <ng-template #template let-data>
                     <span> {{ data.updated_at | utcToLocal: 'fullDate' }}</span>
-                </ng-template>
-            </e-column>
-            <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
-                width=120 [allowSorting]="false">
-                <ng-template #template let-data>
-                    <span class="cursor-pointer text-blue-400"  (click)="tooltip.showModal(buildProblemFunc(data))">
-                        Zgłoś
-                    </span>
-                    <bk-dismissable-tooltip #tooltip [identifier]="data.id + 'problem'" label="Informacje">
-
-                    </bk-dismissable-tooltip>
                 </ng-template>
             </e-column>
         </e-columns>

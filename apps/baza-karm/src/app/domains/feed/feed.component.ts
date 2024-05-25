@@ -19,17 +19,16 @@ import {
 import { Observable, of } from 'rxjs';
 import { FeedsService } from '../../services/feeds.service';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
-import { CustomSupabaseAdaptor } from '../../utility/syncfusion/supabase.adapter';
+import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
 import {
   ChangeExtraFilter,
   FeedsState,
   SetCategoryFilter,
   SetCurrentFilter,
 } from './+state/feed.state';
-import { UtcToLocalPipe } from './pipes/utc-local.pipe';
-import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
 import { FilterDialogComponent } from './filter/filter-dialog.component';
-import { categories, category, categoryValue } from './models/category.model';
+import { categories, category } from './models/category.model';
+import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 
 @Component({
   standalone: true,
@@ -48,29 +47,27 @@ import { categories, category, categoryValue } from './models/category.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedComponent implements OnInit {
-  store = inject(Store);
-  supabaseAdaptor = inject(CustomSupabaseAdaptor);
-  service = inject(FeedsService);
-  route = inject(ActivatedRoute);
+  @Input()
+  index: number = 1000;
 
   data!: Observable<DataStateChangeEventArgs>;
   initialPage: object = { pageSize: 50 };
   sortOptions!: Object;
   loadingIndicator = { indicatorType: 'Shimmer' };
+  recordNumber$ = of(0);
+  filter: Observable<string> = of('disabled');
+  filterName = '';
 
   @ViewChild('GridComponent')
   grid!: GridComponent;
-
   @ViewChild('tooltip')
   tooltip!: DismissableTooltipComponent;
+  @ViewChild('problemTooltip')
+  problemTooltip!: DismissableTooltipComponent;
 
-  @Input()
-  index: number = 1000;
-
-  recordNumber$ = of(0);
-
-  filter: Observable<string> = of('disabled');
-  filterName = '';
+  private readonly store = inject(Store);
+  private readonly service = inject(FeedsService);
+  private readonly route = inject(ActivatedRoute);
 
   buildPackageFunc = (data: any) => {
     // Utworzenie tablicy z kluczami i wartościami, które spełniają kryteria

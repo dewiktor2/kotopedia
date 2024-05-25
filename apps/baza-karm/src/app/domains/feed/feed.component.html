@@ -120,12 +120,13 @@
             <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
                 width=120 [allowSorting]="false">
                 <ng-template #template let-data>
-                    <!-- <span class="cursor-pointer text-blue-400" (click)="tooltip2.showModal(buildProblemFunc(data))">
+                    <span class="cursor-pointer text-blue-400"
+                        (click)="problemTooltip.showModal(buildProblemFunc(data))">
                         Zgłoś
                     </span>
-                    <bk-dismissable-tooltip #tooltip2 [identifier]="data.id + 'problem'" label="Informacje">
+                    <bk-dismissable-tooltip #problemTooltip [identifier]="data.id + 'problem'" label="Informacje">
 
-                    </bk-dismissable-tooltip> -->
+                    </bk-dismissable-tooltip>
                 </ng-template>
             </e-column>
         </e-columns>

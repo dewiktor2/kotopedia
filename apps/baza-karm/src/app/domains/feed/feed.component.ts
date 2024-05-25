@@ -87,6 +87,9 @@ export class FeedComponent implements OnInit {
   };
 
   buildProblemFunc = (data: any) => {
+    if (!data) {
+      return ``;
+    }
     return `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl, z dodatkowymi informacjami o karmie. , 
     , 
     Kod karmy: ${data.id}, 

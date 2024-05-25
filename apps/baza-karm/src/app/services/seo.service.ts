@@ -33,7 +33,7 @@ export class SeoService {
       this.titleService.setTitle('Kotopedia - polecane karmy dla kota')
       return 'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, polecane karmy dla kotów';
     }
-    if (this.router.url === '/kocięta') {
+    if (this.router.url === '/kocieta') {
       this.titleService.setTitle('Kotopedia - karmy dla kociąt')
       return 'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kociąt';
     }

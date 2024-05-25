@@ -44,7 +44,7 @@ export const appRoutes: Route[] = [
     data: { type: 'chora-trzustka' },
   },
   {
-    path: 'kocięta',
+    path: 'kocieta',
     loadComponent: () =>
       import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
     data: { type: 'kocięta' },

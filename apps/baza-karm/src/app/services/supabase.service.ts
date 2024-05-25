@@ -124,7 +124,7 @@ export class SupabaseService {
       query = query.not('flavors', 'is', null);
     }
     if (categoryFilter === 'Chore nerki') {
-      // query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 0.7);
+      query = query.gt('fosfor_sucha', 0).lte('fosfor_sucha', 1);
       query = query.not('fosfor_sucha', 'is', null);
       query = query.gt('tluszcz_w_suchej', 0).lte('tluszcz_w_suchej', 30);
     }

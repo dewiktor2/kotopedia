@@ -84,15 +84,22 @@ export class FeedComponent implements OnInit, OnDestroy {
     return resultText;
   };
 
-  buildProblemFunc = (data: any) => {
+  // buildProblemFunc = (data: any) => {
+  //   if (!data) {
+  //     return ``;
+  //   }
+  //   return `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl, z dodatkowymi informacjami o karmie. ,
+  //   ,
+  //   Kod karmy: ${data.id},
+  //   Firma: ${data.brand_name}`;
+  // };
+
+  showProblemModal(data: any) {
     if (!data) {
-      return ``;
+      return;
     }
-    return `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl, z dodatkowymi informacjami o karmie. , 
-    , 
-    Kod karmy: ${data.id}, 
-    Firma: ${data.brand_name}`;
-  };
+    alert(`Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl z dodatkowymi informacjami o karmie: kod: ${data.id}, firma: ${data.brand_name}`);
+  }
 
   constructor() {
     // Accessing the route data

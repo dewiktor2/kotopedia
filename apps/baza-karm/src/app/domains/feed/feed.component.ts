@@ -22,14 +22,12 @@ import { FeedsService } from '../../services/feeds.service';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
 import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
 import {
-  ChangeExtraFilter,
   FeedsState,
-  SetCategoryFilter,
-  SetCurrentFilter,
 } from './+state/feed.state';
-import { FilterDialogComponent } from './filter/filter-dialog.component';
 import { categories, category } from './models/category.model';
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
+import { SetCategoryFilter, SetCurrentFilter, ChangeExtraFilter } from './+state/feed.actions';
+
 
 @Component({
   standalone: true,
@@ -38,8 +36,7 @@ import { UtcToLocalPipe } from './pipes/utc-local.pipe';
     CommonModule,
     UtcToLocalPipe,
     SearchInputComponent,
-    DismissableTooltipComponent,
-    FilterDialogComponent,
+    DismissableTooltipComponent
   ],
   providers: [SortService, PageService],
   selector: 'bk-feed',
@@ -49,11 +46,11 @@ import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 })
 export class FeedComponent implements OnInit, OnDestroy {
   @Input()
-  index: number = 1000;
+  index = 1000;
 
   data!: Observable<DataStateChangeEventArgs>;
   initialPage: object = { pageSize: 50 };
-  sortOptions!: Object;
+  sortOptions!: object;
   loadingIndicator = { indicatorType: 'Shimmer' };
   recordNumber$ = of(0);
   filter: Observable<string> = of('disabled');
@@ -83,16 +80,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     return resultText;
   };
-
-  // buildProblemFunc = (data: any) => {
-  //   if (!data) {
-  //     return ``;
-  //   }
-  //   return `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl, z dodatkowymi informacjami o karmie. ,
-  //   ,
-  //   Kod karmy: ${data.id},
-  //   Firma: ${data.brand_name}`;
-  // };
 
   showProblemModal(data: any) {
     if (!data) {

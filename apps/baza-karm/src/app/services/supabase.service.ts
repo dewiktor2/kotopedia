@@ -6,15 +6,11 @@ import {
   createClient,
 } from '@supabase/supabase-js';
 import { environment } from '../../env/environment';
-import {
-  ProductQueryFetch,
-  defaultQueryFetchValue,
-} from '../utility/syncfusion';
-
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 import { categoryValue } from '../domains/feed/models/category.model';
 import { Store } from '@ngxs/store';
 import { FeedsState } from '../domains/feed/+state/feed.state';
+import { ProductQueryFetch, defaultQueryFetchValue } from '../utility/syncfusion/query.model';
 
 @Injectable({
   providedIn: 'root',

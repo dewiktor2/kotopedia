@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
@@ -42,11 +42,10 @@ export class DismissableTooltipComponent {
 
   private readonly document = inject(DOCUMENT);
 
+
   showModal(text?: string) {
     if (!text && !this.text) {
-      (
-        this?.document?.getElementById(`modal-feed-${this.identifier}`) as any
-      )?.showModal();
+      this.showModalFeed();
       return;
     }
     if (text) {
@@ -54,8 +53,11 @@ export class DismissableTooltipComponent {
     } else {
       this.splittedText = this.text.split(', ');
     }
-    (
-      this?.document?.getElementById(`modal-feed-${this.identifier}`) as any
-    )?.showModal();
+    this.showModalFeed();
   }
+
+  private showModalFeed() {
+    return (this?.document?.getElementById(`modal-feed-${this.identifier}`) as any)?.showModal();
+  }
+
 }

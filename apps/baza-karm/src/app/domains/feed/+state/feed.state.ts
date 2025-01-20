@@ -1,32 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { SupabaseService } from '../../../services/supabase.service';
-import { categories, category, categoryValue } from '../models/category.model';
+import { categories, categoryValue } from '../models/category.model';
 import { FeedStateModel, extraFilters } from './feed.model';
-
-export class SetCategoryFilter {
-  static readonly type = '[Feed] SetCategoryFilter';
-  constructor(public readonly payload: { categoryFitler: category }) {}
-}
-
-export class SetRecordCount {
-  static readonly type = '[Feed] SetRecordCount';
-  constructor(public readonly payload: { count: number }) {}
-}
-
-export class SetCurrentFilter {
-  static readonly type = '[Feed] SetCurrentFilter';
-  constructor(public readonly payload: { currentFilter: string }) {}
-}
-
-export class SetSearchInProgress {
-  static readonly type = '[Feed] SetSearchInProgress';
-  constructor(public readonly payload: { searchInProgress: boolean }) {}
-}
-
-export class ChangeExtraFilter {
-  static readonly type = '[Feed] ChangeExtraFilter';
-}
+import {
+  ChangeExtraFilter,
+  SetCategoryFilter,
+  SetCurrentFilter,
+  SetRecordCount,
+  SetSearchInProgress,
+} from './feed.actions';
+import { SupabaseService } from '../../../services/supabase.service';
 
 @State<FeedStateModel>({
   name: 'feed',

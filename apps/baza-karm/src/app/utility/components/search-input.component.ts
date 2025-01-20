@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
 import { FeedsState } from '../../domains/feed/+state/feed.state';
@@ -21,7 +28,7 @@ import { CommonModule } from '@angular/common';
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           <svg
-            *ngIf="!(searchInProgress$ | async); else other"
+            *ngIf="(searchInProgress$ | async) === false; else other"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
@@ -72,10 +79,11 @@ import { CommonModule } from '@angular/common';
     `,
   ],
 })
-export class SearchInputComponent {
-  @Output() searchText = new EventEmitter<string>();
-  private searchSubject = new Subject<string>();
+export class SearchInputComponent implements OnInit, OnDestroy {
+  @Output() 
+  readonly searchText = new EventEmitter<string>();
 
+  private searchSubject = new Subject<string>();
   private readonly store = inject(Store);
 
   searchInProgress$ = of(false);

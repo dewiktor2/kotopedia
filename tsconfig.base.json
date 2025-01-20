@@ -16,8 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@projekty/shared-ui": ["apps/src/index.ts"],
-      "@kotopedia/domains/feed": ["apps/baza-karm/src/app/domains/feed/index.ts"]
+      "@projekty/shared-ui": ["apps/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,58 +1,19 @@
 import { Route } from '@angular/router';
 
-export const appRoutes: Route[] = [
-  {
-    path: '',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'wszystkie' },
-  },
-  {
-    path: 'wszystkie',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'wszystkie' },
-  },
-  {
-    path: 'monobialkowe',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'monobialkowe' },
-  },
-  {
-    path: 'chore-nerki',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'chore-nerki' },
-  },
-  {
-    path: 'koty-chore',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'koty-chore' },
-  },
-  {
-    path: 'polecane',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'polecane' },
-  },
-  {
-    path: 'chora-trzustka',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'chora-trzustka' },
-  },
-  {
-    path: 'kocieta',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'kocięta' },
-  },
-  {
-    path: 'smaczki',
-    loadComponent: () =>
-      import('@kotopedia/domains/feed').then((m) => m.FeedComponent),
-    data: { type: 'smaczki' },
-  },
+const paths = [
+  { path: '', type: 'wszystkie' },
+  { path: 'wszystkie', type: 'wszystkie' },
+  { path: 'monobialkowe', type: 'monobialkowe' },
+  { path: 'chore-nerki', type: 'chore-nerki' },
+  { path: 'koty-chore', type: 'koty-chore' },
+  { path: 'polecane', type: 'polecane' },
+  { path: 'chora-trzustka', type: 'chora-trzustka' },
+  { path: 'kocieta', type: 'kocięta' },
+  { path: 'smaczki', type: 'smaczki' },
 ];
+
+export const appRoutes: Route[] = paths.map(({ path, type }) => ({
+  path,
+  loadComponent: () =>  import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+  data: { type },
+}));

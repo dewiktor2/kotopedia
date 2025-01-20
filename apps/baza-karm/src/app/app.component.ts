@@ -1,43 +1,58 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
-import { tap } from 'rxjs';
-import { CultureService } from './services/culture.service';
-import { SeoService } from './services/seo.service';
+import { filter, tap } from 'rxjs';
 import { AdsenseModule } from 'ng2-adsense';
-
+import { CultureService } from './services/culture.service';
 
 @Component({
   standalone: true,
   imports: [RouterModule, SharedMenuComponent, AdsenseModule],
   selector: 'bk-root',
-  templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
+  template: `
+    <div class="min-h-screen flex flex-col">
+      <k-shared-menu />
+      <!-- Navigation menu -->
+      <div class="pt-10 px-8 pb-8">
+        <router-outlet />
+        <!-- Main content area -->
+        <ng-adsense
+          [adClient]="'ca-pub-4829562881799420'"
+          [display]="'inline-block'"
+          [width]="320"
+          [height]="108"
+        />
+      </div>
+    </div>
+  `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'baza-karm';
 
   private readonly swUpdate = inject(SwUpdate);
-  private readonly seoService = inject(SeoService);
-
-  constructor(private readonly cultureService: CultureService) {
-    // The culture will be set when the service is instantiated
-  }
+  private readonly cultureService = inject(CultureService);
 
   ngOnInit() {
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates
-        .pipe(
-          tap((event: VersionEvent) => {
-            if (event.type === 'VERSION_READY') {
-              this.reloadPage();
-            }
-          })
-        )
-        .subscribe();
+      this.onVersionReady();
     }
+  }
+
+  private onVersionReady() {
+    this.swUpdate.versionUpdates
+      .pipe(
+        filter((event: VersionEvent) => event?.type === 'VERSION_READY'),
+        tap(() => this.reloadPage())
+      )
+      .subscribe();
   }
 
   reloadPage() {

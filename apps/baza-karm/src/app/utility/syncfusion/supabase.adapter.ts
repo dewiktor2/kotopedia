@@ -1,13 +1,16 @@
 import { FetchOption, CustomDataAdaptor } from '@syncfusion/ej2-data';
 
 import { SupabaseService } from '../../services/supabase.service';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomSupabaseAdaptor extends CustomDataAdaptor {
-  constructor(private supabaseService: SupabaseService) {
+
+  private readonly supabaseService = inject(SupabaseService);
+
+  constructor() {
     super();
   }
 

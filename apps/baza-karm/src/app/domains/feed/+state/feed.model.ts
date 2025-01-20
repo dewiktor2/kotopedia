@@ -1,11 +1,11 @@
-import { category, categoryValue } from '../models/category.model';
+import { categoryValue } from '../models/category.model';
 import type { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
 type help = PostgrestFilterBuilder<any, any, any[], 'v_products', unknown>;
 
 export interface SupabaseFilter {
   category: categoryValue;
-  filterName: string,
+  filterName: string;
   filters: (query: help, flagEnable?: boolean) => help;
 }
 

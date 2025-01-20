@@ -1,19 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { DataStateChangeEventArgs, Sorts } from '@syncfusion/ej2-angular-grids';
-import { Observable, Subject, of } from 'rxjs';
-import { catchError, finalize, map } from 'rxjs/operators';
-import {
-  FeedsState,
-  SetRecordCount,
-  SetSearchInProgress,
-} from '../domains/feed/+state/feed.state';
-import {
-  ProductQueryFetch,
-  QueryFetch,
-  defaultQueryFetchValue,
-} from '../utility/syncfusion';
+import { Observable, Subject } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
 import { SupabaseService } from './supabase.service';
+import { SetSearchInProgress, SetRecordCount } from '../domains/feed/+state/feed.actions';
+import { FeedsState } from '../domains/feed/+state/feed.state';
+import { defaultQueryFetchValue, ProductQueryFetch, QueryFetch } from '../utility/syncfusion/query.model';
+
 
 @Injectable({
   providedIn: 'root',

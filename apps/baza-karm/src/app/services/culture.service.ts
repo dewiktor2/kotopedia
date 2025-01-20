@@ -2,6 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { L10n, setCulture } from '@syncfusion/ej2-base';
 import * as EJ2_LOCALE from '../../assets/i18n/sync-pl.json';
+
 @Injectable({
   providedIn: 'root'
 })

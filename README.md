@@ -1,3 +1,5 @@
+![example workflow](https://github.com/dewiktor2/kotopedia/actions/workflows/build.yml/badge.svg)
+
 # Kotopedia - Feed database
 
 Angular 17

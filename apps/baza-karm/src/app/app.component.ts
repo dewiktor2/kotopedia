@@ -1,5 +1,6 @@
 import {
   Component,
+  Inject,
   OnInit,
   ViewEncapsulation,
   inject,
@@ -9,7 +10,8 @@ import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
 import { filter, tap } from 'rxjs';
 import { AdsenseModule } from 'ng2-adsense';
-import { CultureService } from './services/culture.service';
+import { SEO_HANDLER } from './tokens/seo.token';
+import { CULTURE_HANDLER } from './tokens/culture.token';
 
 @Component({
   standalone: true,
@@ -32,13 +34,20 @@ import { CultureService } from './services/culture.service';
         /> -->
       </div>
     </div>
-  `
+  `,
 })
 export class AppComponent implements OnInit {
   title = 'baza-karm';
 
   private readonly swUpdate = inject(SwUpdate);
-  private readonly cultureService = inject(CultureService);
+
+  constructor(
+    @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
+    @Inject(SEO_HANDLER) private seoHandler: () => void
+  ) {
+    this.cultureHandler();
+    this.seoHandler();
+  }
 
   ngOnInit() {
     if (this.swUpdate.isEnabled) {

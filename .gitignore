@@ -41,4 +41,5 @@ Thumbs.db
 .nx/cache
 .angular
 
-apps/baza-karm/src/env/*
+apps/baza-karm/src/env/environment.prod.ts
+apps/baza-karm/src/env/environment.ts

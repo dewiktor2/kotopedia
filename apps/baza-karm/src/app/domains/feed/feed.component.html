@@ -11,7 +11,8 @@
         </div>
     </ng-container>
 
-    <ejs-grid [dataSource]='grid' height=700 allowPaging='true' [allowSorting]="true" [sortSettings]='sortOptions'
+
+    <ejs-grid [dataSource]='grid' [height]="'calc(100vh - 450px)'"  allowPaging='true' [allowSorting]="true" [sortSettings]='sortOptions'
         [loadingIndicator]='loadingIndicator' [allowFiltering]="true" [allowMultiSorting]="false" width="auto"
         class="sortingenabled" [pageSettings]='initialPage' [gridLines]="'Both'"
         (dataStateChange)='dataStateChange($event)'>

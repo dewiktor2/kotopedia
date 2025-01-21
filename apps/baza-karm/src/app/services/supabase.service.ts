@@ -94,7 +94,7 @@ export class SupabaseService {
     if (options.startIndex) {
       query = query.range(options?.startIndex, options.endIndex);
     } else {
-      query = query.range(0, 50);
+      query = query.range(0, 20);
     }
 
     // Execute the query

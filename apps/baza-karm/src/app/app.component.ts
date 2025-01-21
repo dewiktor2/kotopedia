@@ -18,21 +18,21 @@ import { CultureService } from './services/culture.service';
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="min-h-screen flex flex-col">
+    <div class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       <k-shared-menu />
       <!-- Navigation menu -->
-      <div class="pt-10 px-8 pb-8">
+      <div class="pt-10 px-8 pb-8 flex-1 overflow-auto">
         <router-outlet />
         <!-- Main content area -->
-        <ng-adsense
+        <!-- <ng-adsense
           [adClient]="'ca-pub-4829562881799420'"
           [display]="'inline-block'"
           [width]="320"
           [height]="108"
-        />
+        /> -->
       </div>
     </div>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   title = 'baza-karm';

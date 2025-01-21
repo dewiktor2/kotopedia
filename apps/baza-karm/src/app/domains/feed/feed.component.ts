@@ -49,7 +49,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   index = 1000;
 
   data!: Observable<DataStateChangeEventArgs>;
-  initialPage: object = { pageSize: 50 };
+  initialPage: object = { pageSize: 20 };
   sortOptions!: object;
   loadingIndicator = { indicatorType: 'Shimmer' };
   recordNumber$ = of(0);
@@ -108,7 +108,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.service.execute({ skip: 0, take: 50 });
+    this.service.execute({ skip: 0, take: 20 });
     this.filter = this.store.select(FeedsState.extraFilter);
   }
 
@@ -122,7 +122,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   changeCheckboxState() {
     this.store.dispatch(new ChangeExtraFilter());
-    this.service.execute({ skip: 0, take: 50 });
+    this.service.execute({ skip: 0, take: 20 });
   }
 
   search(searchKey: string) {

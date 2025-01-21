@@ -1,4 +1,4 @@
-name: Build Nx Angular App
+name: Build
 
 on:
   push:
@@ -24,12 +24,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      # Add a step to create the missing environment.prod.ts file
-      - name: Create missing environment file
-        run: |
-          mkdir -p apps/baza-karm/src/env
-          echo "export const environment = { production: true };" > apps/baza-karm/src/env/environment.prod.ts
 
       - name: Build Nx app
         run: npx nx run baza-karm:build:production

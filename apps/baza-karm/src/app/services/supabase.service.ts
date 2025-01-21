@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import {
   AuthSession,
   SupabaseClient,
-  SupabaseClientOptions,
   createClient,
 } from '@supabase/supabase-js';
 import { environment } from '../../env/environment';
@@ -26,13 +25,6 @@ export class SupabaseService {
   }
 
   private init() {
-    const options = {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    } as SupabaseClientOptions<any>;
-
     this.#supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey,

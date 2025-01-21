@@ -4,6 +4,7 @@
 
 Angular 17
 NGXS
+SSR
 Supabase
 Syncfusion
 Tailwind

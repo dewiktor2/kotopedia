@@ -6,17 +6,17 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
-import { filter, tap } from 'rxjs';
 import { AdsenseModule } from 'ng2-adsense';
-import { SEO_HANDLER } from './tokens/seo.token';
+import { filter, tap } from 'rxjs';
 import { CULTURE_HANDLER } from './tokens/culture.token';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SEO_HANDLER } from './tokens/seo.token';
 
 @Component({
-    imports: [RouterModule, SharedMenuComponent, AdsenseModule],
+    imports: [RouterOutlet, SharedMenuComponent, AdsenseModule],
     selector: 'bk-root',
     styleUrl: './app.component.scss',
     encapsulation: ViewEncapsulation.None,

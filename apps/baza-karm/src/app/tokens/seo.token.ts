@@ -1,5 +1,6 @@
 
-import { inject, InjectionToken } from '@angular/core';
+import { DestroyRef, inject, InjectionToken } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -11,6 +12,7 @@ export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
     const titleService = inject(Title);
     const router = inject(Router);
     const activatedRoute = inject(ActivatedRoute);
+    const destroyRef = inject(DestroyRef);
 
     const defaultDescription = 'Znajdź najlepsze karmy dla swojego kota.';
     const defaultKeywords = 'kot, karma dla kota, karmy dla kotów, zdrowie kota';
@@ -25,6 +27,7 @@ export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
           }
           return route;
         }),
+        takeUntilDestroyed(destroyRef),
         switchMap((route) => route.data)
       )
       .subscribe((data) => {

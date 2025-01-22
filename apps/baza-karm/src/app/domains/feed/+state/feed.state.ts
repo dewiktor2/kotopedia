@@ -44,7 +44,7 @@ export class FeedsState {
     return state.extraFilters;
   }
 
-  @Selector() static extraFilter(state: FeedStateModel) {
+  @Selector() static extraFilter(state: FeedStateModel) {;
     return state.extraFilter;
   }
 

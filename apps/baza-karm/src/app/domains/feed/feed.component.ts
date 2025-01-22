@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -44,7 +43,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     styleUrl: './feed.component.scss',
     encapsulation: ViewEncapsulation.None
 })
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements OnInit {
   @Input()
   index = 1000;
 
@@ -91,6 +90,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   constructor() {
     // Accessing the route data
     this.route.data.pipe(takeUntilDestroyed()).subscribe((data) => {
+      this.store.dispatch(new SetCurrentFilter({ currentFilter: '' }));
       this.store.dispatch(
         new SetCategoryFilter({ categoryFitler: data['type'] })
       );
@@ -110,10 +110,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.service.execute({ skip: 0, take: 20 });
     this.filter = this.store.select(FeedsState.extraFilter);
-  }
-
-  public ngOnDestroy(): void {
-    this.store.dispatch(new SetCurrentFilter({ currentFilter: '' }));
   }
 
   public dataStateChange(state: DataStateChangeEventArgs): void {

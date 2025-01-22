@@ -16,12 +16,11 @@ import { CULTURE_HANDLER } from './tokens/culture.token';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  standalone: true,
-  imports: [RouterModule, SharedMenuComponent, AdsenseModule],
-  selector: 'bk-root',
-  styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  template: `
+    imports: [RouterModule, SharedMenuComponent, AdsenseModule],
+    selector: 'bk-root',
+    styleUrl: './app.component.scss',
+    encapsulation: ViewEncapsulation.None,
+    template: `
     <div class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       <k-shared-menu />
       <!-- Navigation menu -->
@@ -36,7 +35,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         /> -->
       </div>
     </div>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   title = 'baza-karm';

@@ -3,12 +3,11 @@ import { Component, ViewEncapsulation, Inject, Renderer2 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  selector: 'k-shared-menu',
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss',
-  encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule, RouterModule],
+    selector: 'k-shared-menu',
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.scss',
+    encapsulation: ViewEncapsulation.None
 })
 export class SharedMenuComponent {
   // Property to track if the drawer is open

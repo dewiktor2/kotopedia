@@ -2,10 +2,9 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'bk-dismissable-tooltip',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'bk-dismissable-tooltip',
+    imports: [CommonModule],
+    template: `
     <dialog id="modal-feed-{{ identifier }}" class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">{{ label }}</h3>
@@ -23,7 +22,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
       </div>
     </dialog>
   `,
-  styles: ``,
+    styles: ``
 })
 export class DismissableTooltipComponent {
   @Input()

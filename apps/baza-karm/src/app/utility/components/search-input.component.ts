@@ -14,10 +14,9 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'bk-search-input',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'bk-search-input',
+    imports: [CommonModule],
+    template: `
     <div class="form-control pb-4 flex w-72">
       <div class="place-items-center flex">
         <label class="input input-bordered flex w-72 items-center gap-2">
@@ -70,8 +69,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       /* Additional styles for flex layout */
       .form-control {
         display: flex;
@@ -79,7 +78,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         gap: 8px;
       }
     `,
-  ],
+    ]
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
   @Output() 

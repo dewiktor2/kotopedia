@@ -31,19 +31,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
-  standalone: true,
-  imports: [
-    GridModule,
-    CommonModule,
-    UtcToLocalPipe,
-    SearchInputComponent,
-    DismissableTooltipComponent
-  ],
-  providers: [SortService, PageService],
-  selector: 'bk-feed',
-  templateUrl: './feed.component.html',
-  styleUrl: './feed.component.scss',
-  encapsulation: ViewEncapsulation.None,
+    imports: [
+        GridModule,
+        CommonModule,
+        UtcToLocalPipe,
+        SearchInputComponent,
+        DismissableTooltipComponent
+    ],
+    providers: [SortService, PageService],
+    selector: 'bk-feed',
+    templateUrl: './feed.component.html',
+    styleUrl: './feed.component.scss',
+    encapsulation: ViewEncapsulation.None
 })
 export class FeedComponent implements OnInit, OnDestroy {
   @Input()

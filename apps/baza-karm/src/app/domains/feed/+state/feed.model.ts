@@ -1,12 +1,12 @@
 import { categoryValue } from '../models/category.model';
-import type { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 
-type help = PostgrestFilterBuilder<any, any, any[], 'v_products', unknown>;
+
+// type help = PostgrestFilterBuilder<any, any, any[], 'v_products', unknown>;
 
 export interface SupabaseFilter {
   category: categoryValue;
   filterName: string;
-  filters: (query: help, flagEnable?: boolean) => help;
+  filters: (query: any, flagEnable?: boolean) => any;
 }
 
 export interface FeedStateModel {
@@ -22,7 +22,7 @@ export const extraFilters: SupabaseFilter[] = [
   {
     category: 'Polecane',
     filterName: 'Pokaż akceptowalne karmy',
-    filters: (query: help, canBeAccepted?: boolean) =>
+    filters: (query: any, canBeAccepted?: boolean) =>
       canBeAccepted
         ? query
         : query
@@ -32,7 +32,7 @@ export const extraFilters: SupabaseFilter[] = [
   {
     category: 'Monobiałkowe',
     filterName: 'Pokaż polecane karmy',
-    filters: (query: help, recommended?: boolean) =>
+    filters: (query: any, recommended?: boolean) =>
       recommended
         ? query
             .gt('fosfor_sucha', 0)
@@ -48,7 +48,7 @@ export const extraFilters: SupabaseFilter[] = [
   {
     category: 'Chore nerki',
     filterName: 'Pokaż polecane karmy',
-    filters: (query: help, recommended?: boolean) =>
+    filters: (query: any, recommended?: boolean) =>
       recommended
         ? query
             .gt('wegle_sucha', 0)
@@ -60,7 +60,7 @@ export const extraFilters: SupabaseFilter[] = [
   {
     category: 'Kocięta',
     filterName: 'Pokaż akceptowalne karmy',
-    filters: (query: help, canBeAccepted?: boolean) =>
+    filters: (query: any, canBeAccepted?: boolean) =>
       canBeAccepted
         ? query
         : query

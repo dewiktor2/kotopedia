@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { categories, categoryValue } from '../models/category.model';
 import { FeedStateModel, extraFilters } from './feed.model';
@@ -9,7 +9,6 @@ import {
   SetRecordCount,
   SetSearchInProgress,
 } from './feed.actions';
-import { SupabaseService } from '../../../services/supabase.service';
 
 @State<FeedStateModel>({
   name: 'feed',
@@ -24,7 +23,6 @@ import { SupabaseService } from '../../../services/supabase.service';
 })
 @Injectable()
 export class FeedsState {
-  private readonly supabase = inject(SupabaseService);
 
   @Selector() static categoryFilter(state: FeedStateModel) {
     return state.categoryFilter;
@@ -46,7 +44,7 @@ export class FeedsState {
     return state.extraFilters;
   }
 
-  @Selector() static extraFilter(state: FeedStateModel) {
+  @Selector() static extraFilter(state: FeedStateModel) {;
     return state.extraFilter;
   }
 

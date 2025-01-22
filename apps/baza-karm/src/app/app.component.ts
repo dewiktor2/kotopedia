@@ -1,25 +1,26 @@
 import {
   Component,
+  DestroyRef,
   Inject,
   OnInit,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
-import { filter, tap } from 'rxjs';
 import { AdsenseModule } from 'ng2-adsense';
-import { SEO_HANDLER } from './tokens/seo.token';
+import { filter, tap } from 'rxjs';
 import { CULTURE_HANDLER } from './tokens/culture.token';
+import { SEO_HANDLER } from './tokens/seo.token';
 
 @Component({
-  standalone: true,
-  imports: [RouterModule, SharedMenuComponent, AdsenseModule],
-  selector: 'bk-root',
-  styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  template: `
+    imports: [RouterOutlet, SharedMenuComponent, AdsenseModule],
+    selector: 'bk-root',
+    styleUrl: './app.component.scss',
+    encapsulation: ViewEncapsulation.None,
+    template: `
     <div class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       <k-shared-menu />
       <!-- Navigation menu -->
@@ -34,13 +35,14 @@ import { CULTURE_HANDLER } from './tokens/culture.token';
         /> -->
       </div>
     </div>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   title = 'baza-karm';
 
+  private destroyRef = inject(DestroyRef);
   private readonly swUpdate = inject(SwUpdate);
-
+  
   constructor(
     @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
     @Inject(SEO_HANDLER) private seoHandler: () => void
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit {
   private onVersionReady() {
     this.swUpdate.versionUpdates
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((event: VersionEvent) => event?.type === 'VERSION_READY'),
         tap(() => this.reloadPage())
       )

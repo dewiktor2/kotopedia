@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   OnDestroy,
   OnInit,
@@ -10,12 +11,12 @@ import { Store } from '@ngxs/store';
 import { Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
 import { FeedsState } from '../../domains/feed/+state/feed.state';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'bk-search-input',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'bk-search-input',
+    imports: [CommonModule],
+    template: `
     <div class="form-control pb-4 flex w-72">
       <div class="place-items-center flex">
         <label class="input input-bordered flex w-72 items-center gap-2">
@@ -68,8 +69,8 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       /* Additional styles for flex layout */
       .form-control {
         display: flex;
@@ -77,7 +78,7 @@ import { CommonModule } from '@angular/common';
         gap: 8px;
       }
     `,
-  ],
+    ]
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
   @Output() 
@@ -85,6 +86,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
 
   private searchSubject = new Subject<string>();
   private readonly store = inject(Store);
+  private destroyRef = inject(DestroyRef);
 
   searchInProgress$ = of(false);
 
@@ -93,7 +95,8 @@ export class SearchInputComponent implements OnInit, OnDestroy {
     this.searchSubject
       .pipe(
         debounceTime(500), // Wait for 500ms of silence before emitting the last value
-        distinctUntilChanged() // Only emit if the current value is different from the last
+        distinctUntilChanged(), // Only emit if the current value is different from the last
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((value) => this.searchText.emit(value));
   }

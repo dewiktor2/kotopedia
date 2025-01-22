@@ -52,8 +52,16 @@ const paths = [
   },
 ];
 
-export const appRoutes: Route[] = paths.map(({ path, type, title, description, keywords }) => ({
-  path,
-  loadComponent: () => import('./domains/feed/feed.component').then((m) => m.FeedComponent),
-  data: { type, title, description, keywords  },
-}));
+export const appRoutes: Route[] = (paths || []).map(
+  ({ path, type, title, description, keywords }) => ({
+    path,
+    loadComponent: () =>
+      import('./domains/feed/feed.component')
+        .then((m) => m.FeedComponent)
+        .catch((err) => {
+          console.error(`Error loading component for path: ${path}`, err);
+          throw err;
+        }),
+    data: { type, title, description, keywords },
+  })
+);

@@ -5,7 +5,7 @@ const paths = [
     path: '', 
     type: 'wszystkie', 
     title: 'Kotopedia - karmy dla kota', 
-    description: 'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota', 
+    description: 'Kotopedia - baza karm dla kotów, karmy, kalkulator dla kotów, karmy dla kota', 
     keywords: 'kot, kota, karma dla kota, karmy dla kotów, kotopedia, najlepsze karmy, zdrowie kota' 
   },
   { 

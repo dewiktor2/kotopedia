@@ -6,11 +6,11 @@ import {
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { NgxsModule } from '@ngxs/store';
 import { provideServiceWorker } from '@angular/service-worker';
 import '@angular/common/locales/global/pl';
 import { AdsenseModule } from 'ng2-adsense';
 import { FeedsState } from './domains/feed/+state/feed.state';
+import { NgxsModule } from '@ngxs/store';
 
 
 export const appConfig: ApplicationConfig = {

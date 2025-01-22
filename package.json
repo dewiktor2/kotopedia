@@ -2,7 +2,9 @@
   "name": "@projekty/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "skott": "skott --displayMode=webapp"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "18.2.13",
@@ -17,7 +19,7 @@
     "@angular/router": "18.2.13",
     "@angular/service-worker": "18.2.13",
     "@angular/ssr": "18.2.9",
-    "@ngxs/store": "18.1.6",
+    "@ngxs/store": "18.0.0",
     "@nx/angular": "19.8.14",
     "@supabase/supabase-js": "^2.39.6",
     "@syncfusion/ej2-angular-grids": "^24.2.7",

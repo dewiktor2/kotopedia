@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { DataStateChangeEventArgs, Sorts } from '@syncfusion/ej2-angular-grids';
 import { Observable, Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { SupabaseService } from './supabase.service';
 import { SetSearchInProgress, SetRecordCount } from '../domains/feed/+state/feed.actions';
 import { FeedsState } from '../domains/feed/+state/feed.state';
 import { defaultQueryFetchValue, ProductQueryFetch, QueryFetch } from '../utility/syncfusion/query.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ import { defaultQueryFetchValue, ProductQueryFetch, QueryFetch } from '../utilit
 })
 export class FeedsService extends Subject<DataStateChangeEventArgs> {
   private store = inject(Store);
-
+  private destroyRef = inject(DestroyRef);
   private readonly client = inject(SupabaseService);
 
   constructor() {
@@ -22,7 +23,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
   }
 
   public execute(state: any): void {
-    this.getData(state).subscribe((x) => super.next(x));
+    this.getData(state).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((x) => super.next(x));
   }
 
   protected getData(

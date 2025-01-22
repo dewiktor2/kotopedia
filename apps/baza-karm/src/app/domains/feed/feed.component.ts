@@ -27,6 +27,7 @@ import {
 import { categories, category } from './models/category.model';
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 import { SetCategoryFilter, SetCurrentFilter, ChangeExtraFilter } from './+state/feed.actions';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -90,7 +91,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   constructor() {
     // Accessing the route data
-    this.route.data.subscribe((data) => {
+    this.route.data.pipe(takeUntilDestroyed()).subscribe((data) => {
       this.store.dispatch(
         new SetCategoryFilter({ categoryFitler: data['type'] })
       );

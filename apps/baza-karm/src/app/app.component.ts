@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   Inject,
   OnInit,
   ViewEncapsulation,
@@ -12,6 +13,7 @@ import { filter, tap } from 'rxjs';
 import { AdsenseModule } from 'ng2-adsense';
 import { SEO_HANDLER } from './tokens/seo.token';
 import { CULTURE_HANDLER } from './tokens/culture.token';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
@@ -39,8 +41,9 @@ import { CULTURE_HANDLER } from './tokens/culture.token';
 export class AppComponent implements OnInit {
   title = 'baza-karm';
 
+  private destroyRef = inject(DestroyRef);
   private readonly swUpdate = inject(SwUpdate);
-
+  
   constructor(
     @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
     @Inject(SEO_HANDLER) private seoHandler: () => void
@@ -58,6 +61,7 @@ export class AppComponent implements OnInit {
   private onVersionReady() {
     this.swUpdate.versionUpdates
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         filter((event: VersionEvent) => event?.type === 'VERSION_READY'),
         tap(() => this.reloadPage())
       )

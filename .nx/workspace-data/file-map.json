@@ -14,7 +14,7 @@
     "@angular/router": "18.2.13",
     "@angular/service-worker": "18.2.13",
     "@angular/ssr": "18.2.9",
-    "@ngxs/store": "18.1.6",
+    "@ngxs/store": "18.0.0",
     "@nx/angular": "19.8.14",
     "@supabase/supabase-js": "^2.39.6",
     "@syncfusion/ej2-angular-grids": "^24.2.7",
@@ -85,52 +85,48 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
-      },
-      {
         "file": ".eslintignore",
         "hash": "7663861978715868291"
       },
       {
-        "file": ".eslintrc.json",
-        "hash": "18315524891129148814"
-      },
-      {
-        "file": ".github/workflows/build.yml",
-        "hash": "17581712015690216538"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "9835727590166923858"
-      },
-      {
-        "file": ".nvmrc",
-        "hash": "3169156820904398224"
+        "file": "tsconfig.base.json",
+        "hash": "11536225490382743489"
       },
       {
         "file": ".prettierignore",
         "hash": "3395189204293871444"
       },
       {
+        "file": "package.json",
+        "hash": "7462573252838691834"
+      },
+      {
         "file": ".prettierrc",
         "hash": "16267754514737964994"
       },
       {
-        "file": ".vscode/extensions.json",
-        "hash": "4934098906304722861"
-      },
-      {
-        "file": "README.md",
-        "hash": "9175232584812621522"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "12333515226966617182"
-      },
-      {
         "file": "jest.preset.js",
         "hash": "9430166341120122740"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "18315524891129148814"
+      },
+      {
+        "file": "tailwind.config.js",
+        "hash": "2500932816393351686"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".github/workflows/build.yml",
+        "hash": "17581712015690216538"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "17030509664123329465"
       },
       {
         "file": "migrations.json",
@@ -141,20 +137,24 @@
         "hash": "5534269767314307886"
       },
       {
-        "file": "package-lock.json",
-        "hash": "6920216610845096686"
+        "file": ".vscode/extensions.json",
+        "hash": "4934098906304722861"
       },
       {
-        "file": "package.json",
-        "hash": "11625147274092415201"
+        "file": ".gitignore",
+        "hash": "9835727590166923858"
       },
       {
-        "file": "tailwind.config.js",
-        "hash": "2500932816393351686"
+        "file": ".nvmrc",
+        "hash": "3169156820904398224"
       },
       {
-        "file": "tsconfig.base.json",
-        "hash": "11536225490382743489"
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": "README.md",
+        "hash": "9175232584812621522"
       }
     ],
     "projectFileMap": {
@@ -198,7 +198,7 @@
         },
         {
           "file": "apps/baza-karm/src/app/app.component.ts",
-          "hash": "15274110849746785057",
+          "hash": "6446454715567600801",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -218,20 +218,20 @@
         },
         {
           "file": "apps/baza-karm/src/app/app.config.ts",
-          "hash": "14236681417392985249",
+          "hash": "2867027110745781719",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
             "npm:@angular/platform-browser",
-            "npm:@ngxs/store",
             "npm:@angular/service-worker",
             "npm:@angular/common",
-            "npm:ng2-adsense"
+            "npm:ng2-adsense",
+            "npm:@ngxs/store"
           ]
         },
         {
           "file": "apps/baza-karm/src/app/app.routes.ts",
-          "hash": "3038578126209533162",
+          "hash": "13101004035507102218",
           "deps": [
             "npm:@angular/router"
           ]
@@ -249,7 +249,7 @@
         },
         {
           "file": "apps/baza-karm/src/app/domains/feed/+state/feed.state.ts",
-          "hash": "6959336199718896995",
+          "hash": "8377547704956350609",
           "deps": [
             "npm:@angular/core",
             "npm:@ngxs/store"
@@ -265,7 +265,7 @@
         },
         {
           "file": "apps/baza-karm/src/app/domains/feed/feed.component.ts",
-          "hash": "7527841835745627577",
+          "hash": "7224188979162475369",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
@@ -302,7 +302,7 @@
         },
         {
           "file": "apps/baza-karm/src/app/services/feeds.service.ts",
-          "hash": "1914701947613449003",
+          "hash": "2928868821244920465",
           "deps": [
             "npm:@angular/core",
             "npm:@ngxs/store",
@@ -335,10 +335,9 @@
         },
         {
           "file": "apps/baza-karm/src/app/tokens/seo.token.ts",
-          "hash": "14752071435385153996",
+          "hash": "3878204097146939686",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/common",
             "npm:@angular/platform-browser",
             "npm:@angular/router",
             "npm:rxjs"
@@ -350,7 +349,7 @@
         },
         {
           "file": "apps/baza-karm/src/app/utility/components/search-input.component.ts",
-          "hash": "833718669966506221",
+          "hash": "8219604997267983159",
           "deps": [
             "npm:@angular/core",
             "npm:@ngxs/store",

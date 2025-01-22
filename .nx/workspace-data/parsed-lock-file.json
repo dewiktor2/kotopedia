@@ -3379,9 +3379,9 @@
       "type": "npm",
       "name": "npm:@ngxs/store",
       "data": {
-        "version": "18.1.6",
+        "version": "18.0.0",
         "packageName": "@ngxs/store",
-        "hash": "sha512-2CZC/v/S6MEwXmVB1w1cRbicrL26TI4QASRu6xXV+vK5gqFhEz3FzLG5ZvVMcH986Vhv/Mo0esAOABA2qWYJNA=="
+        "hash": "sha512-uYs7/KG0yBLS8Mxe87QVgknM950pRzDZ2iRqGaYDCB22NOQYf3sr+wJ3WdYTZnenTresc1njvUhJXzY7/UDdxA=="
       }
     },
     "npm:@nodelib/fs.scandir": {

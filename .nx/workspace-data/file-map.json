@@ -1,0 +1,521 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.5.10",
+  "deps": {
+    "@angular/animations": "18.1.5",
+    "@angular/common": "18.1.5",
+    "@angular/compiler": "18.1.5",
+    "@angular/core": "18.1.5",
+    "@angular/forms": "18.1.5",
+    "@angular/platform-browser": "18.1.5",
+    "@angular/platform-browser-dynamic": "18.1.5",
+    "@angular/platform-server": "18.1.5",
+    "@angular/pwa": "18.1.4",
+    "@angular/router": "18.1.5",
+    "@angular/service-worker": "18.1.5",
+    "@angular/ssr": "18.1.4",
+    "@ngxs/store": "^3.8.2",
+    "@nx/angular": "19.5.10",
+    "@supabase/supabase-js": "^2.39.6",
+    "@syncfusion/ej2-angular-grids": "^24.2.7",
+    "daisyui": "^4.7.2",
+    "ej2-locale": "^17.1.48",
+    "express": "~4.18.2",
+    "ng2-adsense": "^13.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3",
+    "@angular-devkit/build-angular": "18.1.4",
+    "@angular-devkit/core": "18.1.4",
+    "@angular-devkit/schematics": "18.1.4",
+    "@angular-eslint/eslint-plugin": "18.0.1",
+    "@angular-eslint/eslint-plugin-template": "18.0.1",
+    "@angular-eslint/template-parser": "18.0.1",
+    "@angular/cli": "~18.1.0",
+    "@angular/compiler-cli": "18.1.5",
+    "@angular/language-service": "18.1.5",
+    "@nx/eslint": "19.5.10",
+    "@nx/eslint-plugin": "19.5.10",
+    "@nx/jest": "19.5.10",
+    "@nx/js": "19.5.10",
+    "@nx/workspace": "19.5.10",
+    "@schematics/angular": "18.1.4",
+    "@swc-node/register": "1.9.2",
+    "@swc/core": "1.5.7",
+    "@swc/helpers": "0.5.15",
+    "@types/express": "4.17.14",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.16.9",
+    "@typescript-eslint/eslint-plugin": "7.16.0",
+    "@typescript-eslint/parser": "7.16.0",
+    "autoprefixer": "^10.4.17",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "^9.0.0",
+    "jest": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.1",
+    "jest-preset-angular": "14.1.1",
+    "jsonc-eslint-parser": "^2.1.0",
+    "nx": "19.5.10",
+    "postcss": "^8.4.35",
+    "prettier": "^2.6.2",
+    "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.1.0",
+    "ts-node": "10.9.1",
+    "typescript": "5.5.4"
+  },
+  "pathMappings": {
+    "@projekty/shared-ui": [
+      "apps/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": ".nvmrc",
+        "hash": "3169156820904398224"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "tailwind.config.js",
+        "hash": "2500932816393351686"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "3395189204293871444"
+      },
+      {
+        "file": "migrations.json",
+        "hash": "8627255123357747334"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "11536225490382743489"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4934098906304722861"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "9835727590166923858"
+      },
+      {
+        "file": ".github/workflows/build.yml",
+        "hash": "17581712015690216538"
+      },
+      {
+        "file": "README.md",
+        "hash": "9175232584812621522"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "14171153777273165583"
+      },
+      {
+        "file": "package.json",
+        "hash": "430611143854709331"
+      },
+      {
+        "file": "nx.json",
+        "hash": "5534269767314307886"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "18315524891129148814"
+      }
+    ],
+    "projectFileMap": {
+      "baza-karm": [
+        {
+          "file": "apps/baza-karm/.eslintrc.json",
+          "hash": "2663851640783660331"
+        },
+        {
+          "file": "apps/baza-karm/jest.config.ts",
+          "hash": "11172067371845727823"
+        },
+        {
+          "file": "apps/baza-karm/ngsw-config.json",
+          "hash": "5821169595846092765"
+        },
+        {
+          "file": "apps/baza-karm/project.json",
+          "hash": "12837612632756341982"
+        },
+        {
+          "file": "apps/baza-karm/server.ts",
+          "hash": "1677470708837359654",
+          "deps": [
+            "npm:express"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.component.spec.ts",
+          "hash": "17931621839016451888",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.component.ts",
+          "hash": "15274110849746785057",
+          "deps": [
+            "shared-ui",
+            "npm:rxjs",
+            "npm:ng2-adsense"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.config.server.ts",
+          "hash": "472700109066692288",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-server"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.config.ts",
+          "hash": "14236681417392985249",
+          "deps": [
+            "npm:@ngxs/store",
+            "npm:ng2-adsense"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/app.routes.ts",
+          "hash": "3038578126209533162",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/+state/feed.actions.ts",
+          "hash": "14298674910656128866"
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/+state/feed.model.ts",
+          "hash": "16631371213416965687",
+          "deps": [
+            "npm:@supabase/postgrest-js"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/+state/feed.state.ts",
+          "hash": "6959336199718896995",
+          "deps": [
+            "npm:@ngxs/store"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/feed.component.html",
+          "hash": "6180582517030361572"
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/feed.component.scss",
+          "hash": "16198463126229651601"
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/feed.component.ts",
+          "hash": "7527841835745627577",
+          "deps": [
+            "npm:@ngxs/store",
+            "npm:@syncfusion/ej2-angular-grids",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/filter/filter-dialog.component.ts",
+          "hash": "14679901172716730128",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/models/category.model.ts",
+          "hash": "18319499620655903017"
+        },
+        {
+          "file": "apps/baza-karm/src/app/domains/feed/pipes/utc-local.pipe.ts",
+          "hash": "4625777292393491287",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/manifest.webmanifest",
+          "hash": "4819981280787206413"
+        },
+        {
+          "file": "apps/baza-karm/src/app/services/feeds.service.ts",
+          "hash": "1914701947613449003",
+          "deps": [
+            "npm:@ngxs/store",
+            "npm:@syncfusion/ej2-angular-grids",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/services/seo.service.ts",
+          "hash": "13112911458127560544"
+        },
+        {
+          "file": "apps/baza-karm/src/app/services/supabase.service.ts",
+          "hash": "13802600682285651415",
+          "deps": [
+            "npm:@supabase/supabase-js",
+            "npm:@supabase/postgrest-js",
+            "npm:@ngxs/store"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/tokens/culture.token.ts",
+          "hash": "16631124983679015648",
+          "deps": [
+            "npm:@syncfusion/ej2-base"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/tokens/seo.token.ts",
+          "hash": "14752071435385153996",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/platform-browser",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/utility/components/search-input.component.scss",
+          "hash": "18356644911366506540"
+        },
+        {
+          "file": "apps/baza-karm/src/app/utility/components/search-input.component.ts",
+          "hash": "833718669966506221",
+          "deps": [
+            "npm:@ngxs/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/utility/components/tooltip/dismissable-tooltip.component.ts",
+          "hash": "7180837765322527403",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/utility/syncfusion/query.model.ts",
+          "hash": "6219292496316100087",
+          "deps": [
+            "npm:@syncfusion/ej2-angular-grids"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/app/utility/syncfusion/supabase.adapter.ts",
+          "hash": "1514478130531801517",
+          "deps": [
+            "npm:@syncfusion/ej2-data"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/i18n/sync-pl.json",
+          "hash": "756456694535348307"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/128x128.png",
+          "hash": "10113984721311346009"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/192x192.png",
+          "hash": "11936233310717390384"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/24x24.png",
+          "hash": "1885986245195280905"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/48x48.png",
+          "hash": "2314731233948447919"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/512x512.png",
+          "hash": "12171222130388401928"
+        },
+        {
+          "file": "apps/baza-karm/src/assets/img/logo.webp",
+          "hash": "4295249459648429775"
+        },
+        {
+          "file": "apps/baza-karm/src/env/fakeForCI.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/baza-karm/src/favicon.ico",
+          "hash": "16841625019034532661"
+        },
+        {
+          "file": "apps/baza-karm/src/index.html",
+          "hash": "3200502959303669006"
+        },
+        {
+          "file": "apps/baza-karm/src/main.server.ts",
+          "hash": "11653607448136507287",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/main.ts",
+          "hash": "513733506230025327",
+          "deps": [
+            "npm:@syncfusion/ej2-base"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/src/manifest.webmanifest",
+          "hash": "14718844371277501005"
+        },
+        {
+          "file": "apps/baza-karm/src/robots.txt",
+          "hash": "3154897472774894673"
+        },
+        {
+          "file": "apps/baza-karm/src/sitemap.xml",
+          "hash": "14858649111830309242"
+        },
+        {
+          "file": "apps/baza-karm/src/styles.scss",
+          "hash": "6651198112529365313"
+        },
+        {
+          "file": "apps/baza-karm/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "apps/baza-karm/tsconfig.app.json",
+          "hash": "564685728328269220"
+        },
+        {
+          "file": "apps/baza-karm/tsconfig.editor.json",
+          "hash": "17511610827034788226"
+        },
+        {
+          "file": "apps/baza-karm/tsconfig.json",
+          "hash": "18395570803747673231"
+        },
+        {
+          "file": "apps/baza-karm/tsconfig.spec.json",
+          "hash": "2927375835638640771"
+        }
+      ],
+      "shared-ui": [
+        {
+          "file": "apps/.eslintrc.json",
+          "hash": "5885108930237044454"
+        },
+        {
+          "file": "apps/README.md",
+          "hash": "8650716158155619831"
+        },
+        {
+          "file": "apps/jest.config.ts",
+          "hash": "1238085533590657131"
+        },
+        {
+          "file": "apps/project.json",
+          "hash": "18088448224815978998"
+        },
+        {
+          "file": "apps/src/index.ts",
+          "hash": "16779886742054184809"
+        },
+        {
+          "file": "apps/src/lib/shared-ui/menu/menu.component.html",
+          "hash": "6813953932898572721"
+        },
+        {
+          "file": "apps/src/lib/shared-ui/menu/menu.component.scss",
+          "hash": "880731950510443177"
+        },
+        {
+          "file": "apps/src/lib/shared-ui/menu/menu.component.ts",
+          "hash": "4228175057346553588",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "apps/tsconfig.json",
+          "hash": "4881022640630122902"
+        },
+        {
+          "file": "apps/tsconfig.lib.json",
+          "hash": "4766185256741444917"
+        },
+        {
+          "file": "apps/tsconfig.spec.json",
+          "hash": "2129196202529263968"
+        }
+      ]
+    }
+  }
+}

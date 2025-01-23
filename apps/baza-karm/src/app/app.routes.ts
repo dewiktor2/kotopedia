@@ -3,8 +3,9 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'wszystkie',
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    pathMatch: 'full'
   },
   {
     path: 'wszystkie',
@@ -77,19 +78,15 @@ export const appRoutes: Route[] = [
     },
   },
   {
-    path: 'not-found',
+    path: '**',
     loadComponent: () =>
       import('./domains/not-found/not-found.component').then(
         (m) => m.NotFoundComponent
       ),
     data: {
-      type: 'polecane',
+      type: 'not-found',
       title: 'Kotopedia - Nie znaleziono podanej strony',
-      noMeta: true
+      noMeta: true,
     },
-  },
-  {
-    path: '**',
-    redirectTo: 'not-found',
   },
 ];

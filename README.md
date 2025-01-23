@@ -11,6 +11,7 @@ Tailwind
 Daisy
 
 
-![image](https://github.com/user-attachments/assets/e7bdee80-04a2-47a8-a097-f2834d400542)
+![image](https://github.com/user-attachments/assets/2f1a2627-a69d-4905-83f5-e0deb155e93a)
+
 
 

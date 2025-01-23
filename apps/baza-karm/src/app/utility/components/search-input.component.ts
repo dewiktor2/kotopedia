@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -10,26 +11,26 @@ import {
 import { Store } from '@ngxs/store';
 import { Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
 import { FeedsState } from '../../domains/feed/+state/feed.state';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'bk-search-input',
-    imports: [CommonModule],
-    template: `
+  selector: 'bk-search-input',
+  imports: [AsyncPipe],
+  template: `
     <div class="form-control pb-4 flex w-72">
       <div class="place-items-center flex">
         <label class="input input-bordered flex w-72 items-center gap-2">
           <input
-            [readonly]="searchInProgress$ | async"
+            [readonly]="(searchInProgress$ | async) || disabled"
             #searchInput
             type="search"
             class="grow"
             placeholder="Szukaj"
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
+          @if ( (searchInProgress$ | async) === false) {
           <svg
-            *ngIf="(searchInProgress$ | async) === false; else other"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
@@ -42,9 +43,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
               clip-rule="evenodd"
             />
           </svg>
-          <ng-template #other>
-            <span class="loading loading-ring loading-xs"></span>
-          </ng-template>
+          } @else {
+          <span class="loading loading-ring loading-xs"></span>
+          }
         </label>
         <!-- Information Icon with Tooltip -->
         <div
@@ -69,8 +70,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </div>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       /* Additional styles for flex layout */
       .form-control {
         display: flex;
@@ -78,34 +79,37 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         gap: 8px;
       }
     `,
-    ]
+  ],
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
-  @Output() 
+  @Output()
   readonly searchText = new EventEmitter<string>();
 
-  private searchSubject = new Subject<string>();
-  private readonly store = inject(Store);
-  private destroyRef = inject(DestroyRef);
+  @Input()
+  disabled = false;
+
+  #searchSubject = new Subject<string>();
+  readonly #store = inject(Store);
+  #destroyRef = inject(DestroyRef);
 
   searchInProgress$ = of(false);
 
   ngOnInit() {
-    this.searchInProgress$ = this.store.select(FeedsState.searchInProgress);
-    this.searchSubject
+    this.searchInProgress$ = this.#store.select(FeedsState.searchInProgress);
+    this.#searchSubject
       .pipe(
         debounceTime(500), // Wait for 500ms of silence before emitting the last value
         distinctUntilChanged(), // Only emit if the current value is different from the last
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.#destroyRef)
       )
       .subscribe((value) => this.searchText.emit(value));
   }
 
   ngOnDestroy() {
-    this.searchSubject.unsubscribe();
+    this.#searchSubject.unsubscribe();
   }
 
   onSearchButtonClick(value: string): void {
-    this.searchSubject.next(value);
+    this.#searchSubject.next(value);
   }
 }

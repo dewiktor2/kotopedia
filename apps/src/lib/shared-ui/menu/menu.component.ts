@@ -1,9 +1,9 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, Inject, Renderer2 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, NgOptimizedImage],
     selector: 'k-shared-menu',
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',

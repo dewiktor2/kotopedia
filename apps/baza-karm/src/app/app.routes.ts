@@ -1,67 +1,95 @@
 import { Route } from '@angular/router';
 
-const paths = [
-  { 
-    path: '', 
-    type: 'wszystkie', 
-    title: 'Kotopedia - karmy dla kota', 
-    description: 'Kotopedia - baza karm dla kotów, karmy, kalkulator dla kotów, karmy dla kota', 
-    keywords: 'kot, kota, karma dla kota, karmy dla kotów, kotopedia, najlepsze karmy, zdrowie kota' 
+export const appRoutes: Route[] = [
+  {
+    path: '',
+    redirectTo: 'wszystkie',
+    pathMatch: 'full',
   },
-  { 
-    path: 'wszystkie', 
-    type: 'wszystkie', 
-    title: 'Kotopedia - karmy dla kota', 
-    description: 'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota', 
-    keywords: 'kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach' 
+  {
+    path: 'wszystkie',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'wszystkie',
+      title: 'Kotopedia - karmy dla kota',
+      description:
+        'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota',
+      keywords: 'kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach',
+    },
   },
-  { 
-    path: 'monobialkowe', 
-    type: 'monobialkowe', 
-    title: 'Kotopedia - karmy monobiałkowe', 
-    description: 'Kotopedia - polecane karmy monobiałkowe dla kotów.', 
-    keywords: 'karmy monobiałkowe, dieta kota, jedzenie dla kota, zdrowa karma' 
+  {
+    path: 'monobialkowe',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'monobialkowe',
+      title: 'Kotopedia - karmy monobiałkowe',
+      description: 'Kotopedia - polecane karmy monobiałkowe dla kotów.',
+      keywords:
+        'karmy monobiałkowe, dieta kota, jedzenie dla kota, zdrowa karma',
+    },
   },
-  { 
-    path: 'chore-nerki', 
-    type: 'chore-nerki', 
-    title: 'Kotopedia - karmy dla kotów z chorymi nerkami', 
-    description: 'Karmy dla kotów z problemami nerkowymi.', 
-    keywords: 'kot z chorymi nerkami, dieta dla kota, karmy weterynaryjne, zdrowie kota' 
+  {
+    path: 'chore-nerki',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'chore-nerki',
+      title: 'Kotopedia - karmy dla kotów z chorymi nerkami',
+      description: 'Karmy dla kotów z problemami nerkowymi.',
+      keywords:
+        'kot z chorymi nerkami, dieta dla kota, karmy weterynaryjne, zdrowie kota',
+    },
   },
-  { 
-    path: 'polecane', 
-    type: 'polecane', 
-    title: 'Kotopedia - polecane karmy', 
-    description: 'Kotopedia - nasze rekomendacje karm dla kotów.', 
-    keywords: 'polecane karmy, najlepsze karmy, kot, jedzenie dla kota' 
+  {
+    path: 'polecane',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'polecane',
+      title: 'Kotopedia - polecane karmy',
+      description: 'Kotopedia - nasze rekomendacje karm dla kotów.',
+      keywords: 'polecane karmy, najlepsze karmy, kot, jedzenie dla kota',
+    },
   },
-  { 
-    path: 'chora-trzustka', 
-    type: 'chora-trzustka', 
-    title: 'Kotopedia - karmy dla kotów z chorą trzustką', 
-    description: 'Kotopedia - karmy dla kotów z problemami trzustkowymi.', 
-    keywords: 'kot z chorą trzustką, karmy weterynaryjne, dieta kota' 
+  {
+    path: 'chora-trzustka',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'polecane',
+      title: 'Kotopedia - polecane karmy',
+      description: 'Kotopedia - nasze rekomendacje karm dla kotów.',
+      keywords: 'polecane karmy, najlepsze karmy, kot, jedzenie dla kota',
+    },
   },
-  { 
-    path: 'kocieta', 
-    type: 'kocięta', 
-    title: 'Kotopedia - karmy dla kociąt', 
-    description: 'Karmy dla młodych kotów - sprawdź najlepsze opcje.', 
-    keywords: 'kocięta, karma dla kociąt, młody kot, najlepsze karmy dla młodych kotów' 
+  {
+    path: 'kocieta',
+    loadComponent: () =>
+      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+    data: {
+      type: 'kocięta',
+      title: 'Kotopedia - karmy dla kociąt',
+      description: 'Karmy dla młodych kotów - sprawdź najlepsze opcje.',
+      keywords:
+        'kocięta, karma dla kociąt, młody kot, najlepsze karmy dla młodych kotów',
+    },
+  },
+  {
+    path: 'not-found',
+    loadComponent: () =>
+      import('./domains/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+    data: {
+      type: 'polecane',
+      title: 'Kotopedia - Nie znaleziono podanej strony',
+      noMeta: true
+    },
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   },
 ];
-
-export const appRoutes: Route[] = (paths || []).map(
-  ({ path, type, title, description, keywords }) => ({
-    path,
-    loadComponent: () =>
-      import('./domains/feed/feed.component')
-        .then((m) => m.FeedComponent)
-        .catch((err) => {
-          console.error(`Error loading component for path: ${path}`, err);
-          throw err;
-        }),
-    data: { type, title, description, keywords },
-  })
-);

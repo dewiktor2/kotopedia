@@ -45,11 +45,17 @@ export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
       )
       .subscribe((data) => {
         const title = data['title'] || 'Kotopedia - baza karm dla kotów';
+
+        titleService.setTitle(title);
+
+        if(data['noMeta']) {
+          return;
+        }
+              
         const description = data['description'] || defaultDescription;
         const keywords = data['keywords'] || defaultKeywords;
         const canonicalUrl = `${document.location.origin}${router.url}`;
 
-        titleService.setTitle(title);
         meta.updateTag({ name: 'description', content: description });
         meta.updateTag({ name: 'keywords', content: keywords });
         updateCanonicalUrl(canonicalUrl);

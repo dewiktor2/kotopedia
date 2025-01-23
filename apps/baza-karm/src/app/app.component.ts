@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
 import { AdsenseModule } from 'ng2-adsense';
@@ -23,24 +23,18 @@ import { SEO_HANDLER } from './tokens/seo.token';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
-      @if (showMenu()) {   
-        @defer {
-          <k-shared-menu />
-          <div class="pt-10 px-8 pb-8 flex-1 overflow-auto">
-            <router-outlet />
-            <!-- Main content area -->
-            <!-- <ng-adsense
+      <k-shared-menu />
+
+      <div class="pt-10 px-8 pb-8 flex-1 overflow-auto">
+        <router-outlet />
+        <!-- Main content area -->
+        <!-- <ng-adsense
                 [adClient]="'ca-pub-4829562881799420'"
                 [display]="'inline-block'"
                 [width]="320"
                 [height]="108"
               /> -->
-          </div>
-        } 
-      } 
-      @else {
-        <router-outlet />
-      }
+      </div>
     </div>
   `,
 })
@@ -49,7 +43,6 @@ export class AppComponent implements OnInit {
   showMenu = signal(true);
 
   #destroyRef = inject(DestroyRef);
-  #router = inject(Router);
   readonly #swUpdate = inject(SwUpdate);
 
   constructor(
@@ -64,15 +57,6 @@ export class AppComponent implements OnInit {
     if (this.#swUpdate.isEnabled) {
       this.onVersionReady();
     }
-    this.#router.events
-      .pipe(
-        takeUntilDestroyed(this.#destroyRef),
-        filter((event) => event instanceof NavigationEnd)
-      )
-      .subscribe((event: NavigationEnd) => {
-        // Hide the shared menu if on the 'not-found' route
-        this.showMenu.set(event.url !== '/not-found');
-      });
   }
 
   private onVersionReady() {

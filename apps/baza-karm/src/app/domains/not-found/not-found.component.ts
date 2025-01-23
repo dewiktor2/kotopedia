@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   template: `
     <div
-      class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800"
+      class="flex flex-col items-center justify-center min-h-[700px] bg-gray-100 text-gray-800"
     >
       <h1 class="text-9xl font-extrabold tracking-widest text-gray-900">404</h1>
       <div

@@ -1,6 +1,6 @@
 <div *ngIf="(data | async) as grid; else other;" class="control-section">
     <!-- <bk-filter-dialog></bk-filter-dialog> -->
-    <bk-search-input (searchText)="search($event)"></bk-search-input>
+    <bk-search-input (searchText)="search($event)" />
     <ng-container *ngIf="(filter | async) as checkbox">
         <div *ngIf="checkbox !== 'disabled'" class="flex items-center mb-1">
             <input id="link-checkbox" type="checkbox" [checked]="checkbox === 'on'" (change)="changeCheckboxState()"
@@ -99,9 +99,7 @@
 
                             {{data.opis}}
                         </span>
-                        <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis" label="Skład karmy">
-
-                        </bk-dismissable-tooltip>
+                        <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis" label="Skład karmy" />
                     </div>
                 </ng-template>
             </e-column>
@@ -121,13 +119,9 @@
             <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
                 width=120 [allowSorting]="false">
                 <ng-template #template let-data>
-                    <!-- (click)="problemTooltip.showModal(buildProblemFunc(data))" -->
                     <span class="cursor-pointer text-blue-400" (click)="showProblemModal(data)">
                         Zgłoś
                     </span>
-                    <!-- <bk-dismissable-tooltip #problemTooltip [identifier]="data.id + 'problem'" label="Informacje">
-
-                    </bk-dismissable-tooltip> -->
                 </ng-template>
             </e-column>
         </e-columns>

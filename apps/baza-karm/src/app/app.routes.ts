@@ -5,7 +5,14 @@ export const appRoutes: Route[] = [
     path: '',
     loadComponent: () =>
       import('./domains/feed/feed.component').then((m) => m.FeedComponent),
-    pathMatch: 'full'
+    data: {
+      type: 'wszystkie',
+      title: 'Kotopedia - karmy dla kota',
+      description:
+        'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota',
+      keywords: 'kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach',
+    },
+    pathMatch: 'full',
   },
   {
     path: 'wszystkie',
@@ -80,13 +87,11 @@ export const appRoutes: Route[] = [
   {
     path: '**',
     loadComponent: () =>
-      import('./domains/not-found/not-found.component').then(
-        (m) => m.NotFoundComponent
-      ),
+      import('./domains/not-found/not-found.component').then((m) => m.NotFoundComponent),
     data: {
       type: 'not-found',
       title: 'Kotopedia - Nie znaleziono podanej strony',
       noMeta: true,
-    },
+    }
   },
 ];

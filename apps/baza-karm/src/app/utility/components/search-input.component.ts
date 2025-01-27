@@ -1,18 +1,17 @@
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   DestroyRef,
-  EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
-  Output,
   inject,
+  input,
+  output
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngxs/store';
 import { Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
 import { FeedsState } from '../../domains/feed/+state/feed.state';
-import { AsyncPipe } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'bk-search-input',
@@ -22,7 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       <div class="place-items-center flex">
         <label class="input input-bordered flex w-72 items-center gap-2">
           <input
-            [readonly]="(searchInProgress$ | async) || disabled"
+            [readonly]="(searchInProgress$ | async) || disabled()"
             #searchInput
             type="search"
             class="grow"
@@ -82,16 +81,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
-  @Output()
-  readonly searchText = new EventEmitter<string>();
-
-  @Input()
-  disabled = false;
+  readonly searchText = output<string>();
+  disabled = input<boolean>(false)
 
   #searchSubject = new Subject<string>();
   readonly #store = inject(Store);
   #destroyRef = inject(DestroyRef);
-
   searchInProgress$ = of(false);
 
   ngOnInit() {

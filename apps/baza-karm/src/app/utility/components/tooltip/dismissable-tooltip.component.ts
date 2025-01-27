@@ -31,7 +31,7 @@ import { DOCUMENT } from '@angular/common';
 export class DismissableTooltipComponent {
   @Input()
   text!: string;
-
+  
   @Input()
   label!: string;
 

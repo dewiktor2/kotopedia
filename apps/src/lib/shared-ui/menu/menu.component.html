@@ -17,7 +17,7 @@
                     </label>
                     <div class="flex-1 px-2 mx-2">
                         <div class="flex items-center">
-                            <img ngSrc="assets/img/logo.webp" width="48" height="48" priority  alt="Kotopedia">
+                            <img ngSrc="assets/img/logo.webp" width="48" height="48" priority alt="Kotopedia">
                             <h1>Baza karm dla kotów</h1>
                         </div>
                     </div>
@@ -31,26 +31,32 @@
                     <li>
                         <span>Karmy</span>
                         <ul class="pl-4">
-                            <li class="pb-1"><a [routerLink]="['/wszystkie']"
-                                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }">Wszystkie</a>
+                            <li class="pb-1">
+                                <a [routerLink]="['/wszystkie']"
+                                    [class.active-link]="router.url === '/wszystkie'  || router.url === '/'">Wszystkie</a>
                             </li>
-                            <li class="pb-1"><a [routerLink]="['/polecane']"
-                                    [ngClass]="{'active-link': router.url === '/polecane' }">Polecane</a></li>
-                            <li class="pb-1"><a [routerLink]="['/monobialkowe']"
-                                    [ngClass]="{'active-link': router.url === '/monobialkowe' }">Monobiałkowe</a></li>
-                            <li class="pb-1"><a [routerLink]="['/chore-nerki']"
-                                    [ngClass]="{'active-link': router.url === '/chore-nerki' }">Chore nerki</a></li>
-                            <li class="pb-1"><a [routerLink]="['/chora-trzustka']"
-                                    [ngClass]="{'active-link': router.url === '/chora-trzustka' }">Chora trzustka</a>
+                            <li class="pb-1">
+                                <a [routerLink]="['/polecane']"
+                                    [class.active-link]="router.url === '/polecane'">Polecane</a>
                             </li>
-                            <li class="pb-1"><a [routerLink]="['/kocieta']"
-                                [ngClass]="{'active-link': router.url === '/kocieta' }">Kocięta</a>
+                            <li class="pb-1">
+                                <a [routerLink]="['/monobialkowe']"
+                                    [class.active-link]="router.url === '/monobialkowe'">Monobiałkowe</a>
+                            </li>
+                            <li class="pb-1">
+                                <a [routerLink]="['/chore-nerki']"
+                                    [class.active-link]="router.url === '/chore-nerki'">Chore nerki</a>
+                            </li>
+                            <li class="pb-1">
+                                <a [routerLink]="['/chora-trzustka']"
+                                    [class.active-link]="router.url === '/chora-trzustka'">Chora trzustka</a>
+                            </li>
+                            <li class="pb-1">
+                                <a [routerLink]="['/kocieta']"
+                                    [class.active-link]="router.url === '/kocieta'">Kocięta</a>
                             </li>
                         </ul>
                     </li>
-                    <!-- Separate Drawer item for Smaczki -->
-                    <!-- <li><a [routerLink]="['/smaczki']"
-                            [ngClass]="{'active-link': router.url === '/smaczki' }">Smaczki</a></li> -->
                 </ul>
             </div>
         </div>
@@ -70,23 +76,30 @@
             <!-- Horizontal Menu for Desktop -->
             <div class="flex-1 flex justify-start">
                 <a [routerLink]="['/wszystkie']"
-                    [ngClass]="{'active-link': router.url === '/wszystkie' || router.url === '/' }"
-                    routerLinkActive="active-link" class="btn btn-ghost">Wszystkie</a>
-                <a [routerLink]="['/polecane']" [ngClass]="{'active-link': router.url === '/polecane' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Polecane</a>
-                <a [routerLink]="['/monobialkowe']" [ngClass]="{'active-link': router.url === '/monobialkowe' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Monobiałkowe</a>
-                <a [routerLink]="['/chore-nerki']" [ngClass]="{'active-link': router.url === '/chore-nerki' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Chore nerki</a>
-                <a [routerLink]="['/chora-trzustka']" [ngClass]="{'active-link': router.url === '/chora-trzustka' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Chora trzustka</a>
-                <a [routerLink]="['/kocieta']" [ngClass]="{'active-link': router.url === '/kocieta' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Kocięta</a>
-                <!-- <a [routerLink]="['/koty-chore']" [ngClass]="{'active-link': router.url === '/koty-chore' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Koty
-                    chore</a>
-                <a [routerLink]="['/smaczki']" [ngClass]="{'active-link': router.url === '/smaczki' }"
-                    routerLinkActive="active-link" class="btn btn-ghost ml-1">Smaczki</a> -->
+                    [class.active-link]="router.url === '/wszystkie'  || router.url === '/'"
+                    routerLinkActive="active-link" class="btn btn-ghost">
+                    Wszystkie
+                </a>
+                <a [routerLink]="['/polecane']" [class.active-link]="router.url === '/polecane'"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">
+                    Polecane
+                </a>
+                <a [routerLink]="['/monobialkowe']" [class.active-link]="router.url === '/monobialkowe'"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">
+                    Monobiałkowe
+                </a>
+                <a [routerLink]="['/chore-nerki']" [class.active-link]="router.url === '/chore-nerki'"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">
+                    Chore nerki
+                </a>
+                <a [routerLink]="['/chora-trzustka']" [class.active-link]="router.url === '/chora-trzustka'"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">
+                    Chora trzustka
+                </a>
+                <a [routerLink]="['/kocieta']" [class.active-link]="router.url === '/kocieta'"
+                    routerLinkActive="active-link" class="btn btn-ghost ml-1">
+                    Kocięta
+                </a>
             </div>
 
             <!-- Right Aligned Items, e.g., Theme Switcher -->

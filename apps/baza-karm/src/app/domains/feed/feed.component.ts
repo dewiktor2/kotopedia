@@ -1,13 +1,13 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
-  Input,
   OnInit,
-  ViewChild,
   ViewEncapsulation,
   inject,
   signal,
+  viewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import {
@@ -21,15 +21,14 @@ import { Observable, of } from 'rxjs';
 import { FeedsService } from '../../services/feeds.service';
 import { SearchInputComponent } from '../../utility/components/search-input.component';
 import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
+import {
+  ChangeExtraFilter,
+  SetCategoryFilter,
+  SetCurrentFilter,
+} from './+state/feed.actions';
 import { FeedsState } from './+state/feed.state';
 import { categories, category } from './models/category.model';
 import { UtcToLocalPipe } from './pipes/utc-local.pipe';
-import {
-  SetCategoryFilter,
-  SetCurrentFilter,
-  ChangeExtraFilter,
-} from './+state/feed.actions';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [
@@ -46,9 +45,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedComponent implements OnInit {
-  @Input()
-  index = 1000;
-
   gridData$!: Observable<DataStateChangeEventArgs>;
   initialPage: object = { pageSize: 20 };
   sortOptions!: object;
@@ -56,13 +52,10 @@ export class FeedComponent implements OnInit {
   recordNumber$ = of(0);
   filter$: Observable<string> = of('disabled');
   filterName = signal('');
-
-  @ViewChild('GridComponent')
-  grid!: GridComponent;
-  @ViewChild('tooltip')
-  tooltip!: DismissableTooltipComponent;
-  @ViewChild('problemTooltip')
-  problemTooltip!: DismissableTooltipComponent;
+  
+  grid = viewChild<GridComponent>('GridComponent')
+  tooltip = viewChild<DismissableTooltipComponent>('tooltip')
+  problemTooltip = viewChild<DismissableTooltipComponent>('problemTooltip')
 
   readonly #store = inject(Store);
   readonly #service = inject(FeedsService);

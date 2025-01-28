@@ -31,8 +31,6 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
   protected getData(
     state: DataStateChangeEventArgs
   ): Observable<DataStateChangeEventArgs> {
-    // const pageQuery = `$skip=${state.skip}&$top=${state.take}`;
-    // let sortQuery: string = '';
     const query = defaultQueryFetchValue('') as ProductQueryFetch;
 
     if (state && (state.sorted || []).length) {

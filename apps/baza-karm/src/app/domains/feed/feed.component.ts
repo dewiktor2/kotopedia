@@ -53,9 +53,9 @@ export class FeedComponent implements OnInit {
   filter$: Observable<string> = of('disabled');
   filterName = signal('');
   
-  grid = viewChild<GridComponent>('GridComponent')
-  tooltip = viewChild<DismissableTooltipComponent>('tooltip')
-  problemTooltip = viewChild<DismissableTooltipComponent>('problemTooltip')
+  grid = viewChild<GridComponent>('GridComponent');
+  tooltip = viewChild<DismissableTooltipComponent>('tooltip');
+  problemTooltip = viewChild<DismissableTooltipComponent>('problemTooltip');
 
   readonly #store = inject(Store);
   readonly #service = inject(FeedsService);

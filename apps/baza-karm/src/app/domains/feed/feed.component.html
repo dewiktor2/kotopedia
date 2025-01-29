@@ -124,7 +124,7 @@
                     <e-column headerText='Data edycji' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
                         width=120 [allowSorting]="false">
                         <ng-template #template let-data>
-                            <span> {{ data.updated_at | utcToLocal: 'fullDate' }}</span>
+                            <span> {{ data.updated_at | utcToLocal }}</span>
                         </ng-template>
                     </e-column>
                     <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'

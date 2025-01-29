@@ -4,28 +4,35 @@ import { DataStateChangeEventArgs, Sorts } from '@syncfusion/ej2-angular-grids';
 import { Observable, Subject } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { SupabaseService } from './supabase.service';
-import { SetSearchInProgress, SetRecordCount } from '../domains/feed/+state/feed.actions';
+import {
+  SetSearchInProgress,
+  SetRecordCount,
+} from '../domains/feed/+state/feed.actions';
 import { FeedsState } from '../domains/feed/+state/feed.state';
-import { defaultQueryFetchValue, ProductQueryFetch, QueryFetch } from '../utility/syncfusion/query.model';
+import {
+  defaultQueryFetchValue,
+  ProductQueryFetch,
+  QueryFetch,
+} from '../utility/syncfusion/query.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class FeedsService extends Subject<DataStateChangeEventArgs> {
-  private store = inject(Store);
-  private destroyRef = inject(DestroyRef);
-  private readonly client = inject(SupabaseService);
+  readonly #store = inject(Store);
+  readonly #client = inject(SupabaseService);
+
+  destroyRef = inject(DestroyRef);
 
   constructor() {
     super();
   }
 
   public execute(state: any): void {
-    this.getData(state).pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe((x) => super.next(x));
+    this.getData(state)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((x) => super.next(x));
   }
 
   protected getData(
@@ -42,7 +49,7 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       };
     }
 
-    const currentFilter = this.store.selectSnapshot(FeedsState.currentFilter);
+    const currentFilter = this.#store.selectSnapshot(FeedsState.currentFilter);
 
     if (
       (state && state?.search?.length && state.search[0].key) ||
@@ -57,7 +64,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       query.search = search;
     }
 
-    const categoryFilter = this.store.selectSnapshot(FeedsState.categoryFilter);
+    const categoryFilter = this.#store.selectSnapshot(
+      FeedsState.categoryFilter
+    );
 
     query.categoryFilter = categoryFilter;
 
@@ -67,13 +76,13 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       query.endIndex = action.currentPage * action.pageSize - 1;
     }
 
-    this.store.dispatch(new SetSearchInProgress({ searchInProgress: true }));
+    this.#store.dispatch(new SetSearchInProgress({ searchInProgress: true }));
 
     return this.fetchData(query).pipe(
       map((response: any) => {
         const result = response.data;
         const count = response.count;
-        this.store.dispatch(
+        this.#store.dispatch(
           new SetRecordCount({
             count,
           })
@@ -81,7 +90,7 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
         return { result, count } as DataStateChangeEventArgs;
       }),
       finalize(() => {
-        this.store.dispatch(
+        this.#store.dispatch(
           new SetSearchInProgress({ searchInProgress: false })
         );
       })
@@ -90,7 +99,7 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
 
   private fetchData(query: QueryFetch): Observable<any> {
     return new Observable((observer) => {
-      this.client
+      this.#client
         .productsV2(query)
         .then((result: any) => {
           if (result.error) {

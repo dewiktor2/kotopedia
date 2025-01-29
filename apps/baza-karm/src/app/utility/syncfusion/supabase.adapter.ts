@@ -7,8 +7,7 @@ import { inject, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CustomSupabaseAdaptor extends CustomDataAdaptor {
-
-  private readonly supabaseService = inject(SupabaseService);
+  readonly #supabaseService = inject(SupabaseService);
 
   constructor() {
     super();
@@ -32,6 +31,6 @@ export class CustomSupabaseAdaptor extends CustomDataAdaptor {
 
   // Example usage for a 'getData' operation
   getData = (option: FetchOption) => {
-    this.handleSupabaseRequest(this.supabaseService.productsV2(), option);
+    this.handleSupabaseRequest(this.#supabaseService.productsV2(), option);
   };
 }

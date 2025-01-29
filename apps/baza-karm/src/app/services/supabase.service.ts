@@ -20,7 +20,7 @@ export class SupabaseService {
   #supabase!: SupabaseClient;
   _session: AuthSession | null = null;
 
-  private readonly store = inject(Store);
+  readonly #store = inject(Store);
 
   constructor() {
     this.init();
@@ -102,7 +102,7 @@ export class SupabaseService {
     categoryFilter: categoryValue
   ): any {
     //PostgrestFilterBuilder<any, any, any[], 'v_products', unknown> {
-    const extraFilters = this.store
+    const extraFilters = this.#store
       .selectSnapshot(FeedsState.extraFilters)
       .find((x) => x.category === categoryFilter);
     if (categoryFilter === 'Polecane') {
@@ -132,7 +132,7 @@ export class SupabaseService {
     }
 
     if (extraFilters) {
-      const extraFilter = this.store.selectSnapshot(FeedsState.extraFilter);
+      const extraFilter = this.#store.selectSnapshot(FeedsState.extraFilter);
       query = extraFilters.filters(query, extraFilter === 'on');
     }
 

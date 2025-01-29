@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
 })
 export class UtcToLocalPipe implements PipeTransform {
-  transform(value: any, format = 'mediumDate'): any {
+  transform(value: any): any {
     if (!value) {
       return '';
     }

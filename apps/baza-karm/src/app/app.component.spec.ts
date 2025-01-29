@@ -1,12 +1,39 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { SharedMenuComponent } from '@projekty/shared-ui';
+import { SEO_HANDLER } from './tokens/seo.token';
+import { SwUpdate } from '@angular/service-worker';
+import { CULTURE_HANDLER } from './tokens/culture.token';
 
 describe('AppComponent', () => {
+  let mockCultureHandler: jest.Mock;
+  let mockSeoHandler: jest.Mock;
+  let swUpdate: jest.Mock;
+  let activatedRouteHandler: jest.Mock;
+
   beforeEach(async () => {
+    // Create Jest mock functions
+    mockCultureHandler = jest.fn();
+    mockSeoHandler = jest.fn();
+    swUpdate = jest.fn();
+    activatedRouteHandler = jest.fn();
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule],
+      imports: [RouterOutlet, SharedMenuComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: activatedRouteHandler },
+        { provide: SwUpdate, useValue: swUpdate },
+        { provide: CULTURE_HANDLER, useValue: mockCultureHandler },
+        { provide: SEO_HANDLER, useValue: mockSeoHandler },
+      ],
     }).compileComponents();
+  });
+
+  it('should call cultureHandler and seoHandler in constructor', () => {
+    TestBed.createComponent(AppComponent);
+
+    expect(mockCultureHandler).toHaveBeenCalledTimes(1);
+    expect(mockSeoHandler).toHaveBeenCalledTimes(1);
   });
 
   it('should render title', () => {
@@ -14,7 +41,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome baza-karm'
+      'Baza karm dla kotów'
     );
   });
 

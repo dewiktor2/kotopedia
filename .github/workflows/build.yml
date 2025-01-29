@@ -25,5 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test
+        run: npx nx run baza-karm:test
+
       - name: Build Nx app
         run: npx nx run baza-karm:build:production

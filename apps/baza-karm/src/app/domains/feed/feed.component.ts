@@ -5,10 +5,14 @@ import {
   ViewEncapsulation,
   inject,
   signal,
-  viewChild
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import {
+  DismissableTooltipComponent,
+  SearchInputComponent,
+} from '@baza-karm/utility';
 import { Store } from '@ngxs/store';
 import {
   DataStateChangeEventArgs,
@@ -18,17 +22,11 @@ import {
   SortService,
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, of } from 'rxjs';
-import { FeedsService } from '../../services/feeds.service';
-import { SearchInputComponent } from '../../utility/components/search-input.component';
-import { DismissableTooltipComponent } from '../../utility/components/tooltip/dismissable-tooltip.component';
-import {
-  ChangeExtraFilter,
-  SetCategoryFilter,
-  SetCurrentFilter,
-} from './+state/feed.actions';
+import { UtcToLocalPipe } from './pipes/utc-local.pipe';
+import { FeedsService } from '@baza-karm/services';
+import { ChangeExtraFilter, SetCategoryFilter, SetCurrentFilter } from './+state/feed.actions';
 import { FeedsState } from './+state/feed.state';
 import { categories, category } from './models/category.model';
-import { UtcToLocalPipe } from './pipes/utc-local.pipe';
 
 @Component({
   imports: [
@@ -52,7 +50,7 @@ export class FeedComponent implements OnInit {
   recordNumber$ = of(0);
   filter$: Observable<string> = of('disabled');
   filterName = signal('');
-  
+
   grid = viewChild<GridComponent>('GridComponent');
   tooltip = viewChild<DismissableTooltipComponent>('tooltip');
   problemTooltip = viewChild<DismissableTooltipComponent>('problemTooltip');

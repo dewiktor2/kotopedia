@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { categories, categoryValue } from '../models/category.model';
+import { SetCategoryFilter, SetRecordCount, SetCurrentFilter, ChangeExtraFilter, SetSearchInProgress } from './feed.actions';
 import { FeedStateModel, extraFilters } from './feed.model';
-import {
-  ChangeExtraFilter,
-  SetCategoryFilter,
-  SetCurrentFilter,
-  SetRecordCount,
-  SetSearchInProgress,
-} from './feed.actions';
+
 
 @State<FeedStateModel>({
   name: 'feed',

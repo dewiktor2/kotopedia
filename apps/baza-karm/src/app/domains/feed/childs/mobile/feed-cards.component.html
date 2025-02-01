@@ -1,6 +1,6 @@
 <div class="control-section px-2">
     <!-- Search Field -->
-    <bk-search-input (searchText)="search($event)"></bk-search-input>
+    <bk-search-input (searchText)="search($event)" />
 
     <!-- Checkbox Filter Section -->
     <div class="flex items-center justify-between mb-4">
@@ -17,7 +17,7 @@
         }
         }
         <!-- Sort Button, aligned on the same row -->
-        <button (click)="openSortDialog()" class="flex items-center space-x-1">
+        <button (click)="openSortDialog()" class="flex items-center space-x-1 ml-auto">
             <!-- Funnel Icon from Heroicons (inline SVG) -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -25,10 +25,16 @@
                     d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 18v-4.586L3.293 6.707A1 1 0 013 6V4z" />
             </svg>
             <!-- Up/Down Indicator (chevron) -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-green-500 transform transition-transform duration-300"
+                [class.rotate-180]="sortOption().finalOrder === 'ascending'"
+                [class.rotate-0]="sortOption().finalOrder === 'descending'" 
+                fill="none" 
+                viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
+
         </button>
     </div>
 
@@ -58,35 +64,41 @@
             <p class="text-sm"><strong>Smak:</strong> {{ card.flavors }}</p>
             <!-- Tabela z danymi: węgle, tłuszcz, fosfor, kcal -->
             <div class="overflow-x-auto mt-2">
-                <table class="w-full text-sm border-collapse">
+                <table class="w-full border-collapse text-xs md:text-sm">
                     <thead>
                         <tr>
-                            <th class="px-2 py-1 text-left font-medium text-gray-700">Węgle</th>
-                            <th class="px-2 py-1 text-left font-medium text-gray-700">Tłuszcz</th>
-                            <th class="px-2 py-1 text-left font-medium text-gray-700">Fosfor</th>
-                            <th class="px-2 py-1 text-left font-medium text-gray-700">Kcal/100g</th>
+                            <th class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700">Białko</th>
+                            <th class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700">Tłuszcz</th>
+                            <th class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700">Węgle</th>
+                            <th class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700">Fosfor</th>
+                            <th class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700">Kcal/100g</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="px-2 py-1" [class.text-red-700]="card.wegle_sucha > 10"
+                            <td class="px-1 py-1 md:px-2 md:py-1" [class.text-red-700]="card.bialko_sucha < 40"
+                                [class.text-black]="card.bialko_sucha >= 40">
+                                {{ card.bialko_sucha }}
+                            </td>
+                            <td class="px-1 py-1 md:px-2 md:py-1" [class.text-red-700]="card.wegle_sucha > 10"
                                 [class.text-orange-400]="card.wegle_sucha > 5 && card.wegle_sucha <= 10"
                                 [class.text-black]="card.wegle_sucha <= 5">
                                 {{ card.wegle_sucha }}
                             </td>
-                            <td class="px-2 py-1" [class.text-red-700]="card.tluszcz_w_suchej > 30"
+                            <td class="px-1 py-1 md:px-2 md:py-1" [class.text-red-700]="card.tluszcz_w_suchej > 30"
                                 [class.text-black]="card.tluszcz_w_suchej <= 30">
                                 {{ card.tluszcz_w_suchej }}
                             </td>
-                            <td class="px-2 py-1"
+                            <td class="px-1 py-1 md:px-2 md:py-1"
                                 [class.text-red-700]="card.fosfor_sucha > 1 || card.fosfor_sucha === 0"
                                 [class.text-black]="card.fosfor_sucha <= 1 && card.fosfor_sucha !== 0">
                                 {{ card.fosfor_sucha }}
                             </td>
-                            <td class="px-2 py-1">
+                            <td class="px-1 py-1 md:px-2 md:py-1">
                                 {{ card.kcal_100 }}
                             </td>
                         </tr>
+                        <!-- Możesz dodać kolejne wiersze, jeżeli masz więcej punktów -->
                     </tbody>
                 </table>
             </div>

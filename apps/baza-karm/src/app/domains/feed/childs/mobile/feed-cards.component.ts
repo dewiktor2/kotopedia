@@ -12,17 +12,20 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
-  ChangeExtraFilter,
-  SetCategoryFilter,
+  category,
+  categories,
+  FeedsState,
   SetCurrentFilter,
-} from '../../+state/feed.actions';
-import { FeedsState } from '../../+state/feed.state';
-import { FeedsService } from '../../../../services/feeds.service';
-import { SearchInputComponent } from '../../../../utility/components/search-input.component';
-import { categories, category } from '../../models/category.model';
-import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
+  SetCategoryFilter,
+  ChangeExtraFilter,
+} from '@baza-karm/domains/feed';
+import {
+  SearchInputComponent,
+  DismissableTooltipComponent,
+} from '@baza-karm/utility';
+import { FeedsService } from '@baza-karm/services';
 
 @Component({
   selector: 'bk-feed-cards',
@@ -38,9 +41,10 @@ export class FeedCardsComponent implements OnInit {
   loading = signal<boolean>(false);
   filterName = signal<string>('');
   // Sorting option signal – default sort by brand_name ascending
-  sortOption = signal<{ field: string; order: 'ascending' | 'descending' }>({
+  sortOption = signal<{ field: string; order: 'ascending' | 'descending'; finalOrder: 'ascending' | 'descending' }>({
     field: 'brand_name',
     order: 'ascending',
+    finalOrder: 'ascending'
   });
   // Signal controlling sort dialog visibility
   sortDialogOpen = signal<boolean>(false);
@@ -154,6 +158,7 @@ export class FeedCardsComponent implements OnInit {
 
   public applySort(): void {
     this.closeSortDialog();
+    this.sortOption.update((current) => ({ ...current, finalOrder: current.order }));
     // Reload page 1 with new sort option
     this.loadPage(1);
   }

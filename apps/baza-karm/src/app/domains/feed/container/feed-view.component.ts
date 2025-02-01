@@ -15,6 +15,7 @@ import {
 import { FeedComponent } from '../feed.component';
 import { FeedCardsComponent } from '../childs/mobile/feed-cards.component';
 
+
 @Component({
   imports: [
     GridModule,

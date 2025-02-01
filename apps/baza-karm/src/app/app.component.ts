@@ -12,8 +12,7 @@ import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { SharedMenuComponent } from '@projekty/shared-ui';
 import { filter, tap } from 'rxjs';
-import { CULTURE_HANDLER } from './tokens/culture.token';
-import { SEO_HANDLER } from './tokens/seo.token';
+import { CULTURE_HANDLER, SEO_HANDLER } from '@baza-karm/tokens';
 
 @Component({
   imports: [RouterOutlet, SharedMenuComponent],
@@ -24,7 +23,7 @@ import { SEO_HANDLER } from './tokens/seo.token';
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       <k-shared-menu />
 
-      <div class="pt-10 px-8 pb-8 flex-1 overflow-auto">
+      <div class="mt-2 px-8 pb-8 flex-1 overflow-auto">
         <router-outlet />
       </div>
     </main>

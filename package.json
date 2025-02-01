@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "skott": "skott --displayMode=webapp"
+    "skott": "skott --displayMode=webapp",
+    "karmy": "nx run baza-karm:serve:development"
   },
   "private": true,
   "dependencies": {

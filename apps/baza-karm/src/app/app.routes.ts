@@ -4,7 +4,9 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'wszystkie',
       title: 'Kotopedia - karmy dla kota',
@@ -17,7 +19,9 @@ export const appRoutes: Route[] = [
   {
     path: 'wszystkie',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'wszystkie',
       title: 'Kotopedia - karmy dla kota',
@@ -29,7 +33,9 @@ export const appRoutes: Route[] = [
   {
     path: 'monobialkowe',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'monobialkowe',
       title: 'Kotopedia - karmy monobiałkowe',
@@ -41,7 +47,9 @@ export const appRoutes: Route[] = [
   {
     path: 'chore-nerki',
     loadComponent: () =>
-      import('./domains/feed/container/feed-view.component').then((m) => m.FeedViewComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'chore-nerki',
       title: 'Kotopedia - karmy dla kotów z chorymi nerkami',
@@ -53,7 +61,9 @@ export const appRoutes: Route[] = [
   {
     path: 'polecane',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'polecane',
       title: 'Kotopedia - polecane karmy',
@@ -64,7 +74,9 @@ export const appRoutes: Route[] = [
   {
     path: 'chora-trzustka',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'polecane',
       title: 'Kotopedia - polecane karmy',
@@ -75,7 +87,9 @@ export const appRoutes: Route[] = [
   {
     path: 'kocieta',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then(
+        (m) => m.FeedViewComponent
+      ),
     data: {
       type: 'kocięta',
       title: 'Kotopedia - karmy dla kociąt',
@@ -87,11 +101,13 @@ export const appRoutes: Route[] = [
   {
     path: '**',
     loadComponent: () =>
-      import('./domains/not-found/not-found.component').then((m) => m.NotFoundComponent),
+      import('./domains/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
     data: {
       type: 'not-found',
       title: 'Kotopedia - Nie znaleziono podanej strony',
       noMeta: true,
-    }
+    },
   },
 ];

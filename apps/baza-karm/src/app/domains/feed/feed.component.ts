@@ -28,6 +28,9 @@ import { ChangeExtraFilter, SetCategoryFilter, SetCurrentFilter } from './+state
 import { FeedsState } from './+state/feed.state';
 import { categories, category } from './models/category.model';
 
+import { Grid, Filter } from '@syncfusion/ej2-grids';
+Grid.Inject(Filter);
+
 @Component({
   imports: [
     GridModule,

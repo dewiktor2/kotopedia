@@ -19,7 +19,7 @@
         @if (gridData$ | async; as grid) {
 
             <ejs-grid [dataSource]='grid' [height]="'calc(100vh - 450px)'" allowPaging='true' [allowSorting]="true"
-                [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="true"
+                [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="false"
                 [allowMultiSorting]="false" width="auto" class="sortingenabled" [pageSettings]='initialPage'
                 [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
                 <e-columns>

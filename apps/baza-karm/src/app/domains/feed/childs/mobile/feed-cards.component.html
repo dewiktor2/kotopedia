@@ -1,0 +1,171 @@
+<div class="control-section px-2">
+    <!-- Search Field -->
+    <bk-search-input (searchText)="search($event)"></bk-search-input>
+
+    <!-- Checkbox Filter Section -->
+    <div class="flex items-center justify-between mb-4">
+        <!-- Checkbox Filter Section -->
+        @if (filter$ | async; as checkbox) {
+        @if (checkbox !== 'disabled') {
+        <div class="flex items-center">
+            <input id="link-checkbox" type="checkbox" [checked]="checkbox === 'on'" (change)="changeCheckboxState()"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="link-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                {{ filterName() }}
+            </label>
+        </div>
+        }
+        }
+        <!-- Sort Button, aligned on the same row -->
+        <button (click)="openSortDialog()" class="flex items-center space-x-1">
+            <!-- Funnel Icon from Heroicons (inline SVG) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 18v-4.586L3.293 6.707A1 1 0 013 6V4z" />
+            </svg>
+            <!-- Up/Down Indicator (chevron) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Cards Container with fixed max-height and scrollable -->
+    <div #cardsContainer class="cards-container grid grid-cols-1 gap-4 mb-4"
+        style="max-height: calc(100vh - 200px); overflow-y: auto;">
+        @if (feedCards(); as cards) {
+        @for (card of cards; track card.id) {
+        <div class="card p-4 border border-gray-300 rounded shadow hover:shadow-lg transition">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-bold">{{ card.brand_name }}</h3>
+                <!-- Ikonka opisu -->
+                <div class="flex items-center">
+                    <div class="ellipsis-style cursor-pointer" (click)="tooltip.showModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z" />
+                        </svg>
+                        <!-- Tooltip (dialog) z opisem -->
+                        <bk-dismissable-tooltip #tooltip [identifier]="card.id" [text]="card.opis"
+                            label="Skład karmy" />
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm"><strong>Nazwa:</strong> {{ card.nazwa }}</p>
+            <p class="text-sm"><strong>Smak:</strong> {{ card.flavors }}</p>
+            <!-- Tabela z danymi: węgle, tłuszcz, fosfor, kcal -->
+            <div class="overflow-x-auto mt-2">
+                <table class="w-full text-sm border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="px-2 py-1 text-left font-medium text-gray-700">Węgle</th>
+                            <th class="px-2 py-1 text-left font-medium text-gray-700">Tłuszcz</th>
+                            <th class="px-2 py-1 text-left font-medium text-gray-700">Fosfor</th>
+                            <th class="px-2 py-1 text-left font-medium text-gray-700">Kcal/100g</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-2 py-1" [class.text-red-700]="card.wegle_sucha > 10"
+                                [class.text-orange-400]="card.wegle_sucha > 5 && card.wegle_sucha <= 10"
+                                [class.text-black]="card.wegle_sucha <= 5">
+                                {{ card.wegle_sucha }}
+                            </td>
+                            <td class="px-2 py-1" [class.text-red-700]="card.tluszcz_w_suchej > 30"
+                                [class.text-black]="card.tluszcz_w_suchej <= 30">
+                                {{ card.tluszcz_w_suchej }}
+                            </td>
+                            <td class="px-2 py-1"
+                                [class.text-red-700]="card.fosfor_sucha > 1 || card.fosfor_sucha === 0"
+                                [class.text-black]="card.fosfor_sucha <= 1 && card.fosfor_sucha !== 0">
+                                {{ card.fosfor_sucha }}
+                            </td>
+                            <td class="px-2 py-1">
+                                {{ card.kcal_100 }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="cursor-pointer text-blue-500 text-sm" (click)="showProblemModal(card)">
+                Zgłoś problem
+            </div> -->
+        </div>
+        }
+        } @else {
+        <div class="flex items-center justify-center min-h-[150px] bg-gray-100">
+            <div class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded shadow bg-white">
+                <span class="text-gray-600 text-sm font-medium">Ładowanie</span>
+                <span class="text-gray-600 animate-pulse">.</span>
+                <span class="text-gray-600 animate-pulse delay-200">.</span>
+                <span class="text-gray-600 animate-pulse delay-400">.</span>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Pagination Bar -->
+    <!-- Pagination Bar with small arrow icons and record count info -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow p-3 flex justify-center items-center space-x-4 z-50">
+        <button (click)="previousPage()" [disabled]="currentPage() <= 1"
+            class="p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50">
+            <!-- Left arrow SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <span class="text-sm text-gray-700 font-semibold">
+            Strona {{ currentPage() }} z {{ totalPages() }} (Łącznie: {{ totalCount() }})
+        </span>
+        <button (click)="nextPage()" [disabled]="currentPage() >= totalPages()"
+            class="p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50">
+            <!-- Right arrow SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Sorting Modal -->
+    @if (sortDialogOpen(); as open) {
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded p-6 w-11/12 max-w-sm">
+            <h2 class="text-lg font-bold mb-4">Opcje sortowania</h2>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Sortuj według:</label>
+                <select [value]="sortOption().field" (change)="onSortFieldChange($event)"
+                    class="mt-1 block w-full border border-gray-300 rounded p-2">
+                    <option value="brand_name">Nazwa firmy</option>
+                    <option value="nazwa">Nazwa produktu</option>
+                    <option value="wegle_sucha">Węgle</option>
+                    <option value="tluszcz_w_suchej">Tłuszcz</option>
+                    <option value="fosfor_sucha">Fosfor</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Kolejność:</label>
+                <select [value]="sortOption().order" (change)="onSortOrderChange($event)"
+                    class="mt-1 block w-full border border-gray-300 rounded p-2">
+                    <option value="ascending">Rosnąco</option>
+                    <option value="descending">Malejąco</option>
+                </select>
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button (click)="closeSortDialog()"
+                    class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded">
+                    Anuluj
+                </button>
+                <button (click)="applySort()"
+                    class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded">
+                    Zastosuj
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</div>

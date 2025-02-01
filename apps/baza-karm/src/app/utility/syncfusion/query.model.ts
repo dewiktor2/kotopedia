@@ -8,13 +8,14 @@ export interface QueryFetch {
   order: { name: string; ascending?: boolean, data?: { referencedTable: string, ascending: false } };
 }
 
-export const defaultQueryFetchValue = (orderColumn: string) => {
+export const defaultQueryFetchValue = (orderColumn = 'brand_name') => {
   return {
     startIndex: 0,
     endIndex: 20,
-    order: { name: orderColumn, ascending: false, data: {} },
-  } as any;
-}
+    // Jeśli nie przekażesz nazwy kolumny, użyjemy 'brand_name' jako domyślnej
+    order: { name: orderColumn || 'brand_name', ascending: false, data: {} },
+  } as ProductQueryFetch;
+};
 
 export interface ProductQueryFetch extends QueryFetch {
   startIndex: number;

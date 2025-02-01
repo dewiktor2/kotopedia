@@ -41,7 +41,7 @@ export const appRoutes: Route[] = [
   {
     path: 'chore-nerki',
     loadComponent: () =>
-      import('./domains/feed/feed.component').then((m) => m.FeedComponent),
+      import('./domains/feed/container/feed-view.component').then((m) => m.FeedViewComponent),
     data: {
       type: 'chore-nerki',
       title: 'Kotopedia - karmy dla kotów z chorymi nerkami',

@@ -23,7 +23,7 @@
     "@ngxs/store": "^19.0.0-dev.master-934d9e1",
     "@nx/angular": "20.3.2",
     "@supabase/supabase-js": "2.48.0",
-    "@syncfusion/ej2-angular-grids": "28.1.41",
+    "@syncfusion/ej2-angular-grids": "28.2.3",
     "daisyui": "4.12.23",
     "ej2-locale": "^17.1.48",
     "express": "~4.21.2",

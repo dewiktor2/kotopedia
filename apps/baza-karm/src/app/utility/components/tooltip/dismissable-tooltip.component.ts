@@ -58,46 +58,84 @@ export class DismissableTooltipComponent {
     // 1. Ustal źródłowy tekst (ten z parametru lub z inputu).
     const rawText = text || this.text();
 
-    const splitted = this.splitOutsideParentheses(rawText);
+    const splitted = this.splitNatural(rawText);
 
     this.splittedText = splitted;
   }
 
   /**
-   * Dzieli tekst po przecinkach znajdujących się TYLKO poza nawiasami.
-   * Nawiasy mogą być zagnieżdżone; liczymy pary '(' i ')'.
-   *
-   * @param input Tekst wejściowy
-   * @returns Tablica fragmentów
+   * Sprawdza, czy dany znak jest cyfrą.
+   * @param char - pojedynczy znak
+   * @returns true, jeśli znak jest cyfrą, false w przeciwnym wypadku.
    */
-  private splitOutsideParentheses(input: string): string[] {
-    const results: string[] = [];
+  private isDigit(char: string): boolean {
+    return /\d/.test(char);
+  }
+
+  /**
+   * Dzieli napis na fragmenty wg. przecinków, ale nie dzieli, gdy przecinek występuje między dwiema cyframi.
+   *
+   * Przykłady:
+   * - "jabłko, banan, gruszka"         -> ["jabłko", "banan", "gruszka"]
+   * - "Waga: 1,5 kg, Cena: 10,99 zł"     -> ["Waga: 1,5 kg", "Cena: 10,99 zł"]
+   *
+   * @param input - Napis do podziału.
+   * @returns Tablica stringów.
+   */
+  private splitNatural(input: string): string[] {
+    const result: string[] = [];
     let buffer = '';
-    let parenthesesCount = 0;
+    let parenDepth = 0; // licznik głębokości nawiasów
 
-    for (const char of input) {
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i];
+
+      // Jeśli trafimy na nawias otwierający, zwiększamy głębokość i dodajemy znak do bufora.
       if (char === '(') {
-        parenthesesCount++;
+        parenDepth++;
         buffer += char;
-      } else if (char === ')') {
-        parenthesesCount = Math.max(0, parenthesesCount - 1);
-        buffer += char;
+        continue;
       }
-      // Jeśli trafimy na przecinek, a nie jesteśmy w nawiasach, to dzielimy
-      else if (char === ',' && parenthesesCount === 0) {
-        results.push(buffer.trim());
-        buffer = '';
-      } else {
+
+      // Jeśli trafimy na nawias zamykający, zmniejszamy głębokość i dodajemy znak.
+      if (char === ')') {
+        parenDepth = Math.max(0, parenDepth - 1);
         buffer += char;
+        continue;
       }
+
+      // Gdy znak to przecinek
+      if (char === ',') {
+        // Jeśli jesteśmy wewnątrz nawiasów, nie dzielimy – dodajemy przecinek do bufora.
+        if (parenDepth > 0) {
+          buffer += char;
+        } else {
+          // Pobieramy poprzedni i następny znak (jeśli istnieją)
+          const prevChar = i > 0 ? input[i - 1] : '';
+          const nextChar = i < input.length - 1 ? input[i + 1] : '';
+
+          // Jeśli przecinek jest między cyframi (np. "1,5"), traktujemy go jako część liczby.
+          if (this.isDigit(prevChar) && this.isDigit(nextChar)) {
+            buffer += char;
+          } else {
+            // W przeciwnym wypadku traktujemy przecinek jako separator.
+            result.push(buffer.trim());
+            buffer = '';
+          }
+        }
+        continue;
+      }
+
+      // Inne znaki dodajemy do bufora.
+      buffer += char;
     }
 
-    // Dodaj ostatni zbuforowany fragment (o ile nie jest pusty)
-    if (buffer.trim().length > 0) {
-      results.push(buffer.trim());
+    // Dodajemy ostatni fragment, jeśli zawiera jakieś treści.
+    if (buffer.trim() !== '') {
+      result.push(buffer.trim());
     }
 
-    return results;
+    return result;
   }
 
   private showModalFeed() {

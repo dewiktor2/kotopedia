@@ -2,10 +2,8 @@ import { AsyncPipe } from '@angular/common';
 import {
   Component,
   ElementRef,
-  Inject,
   inject,
   OnInit,
-  PLATFORM_ID,
   signal,
   ViewChild,
 } from '@angular/core';
@@ -14,18 +12,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { map, Observable } from 'rxjs';
 import {
-  category,
-  categories,
-  FeedsState,
-  SetCurrentFilter,
-  SetCategoryFilter,
   ChangeExtraFilter,
-} from '@baza-karm/domains/feed';
-import {
-  SearchInputComponent,
-  DismissableTooltipComponent,
-} from '@baza-karm/utility';
-import { FeedsService } from '@baza-karm/services';
+  SetCategoryFilter,
+  SetCurrentFilter,
+} from '../../+state/feed.actions';
+import { FeedsState } from '../../+state/feed.state';
+import { FeedsService } from '../../../../services/feeds.service';
+import { SearchInputComponent } from '../../../../utility/components/search-input.component';
+import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
+import { categories, category } from '../../models/category.model';
 
 @Component({
   selector: 'bk-feed-cards',
@@ -41,10 +36,14 @@ export class FeedCardsComponent implements OnInit {
   loading = signal<boolean>(false);
   filterName = signal<string>('');
   // Sorting option signal – default sort by brand_name ascending
-  sortOption = signal<{ field: string; order: 'ascending' | 'descending'; finalOrder: 'ascending' | 'descending' }>({
+  sortOption = signal<{
+    field: string;
+    order: 'ascending' | 'descending';
+    finalOrder: 'ascending' | 'descending';
+  }>({
     field: 'brand_name',
     order: 'ascending',
-    finalOrder: 'ascending'
+    finalOrder: 'ascending',
   });
   // Signal controlling sort dialog visibility
   sortDialogOpen = signal<boolean>(false);
@@ -61,7 +60,7 @@ export class FeedCardsComponent implements OnInit {
   readonly service = inject(FeedsService);
   readonly route = inject(ActivatedRoute);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor() {
     this.filter$ = this.store.select(FeedsState.extraFilter);
     this.accessRouteData();
   }
@@ -158,7 +157,10 @@ export class FeedCardsComponent implements OnInit {
 
   public applySort(): void {
     this.closeSortDialog();
-    this.sortOption.update((current) => ({ ...current, finalOrder: current.order }));
+    this.sortOption.update((current) => ({
+      ...current,
+      finalOrder: current.order,
+    }));
     // Reload page 1 with new sort option
     this.loadPage(1);
   }
@@ -180,12 +182,5 @@ export class FeedCardsComponent implements OnInit {
   public changeCheckboxState(): void {
     this.store.dispatch(new ChangeExtraFilter());
     this.loadPage(1);
-  }
-
-  public showProblemModal(data: any): void {
-    if (!data) return;
-    alert(
-      `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl z dodatkowymi informacjami o karmie: kod: ${data.id}, firma: ${data.brand_name}`
-    );
   }
 }

@@ -1,8 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "apps/baza-karm/src",
     "outDir": "../../dist/out-tsc",
-    "types": ["node"]
+    "types": ["node"],  
   },
   "files": ["src/main.ts", "src/main.server.ts", "server.ts"],
   "include": ["src/**/*.d.ts"],

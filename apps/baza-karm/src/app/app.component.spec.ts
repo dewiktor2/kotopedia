@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { SharedMenuComponent } from '@projekty/shared-ui';
 import { SEO_HANDLER } from './tokens/seo.token';
 import { SwUpdate } from '@angular/service-worker';
 import { CULTURE_HANDLER } from './tokens/culture.token';
+import { SharedMenuComponent } from './utility/components/menu/menu.component';
 
 describe('AppComponent', () => {
   let mockCultureHandler: jest.Mock;

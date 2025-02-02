@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   imports: [CommonModule, RouterModule, NgOptimizedImage],
-  selector: 'k-shared-menu',
+  selector: 'bk-shared-menu',
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   encapsulation: ViewEncapsulation.None,

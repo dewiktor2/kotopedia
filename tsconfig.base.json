@@ -14,14 +14,7 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@baza-karm/domains/feed": ["apps/baza-karm/src/app/domains/feed/index.ts"],
-      "@baza-karm/utility": ["apps/baza-karm/src/app/utility/index.ts"],
-      "@baza-karm/services": ["apps/baza-karm/src/app/services/index.ts"],
-      "@baza-karm/tokens": ["apps/baza-karm/src/app/tokens/index.ts"],
-      "@projekty/shared-ui": ["apps/src/index.ts"]
-    }
+    "baseUrl": "."
   },
   "exclude": ["node_modules", "tmp"]
 }

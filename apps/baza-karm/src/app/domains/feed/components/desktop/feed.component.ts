@@ -9,10 +9,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import {
-  DismissableTooltipComponent,
-  SearchInputComponent,
-} from '@baza-karm/utility';
 import { Store } from '@ngxs/store';
 import {
   DataStateChangeEventArgs,
@@ -22,13 +18,19 @@ import {
   SortService,
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, of } from 'rxjs';
-import { UtcToLocalPipe } from './pipes/utc-local.pipe';
-import { FeedsService } from '@baza-karm/services';
-import { ChangeExtraFilter, SetCategoryFilter, SetCurrentFilter } from './+state/feed.actions';
-import { FeedsState } from './+state/feed.state';
-import { categories, category } from './models/category.model';
+import { UtcToLocalPipe } from '../../../../utility/pipes/utc-local.pipe';
+import {
+  ChangeExtraFilter,
+  SetCategoryFilter,
+  SetCurrentFilter,
+} from '../../+state/feed.actions';
+import { FeedsState } from '../../+state/feed.state';
+import { categories, category } from '../../models/category.model';
+import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
+import { FeedsService } from '../../../../services/feeds.service';
+import { SearchInputComponent } from '../../../../utility/components/search-input.component';
+import { showProblemModal } from '../../functions/show-problem-modal';
 
-import { Grid } from '@syncfusion/ej2-grids';
 @Component({
   imports: [
     GridModule,
@@ -59,6 +61,9 @@ export class FeedComponent implements OnInit {
   readonly #store = inject(Store);
   readonly #service = inject(FeedsService);
   readonly #route = inject(ActivatedRoute);
+
+  showProblem = (data: { id: string | number; brand_name: string }) =>
+    showProblemModal(data);
 
   constructor() {
     // Accessing the route data
@@ -115,14 +120,5 @@ export class FeedComponent implements OnInit {
         },
       ],
     } as DataStateChangeEventArgs);
-  }
-
-  public showProblemModal(data: any) {
-    if (!data) {
-      return;
-    }
-    alert(
-      `Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl z dodatkowymi informacjami o karmie: kod: ${data.id}, firma: ${data.brand_name}`
-    );
   }
 }

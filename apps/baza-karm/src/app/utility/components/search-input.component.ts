@@ -17,7 +17,7 @@ import { FeedsState } from '../../domains/feed/+state/feed.state';
   selector: 'bk-search-input',
   imports: [AsyncPipe],
   template: `
-    <div class="form-control pb-4 flex w-72">
+    <div class="form-control mt-2 pb-4 flex w-72">
       <div class="place-items-center flex">
         <label class="input input-bordered flex w-72 items-center gap-2">
           <input

@@ -55,9 +55,7 @@ export class DismissableTooltipComponent {
   }
 
   private splitText(text: string) {
-    // 1. Ustal źródłowy tekst (ten z parametru lub z inputu).
     const rawText = text || this.text();
-
     const splitted = this.splitNatural(rawText);
 
     this.splittedText = splitted;

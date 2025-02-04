@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -6,7 +6,7 @@ import {
   OnInit,
   inject,
   input,
-  output
+  output,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngxs/store';
@@ -15,7 +15,7 @@ import { FeedsState } from '../../domains/feed/+state/feed.state';
 
 @Component({
   selector: 'bk-search-input',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, NgOptimizedImage],
   template: `
     <div class="form-control mt-2 pb-4 flex w-72">
       <div class="place-items-center flex">
@@ -29,24 +29,18 @@ import { FeedsState } from '../../domains/feed/+state/feed.state';
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           @if ( (searchInProgress$ | async) === false) {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
+          <img
+            ngSrc="assets/svg/search.svg"
             class="w-6 h-6 opacity-70"
+            width="24"
+            height="24"
+            alt="Search Icon"
             (click)="onSearchButtonClick(searchInput.value)"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          />
           } @else {
           <span class="loading loading-ring loading-xs"></span>
           }
         </label>
-        <!-- Information Icon with Tooltip -->
         <div
           class="flex ml-2 tooltip tooltip-left"
           data-tip="Szukaj po nazwie lub firmie"
@@ -82,7 +76,7 @@ import { FeedsState } from '../../domains/feed/+state/feed.state';
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
   readonly searchText = output<string>();
-  disabled = input<boolean>(false)
+  disabled = input<boolean>(false);
 
   #searchSubject = new Subject<string>();
   readonly #store = inject(Store);

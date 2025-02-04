@@ -5,7 +5,7 @@ import {
   inject,
   OnInit,
   signal,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -25,7 +25,11 @@ import { categories, category } from '../../models/category.model';
 @Component({
   selector: 'bk-feed-cards',
   templateUrl: './feed-cards.component.html',
-  imports: [SearchInputComponent, AsyncPipe, DismissableTooltipComponent],
+  imports: [
+    SearchInputComponent,
+    AsyncPipe,
+    DismissableTooltipComponent
+  ],
 })
 export class FeedCardsComponent implements OnInit {
   // Signals for state
@@ -35,7 +39,6 @@ export class FeedCardsComponent implements OnInit {
   totalPages = signal<number>(1);
   loading = signal<boolean>(false);
   filterName = signal<string>('');
-  // Sorting option signal – default sort by brand_name ascending
   sortOption = signal<{
     field: string;
     order: 'ascending' | 'descending';
@@ -45,15 +48,10 @@ export class FeedCardsComponent implements OnInit {
     order: 'ascending',
     finalOrder: 'ascending',
   });
-  // Signal controlling sort dialog visibility
   sortDialogOpen = signal<boolean>(false);
+  cardsContainer = viewChild<ElementRef<HTMLElement>>('cardsContainer');
 
-  readonly pageSize = 10; // 10 items per page
-
-  // Reference to the container for scrolling
-  @ViewChild('cardsContainer', { static: false }) cardsContainer!: ElementRef;
-
-  // Observable for filter if needed
+  readonly pageSize = 10;
   filter$!: Observable<string>;
 
   readonly store = inject(Store);
@@ -123,8 +121,8 @@ export class FeedCardsComponent implements OnInit {
   }
 
   private scrollToTop(): void {
-    if (this.cardsContainer && this.cardsContainer.nativeElement) {
-      this.cardsContainer.nativeElement.scrollTo({
+    if (this.cardsContainer && this.cardsContainer()?.nativeElement) {
+      this.cardsContainer()?.nativeElement.scrollTo({
         top: 0,
         behavior: 'smooth',
       });

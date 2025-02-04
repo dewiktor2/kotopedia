@@ -32,7 +32,6 @@ import { categories, category } from '../../models/category.model';
   ],
 })
 export class FeedCardsComponent implements OnInit {
-  // Signals for state
   feedCards = signal<any[]>([]);
   currentPage = signal<number>(1);
   totalCount = signal<number>(0);

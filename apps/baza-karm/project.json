@@ -18,7 +18,7 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/baza-karm/src/favicon.ico",
-          "apps/baza-karm/src/assets/**",
+          "apps/baza-karm/src/assets",
           "apps/baza-karm/src/manifest.webmanifest",
           "apps/baza-karm/src/robots.txt",
           "apps/baza-karm/src/sitemap.xml"

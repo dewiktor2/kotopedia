@@ -1,21 +1,22 @@
-import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   DestroyRef,
-  OnDestroy,
-  OnInit,
   inject,
   input,
+  OnDestroy,
+  OnInit,
   output,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngxs/store';
-import { Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, of, Subject } from 'rxjs';
 import { FeedsState } from '../../domains/feed/+state/feed.state';
+import { SvgIconComponent } from '@ngneat/svg-icon';
 
 @Component({
   selector: 'bk-search-input',
-  imports: [AsyncPipe, NgOptimizedImage],
+  imports: [AsyncPipe, SvgIconComponent],
   template: `
     <div class="form-control mt-2 pb-4 flex w-72">
       <div class="place-items-center flex">
@@ -28,17 +29,11 @@ import { FeedsState } from '../../domains/feed/+state/feed.state';
             placeholder="Szukaj"
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
-          @if ( (searchInProgress$ | async) === false) {
-          <img
-            ngSrc="assets/svg/search.svg"
-            class="w-6 h-6 opacity-70"
-            width="24"
-            height="24"
-            alt="Search Icon"
-            (click)="onSearchButtonClick(searchInput.value)"
-          />
+          @if ((searchInProgress$ | async) === false) {
+            <svg-icon key="search" aria-roledescription="Search Icon" size="xl"
+                      (click)="onSearchButtonClick(searchInput.value)" />
           } @else {
-          <span class="loading loading-ring loading-xs"></span>
+            <span class="loading loading-ring loading-xs"></span>
           }
         </label>
         <div

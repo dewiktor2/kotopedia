@@ -21,6 +21,7 @@ import { FeedsService } from '../../../../services/feeds.service';
 import { SearchInputComponent } from '../../../../utility/components/search-input.component';
 import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
 import { categories, category } from '../../models/category.model';
+import { SvgIconComponent } from '@ngneat/svg-icon';
 
 @Component({
   selector: 'bk-feed-cards',
@@ -28,7 +29,8 @@ import { categories, category } from '../../models/category.model';
   imports: [
     SearchInputComponent,
     AsyncPipe,
-    DismissableTooltipComponent
+    DismissableTooltipComponent,
+    SvgIconComponent
   ],
 })
 export class FeedCardsComponent implements OnInit {

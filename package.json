@@ -4,7 +4,26 @@
   "license": "MIT",
   "scripts": {
     "skott": "skott --displayMode=webapp",
+    "prestart": "npm run svg",
+    "prebuild": "npm run svg",
+    "svg": "svg-generator",
     "karmy": "nx run baza-karm:serve:development"
+  },
+  "svgGenerator": {
+    "outputPath": "./svgGen",
+    "srcPath": "./apps/baza-karm/src/assets/svg",
+    "svgoConfig": {
+      "plugins": [
+        "removeDimensions",
+        "cleanupAttrs",
+        {
+          "name": "convertColors",
+          "params": {
+            "currentColor": true
+          }
+        }
+      ]
+    }
   },
   "private": true,
   "dependencies": {
@@ -20,6 +39,7 @@
     "@angular/router": "19.0.7",
     "@angular/service-worker": "19.0.7",
     "@angular/ssr": "19.0.7",
+    "@ngneat/svg-icon": "^7.1.6",
     "@ngxs/store": "^19.0.0-dev.master-934d9e1",
     "@nx/angular": "20.3.2",
     "@supabase/supabase-js": "2.48.0",
@@ -41,6 +61,7 @@
     "@angular/cli": "~19.0.0",
     "@angular/compiler-cli": "19.0.7",
     "@angular/language-service": "19.0.7",
+    "@ngneat/svg-generator": "^7.0.3",
     "@nx/eslint": "20.3.2",
     "@nx/eslint-plugin": "20.3.2",
     "@nx/jest": "20.3.2",

@@ -30,30 +30,25 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           @if ((searchInProgress$ | async) === false) {
-            <svg-icon key="search" aria-roledescription="Search Icon" size="xl"
-                      (click)="onSearchButtonClick(searchInput.value)" />
+          <svg-icon
+            key="search"
+            aria-roledescription="Search Icon"
+            size="xl"
+            (click)="onSearchButtonClick(searchInput.value)"
+          />
           } @else {
-            <span class="loading loading-ring loading-xs"></span>
+          <span class="loading loading-ring loading-xs"></span>
           }
         </label>
         <div
           class="flex ml-2 tooltip tooltip-left"
           data-tip="Szukaj po nazwie lub firmie"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
+          <svg-icon
             class="w-6 h-6 cursor-pointer text-blue-500"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-            />
-          </svg>
+            key="description"
+            size="xl"
+          />
         </div>
       </div>
     </div>

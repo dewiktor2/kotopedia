@@ -12,9 +12,16 @@ import { searchIcon } from '../assets/ngSvg/search';
 import { descriptionIcon } from '../assets/ngSvg/description';
 import { funnelIcon } from '../assets/ngSvg/funnel';
 import { chevronDownIcon } from '../assets/ngSvg/chevronDown';
+import { leftArrowIcon } from '../assets/ngSvg/leftArrow';
 
-
-const icons = [hamburgerIcon, searchIcon, descriptionIcon, funnelIcon, chevronDownIcon];
+const icons = [
+  hamburgerIcon,
+  searchIcon,
+  descriptionIcon,
+  funnelIcon,
+  chevronDownIcon,
+  leftArrowIcon,
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [

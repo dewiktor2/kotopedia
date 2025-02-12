@@ -1,9 +1,9 @@
 .active-link {
-    @apply bg-primary-content text-primary-content;
+    background-color: rgb(59, 130, 246);
     color: white;
 }
 
 .btn-ghost:hover {
-    background-color: var(--fallback-bc, oklch(var(--bc) / 0.2));
+    background-color: rgb(59, 130, 246);
     color: white;
 }

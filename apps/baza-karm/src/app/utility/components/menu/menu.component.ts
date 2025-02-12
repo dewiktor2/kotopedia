@@ -2,6 +2,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
+import { links } from './links';
 
 @Component({
   imports: [CommonModule, RouterModule, NgOptimizedImage, SvgIconComponent],
@@ -12,6 +13,7 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
 })
 export class SharedMenuComponent {
   isDrawerOpen = false;
+  links = links;
 
   router = inject(Router);
 

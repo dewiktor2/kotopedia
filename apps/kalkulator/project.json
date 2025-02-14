@@ -4,16 +4,22 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/kalkulator/src",
-  "tags": ["kalkulator"],
+  "tags": [
+    "kalkulator"
+  ],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/kalkulator",
         "index": "apps/kalkulator/src/index.html",
         "browser": "apps/kalkulator/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/kalkulator/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +28,9 @@
             "input": "apps/kalkulator/public"
           }
         ],
-        "styles": ["apps/kalkulator/src/styles.scss"],
+        "styles": [
+          "apps/kalkulator/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/kalkulator/src/main.server.ts",
         "ssr": {
@@ -44,7 +52,8 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "serviceWorker": "apps/kalkulator/ngsw-config.json"
         },
         "development": {
           "optimization": false,
@@ -80,7 +89,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/kalkulator/jest.config.ts"
       }

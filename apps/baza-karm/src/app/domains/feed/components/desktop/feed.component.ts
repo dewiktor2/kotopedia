@@ -1,35 +1,41 @@
 import { AsyncPipe } from '@angular/common';
 import {
   Component,
-  OnInit,
-  ViewEncapsulation,
   inject,
+  OnInit,
   signal,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import {
   DataStateChangeEventArgs,
+  Filter,
+  FilterService,
+  FilterSettingsModel,
+  Grid,
   GridComponent,
   GridModule,
   PageService,
-  SortService,
+  SortService
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, of } from 'rxjs';
-import { UtcToLocalPipe } from '../../../../utility/pipes/utc-local.pipe';
 import {
   ChangeExtraFilter,
   SetCategoryFilter,
   SetCurrentFilter,
 } from '../../+state/feed.actions';
 import { FeedsState } from '../../+state/feed.state';
-import { categories, category } from '../../models/category.model';
-import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
 import { FeedsService } from '../../../../services/feeds.service';
 import { SearchInputComponent } from '../../../../utility/components/search-input.component';
+import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
+import { UtcToLocalPipe } from '../../../../utility/pipes/utc-local.pipe';
 import { showProblemModal } from '../../functions/show-problem-modal';
+import { categories, category } from '../../models/category.model';
+
+Grid.Inject(Filter);
 
 @Component({
   imports: [
@@ -39,7 +45,7 @@ import { showProblemModal } from '../../functions/show-problem-modal';
     SearchInputComponent,
     DismissableTooltipComponent,
   ],
-  providers: [SortService, PageService],
+  providers: [SortService, FilterService, PageService],
   selector: 'bk-feed',
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
@@ -53,6 +59,7 @@ export class FeedComponent implements OnInit {
   recordNumber$ = of(0);
   filter$: Observable<string> = of('disabled');
   filterName = signal('');
+  filterSettings: FilterSettingsModel = { mode: 'OnEnter' };
 
   grid = viewChild<GridComponent>('GridComponent');
   tooltip = viewChild<DismissableTooltipComponent>('tooltip');

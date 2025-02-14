@@ -1,151 +1,147 @@
 <div class="control-section">
-  
-    <bk-search-input  (searchText)="search($event)" />
 
-        @if (filter$ | async; as checkbox)
-        {
-            @if (checkbox !== 'disabled')
-            {
-                <div class="flex items-center mb-1">
-                    <input id="link-checkbox" type="checkbox" [checked]="checkbox === 'on'" (change)="changeCheckboxState()"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        {{ filterName() }}
-                    </label>
-                </div>
-            }
-        }
+    <bk-search-input (searchText)="search($event)" />
 
-        @if (gridData$ | async; as grid) {
+    @if (filter$ | async; as checkbox)
+    {
+    @if (checkbox !== 'disabled')
+    {
+    <div class="flex items-center mb-1">
+        <input id="link-checkbox" type="checkbox" [checked]="checkbox === 'on'" (change)="changeCheckboxState()"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            {{ filterName() }}
+        </label>
+    </div>
+    }
+    }
 
-            <ejs-grid [dataSource]='grid' [height]="'calc(100vh - 450px)'" allowPaging='true' [allowSorting]="true"
-                [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="false"
-                [allowMultiSorting]="false" width="auto" class="sortingenabled" [pageSettings]='initialPage'
-                [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
-                <e-columns>
-                    <e-column field="brand_name" headerText='Firma' headerTextAlign="left" textAlign='Left' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.brand_name}}'>
-                                {{data.brand_name}}
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="nazwa" headerText='Nazwa' headerTextAlign="left" textAlign='Left' width=200>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.nazwa}}'>
-                                {{data.nazwa}}
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="flavors" headerText='Smak' headerTextAlign="left" textAlign='Left' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.flavors}}'>
-                                {{data.flavors}}
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="wegle_sucha" headerText='Węglowodany' textAlign='right' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.wegle_sucha}}'>
-                                <span
-                                    [class.text-red-700]="data.wegle_sucha > 10"
-                                    [class.text-orange-400]="data.wegle_sucha > 5 && data.wegle_sucha <= 10"
-                                    [class.text-black]="data.wegle_sucha <= 5">
-                                    {{ data.wegle_sucha }}
-                                </span>
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="bialko_sucha" headerText='Białko' textAlign='right' width=100>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.bialko_sucha}}'>
-                                <span
-                                    [class.text-red-700]="data.bialko_sucha < 40"
-                                    [class.text-black]="data.bialko_sucha >= 40">
-                                    {{ data.bialko_sucha }}
-                                </span>
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="tluszcz_w_suchej" headerText='Tłuszcz' textAlign='right' width=100>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.tluszcz_w_suchej}}'>
-                                <span
-                                    [class.text-red-700]="data.tluszcz_w_suchej > 30"
-                                    [class.text-black]="data.tluszcz_w_suchej <= 30">
-                                    {{ data.tluszcz_w_suchej }}
-                                </span>
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field="fosfor_sucha" headerText='Fosfor' textAlign='right' width=100>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.fosfor_sucha}}'>
-                                <span
-                                    [class.text-red-700]="data.fosfor_sucha > 1 || data.fosfor_sucha === 0"
-                                    [class.text-black]="data.fosfor_sucha <= 1 && data.fosfor_sucha !== 0">
-                                    {{ data.fosfor_sucha }}
-                                </span>
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <!-- <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
+    @if (gridData$ | async; as grid) {
+
+    <ejs-grid [dataSource]='grid' [height]="'calc(100vh - 450px)'" allowPaging='true' [allowSorting]="true"
+        [sortSettings]='sortOptions' [loadingIndicator]='loadingIndicator' [allowFiltering]="false"
+        [filterSettings]='filterSettings' [allowMultiSorting]="false" width="auto" class="sortingenabled"
+        [pageSettings]='initialPage' [gridLines]="'Both'" (dataStateChange)='dataStateChange($event)'>
+        <e-columns>
+            <e-column field="brand_name" headerText='Firma' headerTextAlign="left" textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.brand_name}}'>
+                        {{data.brand_name}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="nazwa" headerText='Nazwa' headerTextAlign="left" textAlign='Left' width=200>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.nazwa}}'>
+                        {{data.nazwa}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="flavors" headerText='Smak' headerTextAlign="left" textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.flavors}}'>
+                        {{data.flavors}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="wegle_sucha" headerText='Węglowodany' textAlign='right' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.wegle_sucha}}'>
+                        <span [class.text-red-700]="data.wegle_sucha > 10"
+                            [class.text-orange-400]="data.wegle_sucha > 5 && data.wegle_sucha <= 10"
+                            [class.text-black]="data.wegle_sucha <= 5">
+                            {{ data.wegle_sucha }}
+                        </span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="bialko_sucha" headerText='Białko' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.bialko_sucha}}'>
+                        <span [class.text-red-700]="data.bialko_sucha < 40"
+                            [class.text-black]="data.bialko_sucha >= 40">
+                            {{ data.bialko_sucha }}
+                        </span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="tluszcz_w_suchej" headerText='Tłuszcz' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.tluszcz_w_suchej}}'>
+                        <span [class.text-red-700]="data.tluszcz_w_suchej > 30"
+                            [class.text-black]="data.tluszcz_w_suchej <= 30">
+                            {{ data.tluszcz_w_suchej }}
+                        </span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field="fosfor_sucha" headerText='Fosfor' textAlign='right' width=100>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.fosfor_sucha}}'>
+                        <span [class.text-red-700]="data.fosfor_sucha > 1 || data.fosfor_sucha === 0"
+                            [class.text-black]="data.fosfor_sucha <= 1 && data.fosfor_sucha !== 0">
+                            {{ data.fosfor_sucha }}
+                        </span>
+                    </div>
+                </ng-template>
+            </e-column>
+            <!-- <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
                                 <ng-template #template let-data>
                                     <div class="ellipsis-style" title='{{data.wapn_fosfor}}'>
                                         {{data.wapn_fosfor}}
                                     </div>
                                 </ng-template>
                             </e-column> -->
-                    <e-column field="kcal_100" headerText='Kcal/100g' textAlign='right' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.kcal_100}}'>
-                                {{data.kcal_100}}
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field='opis' headerText='Skład (Opis)' headerTextAlign="left" textAlign='left' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" (click)="tooltip.showModal()">
-                                <span class="cursor-pointer text-blue-400">
-                                    {{data.opis}}
-                                </span>
-                                <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis"
-                                    label="Skład karmy" />
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column field='categories' headerTextAlign="left" headerText='Uwagi' textAlign='Left' width=150>
-                        <ng-template #template let-data>
-                            <div class="ellipsis-style" title='{{data.categories}}'>
-                                {{data.categories}}
-                            </div>
-                        </ng-template>
-                    </e-column>
-                    <e-column headerText='Data edycji' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
-                        width=120 [allowSorting]="false">
-                        <ng-template #template let-data>
-                            <span> {{ data.updated_at | utcToLocal }}</span>
-                        </ng-template>
-                    </e-column>
-                    <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
-                        width=120 [allowSorting]="false">
-                        <ng-template #template let-data>
-                            <span class="cursor-pointer text-blue-400" (click)="showProblem(data)">
-                                Zgłoś
-                            </span>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
-        } 
-        @else {
-            <div class="flex items-center justify-center min-h-[600px] bg-gray-100">
-                <div class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white">
-                  <span class="text-gray-600 text-sm font-medium">Ładowanie</span>
-                  <span class="text-gray-600 animate-pulse">.</span>
-                  <span class="text-gray-600 animate-pulse delay-200">.</span>
-                  <span class="text-gray-600 animate-pulse delay-400">.</span>
-                </div>
-            </div>
-        }
+            <e-column field="kcal_100" headerText='Kcal/100g' textAlign='right' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.kcal_100}}'>
+                        {{data.kcal_100}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='opis' headerText='Skład (Opis)' headerTextAlign="left" textAlign='left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" (click)="tooltip.showModal()">
+                        <span class="cursor-pointer text-blue-400">
+                            {{data.opis}}
+                        </span>
+                        <bk-dismissable-tooltip #tooltip [identifier]="data.id" [text]="data.opis"
+                            label="Skład karmy" />
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column field='categories' headerTextAlign="left" headerText='Uwagi' textAlign='Left' width=150>
+                <ng-template #template let-data>
+                    <div class="ellipsis-style" title='{{data.categories}}'>
+                        {{data.categories}}
+                    </div>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Data edycji' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
+                width=120 [allowSorting]="false">
+                <ng-template #template let-data>
+                    <span> {{ data.updated_at | utcToLocal }}</span>
+                </ng-template>
+            </e-column>
+            <e-column headerText='Zgłoś problem' headerTextAlign="left" textAlign='Left' clipMode='EllipsisWithTooltip'
+                width=120 [allowSorting]="false">
+                <ng-template #template let-data>
+                    <span class="cursor-pointer text-blue-400" (click)="showProblem(data)">
+                        Zgłoś
+                    </span>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+    }
+    @else {
+    <div class="flex items-center justify-center min-h-[600px] bg-gray-100">
+        <div class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white">
+            <span class="text-gray-600 text-sm font-medium">Ładowanie</span>
+            <span class="text-gray-600 animate-pulse">.</span>
+            <span class="text-gray-600 animate-pulse delay-200">.</span>
+            <span class="text-gray-600 animate-pulse delay-400">.</span>
+        </div>
+    </div>
+    }
 </div>

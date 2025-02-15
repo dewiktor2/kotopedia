@@ -14,20 +14,20 @@ import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { filter, tap } from 'rxjs';
 import { CULTURE_HANDLER } from './tokens/culture.token';
 import { SEO_HANDLER } from './tokens/seo.token';
-import { SharedMenuComponent } from './utility/components/menu/menu.component';
+import { MenuComponent } from './utility/components/menu/menu.component';
 
 @Component({
-  imports: [RouterOutlet, SharedMenuComponent],
+  imports: [RouterOutlet, MenuComponent],
   selector: 'bk-root',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
   template: `
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
-      <bk-shared-menu />
-
-      <div class="mt-2 px-8 pb-8 flex-1 overflow-auto">
-        <router-outlet />
-      </div>
+      <bk-menu>
+        <div class="mt-2 px-8 pb-8 flex-1 overflow-auto">
+          <router-outlet />
+        </div>
+      </bk-menu>
     </main>
   `,
 })

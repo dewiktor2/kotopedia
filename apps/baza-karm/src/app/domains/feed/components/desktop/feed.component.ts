@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngxs/store';
 import {
   DataStateChangeEventArgs,
@@ -29,6 +29,7 @@ import {
 } from '../../+state/feed.actions';
 import { FeedsState } from '../../+state/feed.state';
 import { FeedsService } from '../../../../services/feeds.service';
+import { links } from '../../../../utility/components/menu/links';
 import { SearchInputComponent } from '../../../../utility/components/search-input.component';
 import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
 import { UtcToLocalPipe } from '../../../../utility/pipes/utc-local.pipe';
@@ -44,6 +45,7 @@ Grid.Inject(Filter);
     UtcToLocalPipe,
     SearchInputComponent,
     DismissableTooltipComponent,
+    RouterLink,
   ],
   providers: [SortService, FilterService, PageService],
   selector: 'bk-feed',
@@ -60,6 +62,8 @@ export class FeedComponent implements OnInit {
   filter$: Observable<string> = of('disabled');
   filterName = signal('');
   filterSettings: FilterSettingsModel = { mode: 'OnEnter' };
+  router = inject(Router);
+  links = links;
 
   grid = viewChild<GridComponent>('GridComponent');
   tooltip = viewChild<DismissableTooltipComponent>('tooltip');

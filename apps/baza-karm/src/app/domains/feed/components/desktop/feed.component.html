@@ -1,4 +1,22 @@
 <div class="control-section">
+  <div class="flex items-center pt-2 bg-base-100 lg:justify-between">
+    <div class="flex-1 flex justify-start">
+      @defer {
+        @for (link of links.desktop; track link.route) {
+          <a
+            [routerLink]="[link.route]"
+            [class.active-link]="router.url === link.route"
+            routerLinkActive="active-link"
+            class="btn btn-ghost ml-1"
+          >
+            {{ link.name }}
+          </a>
+        }
+      }
+    </div>
+    <div class="flex-1 flex justify-end"></div>
+  </div>
+
   <bk-search-input (searchText)="search($event)" />
 
   @if (filter$ | async; as checkbox) {
@@ -153,13 +171,6 @@
             </div>
           </ng-template>
         </e-column>
-        <!-- <e-column field="wapn_fosfor" headerText='Wapń:Fosfor' textAlign='right' width=100>
-                                <ng-template #template let-data>
-                                    <div class="ellipsis-style" title='{{data.wapn_fosfor}}'>
-                                        {{data.wapn_fosfor}}
-                                    </div>
-                                </ng-template>
-                            </e-column> -->
         <e-column
           field="kcal_100"
           headerText="Kcal/100g"

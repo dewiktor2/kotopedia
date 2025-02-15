@@ -21,9 +21,19 @@
           "apps/baza-karm/src/assets",
           "apps/baza-karm/src/manifest.webmanifest",
           "apps/baza-karm/src/robots.txt",
-          "apps/baza-karm/src/sitemap.xml"
+          "apps/baza-karm/src/sitemap.xml",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          }
         ],
-        "styles": ["apps/baza-karm/src/styles.scss"],
+        "styles": [
+          "apps/baza-karm/src/styles.scss",
+          "@taiga-ui/core/styles/taiga-ui-theme.less",
+          "@taiga-ui/core/styles/taiga-ui-fonts.less",
+          "@taiga-ui/styles/taiga-ui-global.less"
+        ],
         "scripts": [],
         "server": "apps/baza-karm/src/main.server.ts",
         "prerender": true,

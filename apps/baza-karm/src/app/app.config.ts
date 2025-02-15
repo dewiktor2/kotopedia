@@ -13,6 +13,9 @@ import { descriptionIcon } from '../assets/ngSvg/description';
 import { funnelIcon } from '../assets/ngSvg/funnel';
 import { chevronDownIcon } from '../assets/ngSvg/chevronDown';
 import { leftArrowIcon } from '../assets/ngSvg/leftArrow';
+import { UNIVERSAL_PROVIDERS } from '@ng-web-apis/universal';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 
 const icons = [
   hamburgerIcon,
@@ -25,6 +28,8 @@ const icons = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
+    NG_EVENT_PLUGINS,
     provideClientHydration(),
     provideRouter(appRoutes),
     provideServiceWorker('ngsw-worker.js', {
@@ -50,5 +55,6 @@ export const appConfig: ApplicationConfig = {
         warnOnUnhandledActions: true,
       }),
     ),
+    UNIVERSAL_PROVIDERS,
   ],
 };

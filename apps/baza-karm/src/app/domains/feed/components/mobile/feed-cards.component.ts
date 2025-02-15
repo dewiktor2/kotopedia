@@ -8,7 +8,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { map, Observable } from 'rxjs';
 import {
@@ -22,6 +22,7 @@ import { SearchInputComponent } from '../../../../utility/components/search-inpu
 import { DismissableTooltipComponent } from '../../../../utility/components/tooltip/dismissable-tooltip.component';
 import { categories, category } from '../../models/category.model';
 import { SvgIconComponent } from '@ngneat/svg-icon';
+import { DismissableModalComponent } from '../../../../utility/components/modal.ts/modal.component';
 
 @Component({
   selector: 'bk-feed-cards',
@@ -31,6 +32,7 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
     AsyncPipe,
     DismissableTooltipComponent,
     SvgIconComponent,
+    DismissableModalComponent
   ],
 })
 export class FeedCardsComponent implements OnInit {
@@ -51,7 +53,9 @@ export class FeedCardsComponent implements OnInit {
   });
   sortDialogOpen = signal<boolean>(false);
   cardsContainer = viewChild<ElementRef<HTMLElement>>('cardsContainer');
-
+  modal = viewChild<DismissableModalComponent>('modal');
+  
+  router = inject(Router);
   readonly pageSize = 10;
   filter$!: Observable<string>;
 
@@ -135,10 +139,12 @@ export class FeedCardsComponent implements OnInit {
   // Sorting dialog functions
   public openSortDialog(): void {
     this.sortDialogOpen.set(true);
+    (this.modal())?.showModal();
   }
 
   public closeSortDialog(): void {
     this.sortDialogOpen.set(false);
+    (this.modal())?.close();
   }
 
   public onSortFieldChange(event: Event): void {

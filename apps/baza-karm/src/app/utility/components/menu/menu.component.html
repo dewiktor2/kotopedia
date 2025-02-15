@@ -1,77 +1,42 @@
-<div class="lg:hidden">
-  <div class="drawer">
-    <input type="checkbox" id="my-drawer" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col">
-      <!-- Mobile Web Navbar -->
-      <div class="flex justify-between items-center p-4 bg-base-100">
-        <label
-          for="my-drawer"
-          class="btn btn-square btn-ghost"
-          (click)="toggleDrawer()"
-        >
-          <svg-icon key="hamburger" />
-        </label>
-        <div class="flex-1 px-2 mx-2">
-          <ng-container *ngTemplateOutlet="title" />
+<header tuiNavigationHeader>
+  <div tuiNavigationLogo>
+    <div class="lg:hidden">
+      <div class="drawer">
+        <input type="checkbox" id="my-drawer" class="drawer-toggle" />
+        <div class="drawer-side" [style.z-index]="101">
+          <label for="my-drawer" class="drawer-overlay"></label>
+          <ul
+            class="menu p-4 overflow-y-auto w-80 mt-16 lg:mt-0"
+            [style.background]="'#1b1f3b'"
+          >
+            <li>
+              <span>Karmy</span>
+              <ul class="pl-4">
+                @for (link of links.mobile; track link.route) {
+                  <li class="pb-1">
+                    <a
+                      [routerLink]="[link.route]"
+                      [class.active-link]="router.url === link.route"
+                      >{{ link.name }}</a
+                    >
+                  </li>
+                }
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <!-- Drawer sidebar for mobile views -->
-    <div class="drawer-side" [style.z-index]="101">
-      <label for="my-drawer" class="drawer-overlay"></label>
-      <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 mt-16 lg:mt-0">
-        <!-- Drawer item for Karmy nadrzędne with sub-items -->
-        <li>
-          <span>Karmy</span>
-          <ul class="pl-4">
-            @for (link of links.mobile; track link.route) {
-              <li class="pb-1">
-                <a
-                  [routerLink]="[link.route]"
-                  [class.active-link]="router.url === link.route"
-                  >{{ link.name }}</a
-                >
-              </li>
-            }
-          </ul>
-        </li>
-      </ul>
-    </div>
+    <label
+      for="my-drawer"
+      class="btn btn-square btn-ghost lg:hidden"
+      (click)="toggleDrawer()"
+    >
+      <svg-icon key="hamburger" />
+    </label>
+    <tui-icon icon="@tui.cat" />
+    <span tuiFade class="tui-text_body-m-2">Baza karm dla kotów</span>
   </div>
-</div>
+</header>
 
-<div class="hidden lg:flex flex-col bg-base-100 w-screen">
-  <div class="flex items-center p-4 bg-base-100 lg:justify-between">
-    <div class="flex-1">
-      <ng-container *ngTemplateOutlet="title" />
-    </div>
-
-    <div class="flex-1 flex justify-start">
-      @for (link of links.desktop; track link.route) {
-        <a
-          [routerLink]="[link.route]"
-          [class.active-link]="router.url === link.route"
-          routerLinkActive="active-link"
-          class="btn btn-ghost ml-1"
-        >
-          {{ link.name }}
-        </a>
-      }
-    </div>
-    <!-- Right Aligned Items, e.g., Theme Switcher -->
-    <div class="flex-1 flex justify-end"></div>
-  </div>
-</div>
-
-<ng-template #title>
-  <div class="flex items-center">
-    <img
-      ngSrc="assets/img/logo.webp"
-      width="48"
-      height="48"
-      priority
-      alt="Kotopedia"
-    />
-    <h1>Baza karm dla kotów</h1>
-  </div>
-</ng-template>
+<ng-content />

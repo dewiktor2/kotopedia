@@ -99,6 +99,11 @@ export const appRoutes: Route[] = [
     },
   },
   {
+    path: 'login',
+    loadComponent: () =>
+      import('./domains/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./domains/not-found/not-found.component').then(

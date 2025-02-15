@@ -1,11 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-@use 'tailwindcss/base' as *;
-@use 'tailwindcss/components' as *;
-@use 'tailwindcss/utilities' as *;
+@use "tailwindcss/base" as *;
+@use "tailwindcss/components" as *;
+@use "tailwindcss/utilities" as *;
 
-@import '../../../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../../../node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
-@import '../../../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../../../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../../../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-angular-grids/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+
+:where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)):not(summary, .active, .btn).focus,
+:where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)):not(summary, .active, .btn):focus,
+:where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title)):is(summary):not(
+        .active,
+        .btn
+    ):focus-visible,
+:where(.menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)):not(summary, .active, .btn).focus,
+:where(.menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)):not(summary, .active, .btn):focus,
+:where(.menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title)):is(summary):not(
+        .active,
+        .btn
+    ):focus-visible {
+    color: #6c86e2 !important;
+}

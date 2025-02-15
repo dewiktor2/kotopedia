@@ -2,13 +2,12 @@
 
 # Kotopedia - Feed database
 
-Angular 19
-NGXS
-SSR
-Supabase
-Syncfusion
-Tailwind => soon [TAIGA_UI ](https://taiga-ui.dev/)
+Angular 19 - Signals, Hydration, SSR
 
+* NGXS
+* Supabase
+* Synfusion grid
+* Tailwind/Daisy - gonna be replace soon by TaigaUI (https://taiga-ui.dev/)
 
 ![image](https://github.com/user-attachments/assets/2f1a2627-a69d-4905-83f5-e0deb155e93a)
 

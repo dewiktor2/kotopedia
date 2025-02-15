@@ -5,7 +5,7 @@ export const appRoutes: Route[] = [
     path: '',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'wszystkie',
@@ -20,7 +20,7 @@ export const appRoutes: Route[] = [
     path: 'wszystkie',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'wszystkie',
@@ -34,7 +34,7 @@ export const appRoutes: Route[] = [
     path: 'monobialkowe',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'monobialkowe',
@@ -48,7 +48,7 @@ export const appRoutes: Route[] = [
     path: 'chore-nerki',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'chore-nerki',
@@ -62,7 +62,7 @@ export const appRoutes: Route[] = [
     path: 'polecane',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'polecane',
@@ -75,7 +75,7 @@ export const appRoutes: Route[] = [
     path: 'chora-trzustka',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'polecane',
@@ -88,7 +88,7 @@ export const appRoutes: Route[] = [
     path: 'kocieta',
     loadComponent: () =>
       import('./domains/feed/container/feed-view.component').then(
-        (m) => m.FeedViewComponent
+        (m) => m.FeedViewComponent,
       ),
     data: {
       type: 'kocięta',
@@ -102,7 +102,7 @@ export const appRoutes: Route[] = [
     path: '**',
     loadComponent: () =>
       import('./domains/not-found/not-found.component').then(
-        (m) => m.NotFoundComponent
+        (m) => m.NotFoundComponent,
       ),
     data: {
       type: 'not-found',

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { categories, categoryValue } from '../models/category.model';
-import { SetCategoryFilter, SetRecordCount, SetCurrentFilter, ChangeExtraFilter, SetSearchInProgress } from './feed.actions';
+import {
+  SetCategoryFilter,
+  SetRecordCount,
+  SetCurrentFilter,
+  ChangeExtraFilter,
+  SetSearchInProgress,
+} from './feed.actions';
 import { FeedStateModel, extraFilters } from './feed.model';
-
 
 @State<FeedStateModel>({
   name: 'feed',
@@ -18,7 +23,6 @@ import { FeedStateModel, extraFilters } from './feed.model';
 })
 @Injectable()
 export class FeedsState {
-
   @Selector() static categoryFilter(state: FeedStateModel) {
     return state.categoryFilter;
   }
@@ -39,14 +43,14 @@ export class FeedsState {
     return state.extraFilters;
   }
 
-  @Selector() static extraFilter(state: FeedStateModel) {;
+  @Selector() static extraFilter(state: FeedStateModel) {
     return state.extraFilter;
   }
 
   @Action(SetCategoryFilter)
   async setCategoryFilter(
     ctx: StateContext<FeedStateModel>,
-    action: SetCategoryFilter
+    action: SetCategoryFilter,
   ) {
     const value = categories[action.payload.categoryFitler];
 
@@ -67,7 +71,7 @@ export class FeedsState {
   @Action(SetRecordCount)
   async setRecordCount(
     ctx: StateContext<FeedStateModel>,
-    action: SetRecordCount
+    action: SetRecordCount,
   ) {
     ctx.patchState({
       recordCount: action.payload.count,
@@ -77,7 +81,7 @@ export class FeedsState {
   @Action(SetCurrentFilter)
   async setCurrentFilter(
     ctx: StateContext<FeedStateModel>,
-    action: SetCurrentFilter
+    action: SetCurrentFilter,
   ) {
     ctx.patchState({
       currentFilter: action.payload.currentFilter,
@@ -101,7 +105,7 @@ export class FeedsState {
   @Action(SetSearchInProgress)
   async setSearchInProgress(
     ctx: StateContext<FeedStateModel>,
-    action: SetSearchInProgress
+    action: SetSearchInProgress,
   ) {
     ctx.patchState({
       searchInProgress: action.payload.searchInProgress,

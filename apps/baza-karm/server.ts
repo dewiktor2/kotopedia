@@ -24,7 +24,7 @@ export function app(): express.Express {
     '*.*',
     express.static(browserDistFolder, {
       maxAge: '1y',
-    })
+    }),
   );
 
   // All regular routes use the Angular engine
@@ -39,10 +39,10 @@ export function app(): express.Express {
         publicPath: browserDistFolder,
         providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
       })
-      .then(html => res.send(html))
-      .catch(err => {
+      .then((html) => res.send(html))
+      .catch((err) => {
         console.error('SSR rendering error:', err);
-        next(err)
+        next(err);
       });
   });
 

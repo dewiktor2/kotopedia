@@ -4,9 +4,16 @@ import { DataStateChangeEventArgs, Sorts } from '@syncfusion/ej2-angular-grids';
 import { Observable, Subject } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { SupabaseService } from './supabase.service';
-import { SetSearchInProgress, SetRecordCount } from '../domains/feed/+state/feed.actions';
+import {
+  SetSearchInProgress,
+  SetRecordCount,
+} from '../domains/feed/+state/feed.actions';
 import { FeedsState } from '../domains/feed/+state/feed.state';
-import { defaultQueryFetchValue, ProductQueryFetch, QueryFetch } from '../utility/syncfusion/query.model';
+import {
+  defaultQueryFetchValue,
+  ProductQueryFetch,
+  QueryFetch,
+} from '../utility/syncfusion/query.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -30,7 +37,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
   public execute(state: DataStateChangeEventArgs): void {
     this.getData(state)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((dataState: DataStateChangeEventArgs) => super.next(dataState));
+      .subscribe((dataState: DataStateChangeEventArgs) =>
+        super.next(dataState),
+      );
   }
 
   /**
@@ -39,7 +48,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
    * @param state - Obiekt DataStateChangeEventArgs zawierający m.in. sortowanie, wyszukiwanie i paginację.
    * @returns Observable emitujący wynik zapytania w postaci DataStateChangeEventArgs.
    */
-  protected getData(state: DataStateChangeEventArgs): Observable<DataStateChangeEventArgs> {
+  protected getData(
+    state: DataStateChangeEventArgs,
+  ): Observable<DataStateChangeEventArgs> {
     // Inicjujemy zapytanie z domyślnym sortowaniem po 'brand_name'
     const query = defaultQueryFetchValue('brand_name') as ProductQueryFetch;
 
@@ -54,7 +65,10 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
 
     // Pobieramy aktualny filtr z NGXS (jeśli użytkownik coś wpisał)
     const currentFilter = this.#store.selectSnapshot(FeedsState.currentFilter);
-    if ((state && state.search?.length && state.search[0].key) || currentFilter) {
+    if (
+      (state && state.search?.length && state.search[0].key) ||
+      currentFilter
+    ) {
       query.search = state.search?.[0] ?? {
         key: currentFilter,
         fields: ['all'],
@@ -63,7 +77,9 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
     }
 
     // Pobieramy wybraną kategorię z NGXS
-    query.categoryFilter = this.#store.selectSnapshot(FeedsState.categoryFilter);
+    query.categoryFilter = this.#store.selectSnapshot(
+      FeedsState.categoryFilter,
+    );
 
     // Obsługa paginacji – jeśli akcja wskazuje na zmianę strony
     if (state.action?.requestType === 'paging') {
@@ -85,8 +101,10 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
       }),
       finalize(() => {
         // Po zakończeniu wyszukiwania wyłączamy wskaźnik wyszukiwania
-        this.#store.dispatch(new SetSearchInProgress({ searchInProgress: false }));
-      })
+        this.#store.dispatch(
+          new SetSearchInProgress({ searchInProgress: false }),
+        );
+      }),
     );
   }
 
@@ -104,7 +122,10 @@ export class FeedsService extends Subject<DataStateChangeEventArgs> {
           if (result.error) {
             return { data: [], count: 0 };
           }
-          return { data: result.data, count: result?.recordNumbers?.count ?? 0 };
+          return {
+            data: result.data,
+            count: result?.recordNumbers?.count ?? 0,
+          };
         })
         .then((data) => {
           observer.next(data);

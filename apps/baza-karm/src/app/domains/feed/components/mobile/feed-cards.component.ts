@@ -30,7 +30,7 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
     SearchInputComponent,
     AsyncPipe,
     DismissableTooltipComponent,
-    SvgIconComponent
+    SvgIconComponent,
   ],
 })
 export class FeedCardsComponent implements OnInit {
@@ -69,13 +69,13 @@ export class FeedCardsComponent implements OnInit {
       this.store.dispatch(new SetCurrentFilter({ currentFilter: '' }));
       // Upewnij się, że właściwość (np. "categoryFitler") odpowiada Twojemu API
       this.store.dispatch(
-        new SetCategoryFilter({ categoryFitler: data['type'] })
+        new SetCategoryFilter({ categoryFitler: data['type'] }),
       );
       const type = data['type'] as category;
       const extraFilters = this.store.selectSnapshot(FeedsState.extraFilters);
       this.filterName.set(
         extraFilters.find((x) => x.category === categories[type])?.filterName ??
-          ''
+          '',
       );
     });
   }

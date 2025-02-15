@@ -19,7 +19,7 @@ import {
   GridComponent,
   GridModule,
   PageService,
-  SortService
+  SortService,
 } from '@syncfusion/ej2-angular-grids';
 import { Observable, of } from 'rxjs';
 import {
@@ -82,13 +82,13 @@ export class FeedComponent implements OnInit {
     this.#route.data.pipe(takeUntilDestroyed()).subscribe((data) => {
       this.#store.dispatch(new SetCurrentFilter({ currentFilter: '' }));
       this.#store.dispatch(
-        new SetCategoryFilter({ categoryFitler: data['type'] })
+        new SetCategoryFilter({ categoryFitler: data['type'] }),
       );
       const type = data['type'] as category;
       const extraFilters = this.#store.selectSnapshot(FeedsState.extraFilters);
       this.filterName.set(
         extraFilters.find((x) => x.category === categories[type])?.filterName ??
-          ''
+          '',
       );
     });
   }

@@ -29,5 +29,5 @@ export class UtcToLocalPipe implements PipeTransform {
     // Use Angular's DatePipe for formatting
     const datePipe = new DatePipe('pl-PL'); // You can use your own locale
     return datePipe.transform(utcDate, 'shortDate');
-}
+  }
 }

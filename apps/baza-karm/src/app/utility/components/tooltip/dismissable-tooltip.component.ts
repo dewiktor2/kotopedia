@@ -13,12 +13,14 @@ import { raw } from 'express';
         <span class="font-bold text-lg">{{ label() }}</span>
         <div class="py-4 text-left text-sm md:text-base">
           @if (!!splittedText.length) {
-          <ul class="list-disc list-inside space-y-1">
-            @for (item of splittedText; track item) {
-            <li>{{ item }}</li>
-            }
-          </ul>
-          } @else { Brak danych }
+            <ul class="list-disc list-inside space-y-1">
+              @for (item of splittedText; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          } @else {
+            Brak danych
+          }
         </div>
         <div class="modal-action">
           <form method="dialog">

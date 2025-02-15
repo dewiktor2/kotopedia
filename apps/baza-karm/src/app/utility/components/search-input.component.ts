@@ -30,14 +30,14 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           @if ((searchInProgress$ | async) === false) {
-          <svg-icon
-            key="search"
-            aria-roledescription="Search Icon"
-            size="xl"
-            (click)="onSearchButtonClick(searchInput.value)"
-          />
+            <svg-icon
+              key="search"
+              aria-roledescription="Search Icon"
+              size="xl"
+              (click)="onSearchButtonClick(searchInput.value)"
+            />
           } @else {
-          <span class="loading loading-ring loading-xs"></span>
+            <span class="loading loading-ring loading-xs"></span>
           }
         </label>
         <div
@@ -79,7 +79,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(500), // Wait for 500ms of silence before emitting the last value
         distinctUntilChanged(), // Only emit if the current value is different from the last
-        takeUntilDestroyed(this.#destroyRef)
+        takeUntilDestroyed(this.#destroyRef),
       )
       .subscribe((value) => this.searchText.emit(value));
   }

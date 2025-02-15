@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
-    @Inject(SEO_HANDLER) private seoHandler: () => void
+    @Inject(SEO_HANDLER) private seoHandler: () => void,
   ) {
     this.cultureHandler();
     this.seoHandler();
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.#destroyRef),
         filter((event: VersionEvent) => event?.type === 'VERSION_READY'),
-        tap(() => this.reloadPage())
+        tap(() => this.reloadPage()),
       )
       .subscribe();
   }

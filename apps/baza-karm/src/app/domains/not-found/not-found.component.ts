@@ -36,7 +36,8 @@ export class NotFoundComponent implements OnInit {
     });
     this.#metaService.updateTag({
       name: 'description',
-      content: 'Kotopedia - Strona, której szukasz nie istnieje lub została przeniesiona',
+      content:
+        'Kotopedia - Strona, której szukasz nie istnieje lub została przeniesiona',
     });
   }
 }

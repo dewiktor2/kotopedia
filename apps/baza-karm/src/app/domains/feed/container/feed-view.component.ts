@@ -14,10 +14,10 @@ import { FeedComponent } from '../components/desktop/feed.component';
   imports: [FeedComponent, FeedCardsComponent],
   selector: 'bk-view-feed',
   encapsulation: ViewEncapsulation.None,
-  template: ` @if(!isMobile) {
-    <bk-feed />
+  template: ` @if (!isMobile) {
+      <bk-feed />
     } @else {
-    <bk-feed-cards />
+      <bk-feed-cards />
     }`,
 })
 export class FeedViewComponent implements OnInit, OnDestroy {
@@ -25,7 +25,7 @@ export class FeedViewComponent implements OnInit, OnDestroy {
   #resizeListener: () => void;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Record<string, string | number>
+    @Inject(PLATFORM_ID) private platformId: Record<string, string | number>,
   ) {
     // Przechowujemy referencję do listenera, aby później móc go usunąć
     this.#resizeListener = () => this.checkIfMobile();

@@ -48,7 +48,7 @@ export const appConfig: ApplicationConfig = {
       { developmentMode: isDevMode() },
       withNgxsDevelopmentOptions({
         warnOnUnhandledActions: true,
-      })
+      }),
     ),
   ],
 };

@@ -6,13 +6,13 @@ export type category =
   | 'chora-trzustka'
   | 'kocięta';
 
-export type categoryValue = 
-| 'wszystkie'
-| 'Polecane'
-| 'Monobiałkowe'
-| 'Chore nerki'
-| 'Chora trzustka'
-| 'Kocięta';
+export type categoryValue =
+  | 'wszystkie'
+  | 'Polecane'
+  | 'Monobiałkowe'
+  | 'Chore nerki'
+  | 'Chora trzustka'
+  | 'Kocięta';
 
 export const categories: Record<category, categoryValue | undefined> = {
   ['wszystkie']: undefined,

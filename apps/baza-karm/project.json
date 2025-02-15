@@ -23,9 +23,7 @@
           "apps/baza-karm/src/robots.txt",
           "apps/baza-karm/src/sitemap.xml"
         ],
-        "styles": [
-          "apps/baza-karm/src/styles.scss"
-        ],
+        "styles": ["apps/baza-karm/src/styles.scss"],
         "scripts": [],
         "server": "apps/baza-karm/src/main.server.ts",
         "prerender": true,

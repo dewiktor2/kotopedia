@@ -31,7 +31,7 @@ export class SupabaseService {
       environment.supabaseKey,
       {
         auth: { persistSession: false, autoRefreshToken: false },
-      }
+      },
     );
   }
 
@@ -49,7 +49,7 @@ export class SupabaseService {
    * @param options - Parametry zapytania, domyślnie ustawione dla kolumny 'brand_name'
    */
   async productsV2(
-    options: ProductQueryFetch = defaultQueryFetchValue('brand_name')
+    options: ProductQueryFetch = defaultQueryFetchValue('brand_name'),
   ) {
     // Inicjujemy zapytanie
     let query = this.#supabase.from('v_products').select();
@@ -70,10 +70,16 @@ export class SupabaseService {
         .from('v_products')
         .select('*', { count: 'exact', head: true });
       if (options.categoryFilter) {
-        queryCount = this.filterQueryByCategory(queryCount, options.categoryFilter);
+        queryCount = this.filterQueryByCategory(
+          queryCount,
+          options.categoryFilter,
+        );
       }
       if (options.search && options.search.key) {
-        queryCount = queryCount.ilike('name_brand_name', `%${options.search.key}%`);
+        queryCount = queryCount.ilike(
+          'name_brand_name',
+          `%${options.search.key}%`,
+        );
       }
       return queryCount;
     };
@@ -124,9 +130,7 @@ export class SupabaseService {
         .lte('wegle_sucha', 10);
     }
     if (categoryFilter === 'Monobiałkowe') {
-      query = query
-        .not('flavors', 'like', '%,%')
-        .not('flavors', 'is', null);
+      query = query.not('flavors', 'like', '%,%').not('flavors', 'is', null);
     }
     if (categoryFilter === 'Chore nerki') {
       query = query

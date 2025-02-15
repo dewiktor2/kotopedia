@@ -16,10 +16,13 @@ export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
     const document = inject(DOCUMENT);
 
     const defaultDescription = 'Znajdź najlepsze karmy dla swojego kota.';
-    const defaultKeywords = 'kot, karma dla kota, karmy dla kotów, zdrowie kota';
+    const defaultKeywords =
+      'kot, karma dla kota, karmy dla kotów, zdrowie kota';
 
     const updateCanonicalUrl = (url: string) => {
-      let link: HTMLLinkElement | null = document.querySelector('link[rel="canonical"]');
+      let link: HTMLLinkElement | null = document.querySelector(
+        'link[rel="canonical"]',
+      );
 
       if (!link) {
         link = document.createElement('link');
@@ -30,35 +33,36 @@ export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
       link.setAttribute('href', url);
     };
 
-    return () => router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => activatedRoute),
-        map((route) => {
-          while (route.firstChild) {
-            route = route.firstChild;
+    return () =>
+      router.events
+        .pipe(
+          filter((event) => event instanceof NavigationEnd),
+          map(() => activatedRoute),
+          map((route) => {
+            while (route.firstChild) {
+              route = route.firstChild;
+            }
+            return route;
+          }),
+          takeUntilDestroyed(destroyRef),
+          switchMap((route) => route.data || {}),
+        )
+        .subscribe((data) => {
+          const title = data['title'] || 'Kotopedia - baza karm dla kotów';
+
+          titleService.setTitle(title);
+
+          if (data['noMeta']) {
+            return;
           }
-          return route;
-        }),
-        takeUntilDestroyed(destroyRef),
-        switchMap((route) => route.data || {})
-      )
-      .subscribe((data) => {
-        const title = data['title'] || 'Kotopedia - baza karm dla kotów';
 
-        titleService.setTitle(title);
+          const description = data['description'] || defaultDescription;
+          const keywords = data['keywords'] || defaultKeywords;
+          const canonicalUrl = `${document.location.origin}${router.url}`;
 
-        if(data['noMeta']) {
-          return;
-        }
-              
-        const description = data['description'] || defaultDescription;
-        const keywords = data['keywords'] || defaultKeywords;
-        const canonicalUrl = `${document.location.origin}${router.url}`;
-
-        meta.updateTag({ name: 'description', content: description });
-        meta.updateTag({ name: 'keywords', content: keywords });
-        updateCanonicalUrl(canonicalUrl);
-      });
+          meta.updateTag({ name: 'description', content: description });
+          meta.updateTag({ name: 'keywords', content: keywords });
+          updateCanonicalUrl(canonicalUrl);
+        });
   },
 });

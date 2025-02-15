@@ -251,7 +251,7 @@
     <div class="flex justify-end space-x-2">
       <button
         (click)="closeSortDialog()"
-        class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded"
+        class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-white font-bold rounded"
       >
         Anuluj
       </button>
@@ -263,54 +263,4 @@
       </button>
     </div>
   </bk-base-modal>
-  <!-- <div
-      class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
-    >
-      <div class="bg-white rounded p-6 w-11/12 max-w-sm">
-        <h2 class="text-lg font-bold mb-4">Opcje sortowania</h2>
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700"
-            >Sortuj według:</label
-          >
-          <select
-            [value]="sortOption().field"
-            (change)="onSortFieldChange($event)"
-            class="mt-1 block w-full border border-gray-300 rounded p-2"
-          >
-            <option value="brand_name">Nazwa firmy</option>
-            <option value="nazwa">Nazwa produktu</option>
-            <option value="bialko_sucha">Białko</option>
-            <option value="wegle_sucha">Węgle</option>
-            <option value="tluszcz_w_suchej">Tłuszcz</option>
-            <option value="fosfor_sucha">Fosfor</option>
-          </select>
-        </div>
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700"
-            >Kolejność:</label
-          >
-          <select
-            [value]="sortOption().order"
-            (change)="onSortOrderChange($event)"
-            class="mt-1 block w-full border border-gray-300 rounded p-2"
-          >
-            <option value="ascending">Rosnąco</option>
-            <option value="descending">Malejąco</option>
-          </select>
-        </div>
-        <div class="flex justify-end space-x-2">
-          <button
-            (click)="closeSortDialog()"
-            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded"
-          >
-            Anuluj
-          </button>
-          <button
-            (click)="applySort()"
-            class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded"
-          >
-            Zastosuj
-          </button>
-        </div>
-      </div> -->
 </div>

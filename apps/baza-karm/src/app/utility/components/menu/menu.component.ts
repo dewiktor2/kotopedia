@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 import { TuiThemeColorService } from '@taiga-ui/cdk';
-import { TuiIcon } from '@taiga-ui/core';
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 import { links } from './links';
 
@@ -13,6 +20,7 @@ import { links } from './links';
     RouterModule,
     SvgIconComponent,
     TuiIcon,
+    TuiButton,
     TuiNavigation,
   ],
   selector: 'bk-menu',
@@ -22,13 +30,19 @@ import { links } from './links';
 })
 export class MenuComponent {
   readonly #theme = inject(TuiThemeColorService);
+  destroyRef = inject(DestroyRef);
+  router = inject(Router);
   isDrawerOpen = false;
   links = links;
+  drawerToggle = viewChild<ElementRef<HTMLLabelElement>>('drawerToggle');
 
-  router = inject(Router);
 
   constructor() {
-    this.#theme.color = '#6c86e2'
+    this.#theme.color = '#6c86e2';
+  }
+
+  linkClicked() {
+    this.drawerToggle()?.nativeElement.click();
   }
 
   toggleDrawer() {

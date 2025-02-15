@@ -1,42 +1,57 @@
 <header tuiNavigationHeader>
   <div tuiNavigationLogo>
-    <div class="lg:hidden">
-      <div class="drawer">
-        <input type="checkbox" id="my-drawer" class="drawer-toggle" />
-        <div class="drawer-side" [style.z-index]="101">
-          <label for="my-drawer" class="drawer-overlay"></label>
-          <ul
-            class="menu p-4 overflow-y-auto w-80 mt-16 lg:mt-0"
-            [style.background]="'#1b1f3b'"
-          >
-            <li>
-              <span>Karmy</span>
-              <ul class="pl-4">
-                @for (link of links.mobile; track link.route) {
-                  <li class="pb-1">
-                    <a
-                      [routerLink]="[link.route]"
-                      [class.active-link]="router.url === link.route"
-                      >{{ link.name }}</a
-                    >
-                  </li>
-                }
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <label
+      #drawerToggle
+      data-drawer-hide="my-drawer"
       for="my-drawer"
       class="btn btn-square btn-ghost lg:hidden"
-      (click)="toggleDrawer()"
     >
       <svg-icon key="hamburger" />
     </label>
     <tui-icon icon="@tui.cat" />
     <span tuiFade class="tui-text_body-m-2">Baza karm dla kotów</span>
   </div>
+  <hr />
+  <button
+    appearance="accent"
+    iconStart="@tui.calculator"
+    tuiButton
+    type="button"
+  >
+    <a [style.color]="'white'" [href]="'https://kalkulator.kotopedia.pl'"
+      >Kalkulator karmy</a
+    >
+  </button>
 </header>
 
 <ng-content />
+
+<div class="lg:hidden">
+  <div class="drawer">
+    <input type="checkbox" id="my-drawer" class="drawer-toggle" />
+    <div class="drawer-side" [style.z-index]="101">
+      <label for="my-drawer" class="drawer-overlay"></label>
+      <ul
+        class="menu p-4 overflow-y-auto w-80 mt-16 lg:mt-0"
+        [style.background]="'#1b1f3b'"
+      >
+        <li>
+          <span [style.color]="'white'">Karmy</span>
+          <ul class="pl-4">
+            @for (link of links.mobile; track link.route) {
+              <li class="pb-1">
+                <a
+                  [style.color]="'white'"
+                  (click)="linkClicked()"
+                  [routerLink]="[link.route]"
+                  [class.active-link]="router.url === link.route"
+                  >{{ link.name }}</a
+                >
+              </li>
+            }
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

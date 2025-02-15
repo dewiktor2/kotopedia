@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   inject,
@@ -32,7 +33,14 @@ import { DismissableModalComponent } from '../../../../utility/components/modal.
     AsyncPipe,
     DismissableTooltipComponent,
     SvgIconComponent,
-    DismissableModalComponent
+    DismissableModalComponent,
+  ],
+  styles: [
+    `
+      select:focus {
+        outline: none;
+      }
+    `,
   ],
 })
 export class FeedCardsComponent implements OnInit {
@@ -54,7 +62,7 @@ export class FeedCardsComponent implements OnInit {
   sortDialogOpen = signal<boolean>(false);
   cardsContainer = viewChild<ElementRef<HTMLElement>>('cardsContainer');
   modal = viewChild<DismissableModalComponent>('modal');
-  
+
   router = inject(Router);
   readonly pageSize = 10;
   filter$!: Observable<string>;
@@ -103,7 +111,6 @@ export class FeedCardsComponent implements OnInit {
       ],
     });
     this.service.pipe(map((data: any) => data)).subscribe((response) => {
-      console.log(`Data for page ${page} received:`, response.result);
       this.feedCards.set(response.result);
       this.totalCount.set(response.count);
       this.totalPages.set(Math.ceil(response.count / this.pageSize));
@@ -139,12 +146,12 @@ export class FeedCardsComponent implements OnInit {
   // Sorting dialog functions
   public openSortDialog(): void {
     this.sortDialogOpen.set(true);
-    (this.modal())?.showModal();
+    this.modal()?.showModal();
   }
 
   public closeSortDialog(): void {
     this.sortDialogOpen.set(false);
-    (this.modal())?.close();
+    this.modal()?.close();
   }
 
   public onSortFieldChange(event: Event): void {

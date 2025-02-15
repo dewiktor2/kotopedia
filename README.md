@@ -7,7 +7,7 @@ NGXS
 SSR
 Supabase
 Syncfusion
-Tailwind => soon ![TAIGA_UI ](https://taiga-ui.dev/)
+Tailwind => soon [TAIGA_UI ](https://taiga-ui.dev/)
 
 
 ![image](https://github.com/user-attachments/assets/2f1a2627-a69d-4905-83f5-e0deb155e93a)

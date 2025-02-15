@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { SEO_HANDLER } from './tokens/seo.token';
 import { SwUpdate } from '@angular/service-worker';
 import { CULTURE_HANDLER } from './tokens/culture.token';
-import { SharedMenuComponent } from './utility/components/menu/menu.component';
+import { MenuComponent } from './utility/components/menu/menu.component';
 
 describe('AppComponent', () => {
   let mockCultureHandler: jest.Mock;
@@ -19,7 +19,7 @@ describe('AppComponent', () => {
     swUpdate = jest.fn();
     activatedRouteHandler = jest.fn();
     await TestBed.configureTestingModule({
-      imports: [RouterOutlet, SharedMenuComponent],
+      imports: [RouterOutlet, MenuComponent],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRouteHandler },
         { provide: SwUpdate, useValue: swUpdate },

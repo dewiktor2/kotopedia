@@ -4,14 +4,17 @@ import {
   ElementRef,
   input,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
+import { TuiBadge } from '@taiga-ui/kit';
 import { TuiNavigation } from '@taiga-ui/layout';
 
 @Component({
   selector: 'bk-menu-header',
-  imports: [SvgIconComponent, TuiIcon, TuiButton, TuiNavigation],
+  imports: [SvgIconComponent, RouterLink, TuiIcon, TuiButton, TuiBadge, TuiNavigation],
   template: ` <header tuiNavigationHeader>
     <div tuiNavigationLogo>
       <label
@@ -39,10 +42,31 @@ import { TuiNavigation } from '@taiga-ui/layout';
     </button>
     <hr />
     <span class="bk-sm-hidden">
-      {{ userId() ? userId() : '' }}
+      @if (userId()) {
+        <tui-badge appearance="positive" tuiStatus>
+          {{ userId() }}
+        </tui-badge>
+      } @else {
+        <a
+          class="mb-2"
+          iconStart="@tui.user"
+          [style.color]="'white'"
+          [routerLink]="'/login'"
+        >
+          Zaloguj się
+        </a>
+      }
     </span>
   </header>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      header[tuiNavigationHeader][tuiNavigationHeader]tui-badge {
+        max-inline-size: 20rem !important;
+      }
+    `,
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
   userId = input.required<string>();

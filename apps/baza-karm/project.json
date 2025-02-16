@@ -81,7 +81,7 @@
           "fileReplacements": [
             {
               "replace": "apps/baza-karm/src/env/environment.ts",
-              "with": "apps/baza-karm/src/fakeEnv/fakeForCi.ts"
+              "with": "apps/baza-karm/src/fakeEnv/fakeForCI.ts"
             }
           ]
         },

@@ -2,19 +2,28 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  inject,
   input,
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
-import { TuiButton, TuiIcon } from '@taiga-ui/core';
+import { TuiButton, TuiIcon, TuiLink } from '@taiga-ui/core';
 import { TuiBadge } from '@taiga-ui/kit';
 import { TuiNavigation } from '@taiga-ui/layout';
 
 @Component({
   selector: 'bk-menu-header',
-  imports: [SvgIconComponent, RouterLink, TuiIcon, TuiButton, TuiBadge, TuiNavigation],
+  imports: [
+    SvgIconComponent,
+    RouterLink,
+    TuiButton,
+    TuiLink,
+    TuiIcon,
+    TuiBadge,
+    TuiNavigation,
+  ],
   template: ` <header tuiNavigationHeader>
     <div tuiNavigationLogo>
       <label
@@ -25,21 +34,33 @@ import { TuiNavigation } from '@taiga-ui/layout';
       >
         <svg-icon key="hamburger" />
       </label>
-      <tui-icon icon="@tui.cat" />
-      <span id="menu-title" tuiFade class="tui-text_body-m-2"
-        >Baza karm dla kotów</span
+
+      <button
+        (click)="homePage()"
+        [style.color]="'white'"
+        iconEnd="@tui.cat"
+        tuiLink
+        type="button"
       >
+        Baza karm dla kotów
+      </button>
+      <div class="bk-sm-hidden">
+        <button
+          appearance="primary"
+          iconStart="@tui.calculator"
+          tuiButton
+          type="button"
+        >
+          <a
+            [style.color]="'white'"
+            [href]="'https://kalkulator.kotopedia.pl'"
+            target="_blank"
+            >Kalkulator karmy</a
+          >
+        </button>
+      </div>
     </div>
-    <button
-      appearance="accent"
-      iconStart="@tui.calculator"
-      tuiButton
-      type="button"
-    >
-      <a [style.color]="'white'" [href]="'https://kalkulator.kotopedia.pl'"
-        >Kalkulator</a
-      >
-    </button>
+
     <hr />
     <span class="bk-sm-hidden">
       @if (userId()) {
@@ -47,14 +68,16 @@ import { TuiNavigation } from '@taiga-ui/layout';
           {{ userId() }}
         </tui-badge>
       } @else {
-        <a
-          class="mb-2"
-          iconStart="@tui.user"
+        <button
+          appearance="primary"
+          (click)="loginPage()"
           [style.color]="'white'"
-          [routerLink]="'/login'"
+          iconStart="@tui.user"
+          tuiButton
+          type="button"
         >
           Zaloguj się
-        </a>
+        </button>
       }
     </span>
   </header>`,
@@ -71,8 +94,17 @@ import { TuiNavigation } from '@taiga-ui/layout';
 export class HeaderComponent {
   userId = input.required<string>();
   drawerToggle = viewChild<ElementRef<HTMLLabelElement>>('drawerToggle');
+  router = inject(Router);
 
   closeDrawer() {
     this.drawerToggle()?.nativeElement.click();
+  }
+
+  homePage() {
+    this.router.navigateByUrl('/');
+  }
+
+  loginPage() {
+    this.router.navigateByUrl('/login');
   }
 }

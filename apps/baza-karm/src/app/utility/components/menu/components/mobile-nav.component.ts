@@ -1,10 +1,10 @@
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    inject,
-    input,
-    output
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  input,
+  output,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TuiBadge } from '@taiga-ui/kit';
@@ -40,6 +40,14 @@ import { links } from '../links';
                 </li>
               }
             </ul>
+          </li>
+          <li>
+            <a
+              [style.color]="'white'"
+              [href]="'https://kalkulator.kotopedia.pl'"
+              [target]="'_blank'"
+              >Kalkulator karmy</a
+            >
           </li>
 
           @if (!userId()) {

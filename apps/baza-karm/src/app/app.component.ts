@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
 import { filter, tap } from 'rxjs';
@@ -23,17 +23,26 @@ import { MenuComponent } from './utility/components/menu/menu.component';
   encapsulation: ViewEncapsulation.None,
   template: `
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
-      <bk-menu>
-        <div class="mt-2 px-8 pb-8 flex-1 overflow-auto">
-          <router-outlet />
-        </div>
-      </bk-menu>
+      @defer {
+        <bk-menu>
+          <div
+            [class]="
+              router.url !== '/login'
+                ? 'mt-2 px-8 pb-8 flex-1 overflow-auto'
+                : ''
+            "
+          >
+            <router-outlet />
+          </div>
+        </bk-menu>
+      }
     </main>
   `,
 })
 export class AppComponent implements OnInit {
   title = 'baza-karm';
   showMenu = signal(true);
+  router = inject(Router);
 
   #destroyRef = inject(DestroyRef);
   readonly #swUpdate = inject(SwUpdate);

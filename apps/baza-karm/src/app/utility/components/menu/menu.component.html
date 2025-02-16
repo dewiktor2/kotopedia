@@ -9,7 +9,9 @@
       <svg-icon key="hamburger" />
     </label>
     <tui-icon icon="@tui.cat" />
-    <span id="menu-title" tuiFade class="tui-text_body-m-2">Baza karm dla kotów</span>
+    <span id="menu-title" tuiFade class="tui-text_body-m-2"
+      >Baza karm dla kotów</span
+    >
   </div>
   <button
     appearance="accent"
@@ -21,6 +23,8 @@
       >Kalkulator</a
     >
   </button>
+  <hr />
+  {{ userId ? userId : '' }}
 </header>
 
 <ng-content />

@@ -1,38 +1,53 @@
 import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngxs/store';
 import {
   AuthSession,
+  AuthTokenResponsePassword,
+  SignInWithPasswordCredentials,
   SupabaseClient,
   createClient,
 } from '@supabase/supabase-js';
+import { Observable, from, tap } from 'rxjs';
 import { environment } from '../../env/environment';
-import { categoryValue } from '../domains/feed/models/category.model';
-import { Store } from '@ngxs/store';
 import { FeedsState } from '../domains/feed/+state/feed.state';
+import { categoryValue } from '../domains/feed/models/category.model';
 import {
   ProductQueryFetch,
   defaultQueryFetchValue,
 } from '../utility/syncfusion/query.model';
 
+const globalSupabase = createClient(
+  environment.supabaseUrl,
+  environment.supabaseKey,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken:true,
+      storageKey: 'supabase-key'
+    },
+  },
+);
+
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
-  #supabase!: SupabaseClient;
+  #supabase: SupabaseClient = globalSupabase;
   _session: AuthSession | null = null;
   readonly #store = inject(Store);
 
   constructor() {
-    this.init();
+    this.restoreSession();
   }
 
-  private init() {
-    this.#supabase = createClient(
-      environment.supabaseUrl,
-      environment.supabaseKey,
-      {
-        auth: { persistSession: false, autoRefreshToken: false },
-      },
-    );
+  private async restoreSession() {
+    this.#supabase.auth.getSession().then(({ data }: any) => {
+      this._session = data.session;
+    });
+  }
+
+  get logged() {
+    return this._session?.user?.id;
   }
 
   get session() {
@@ -40,6 +55,16 @@ export class SupabaseService {
       this._session = data.session;
     });
     return this._session;
+  }
+
+  login(
+    creditionals: SignInWithPasswordCredentials,
+  ): Observable<AuthTokenResponsePassword> {
+    return from(this.#supabase.auth.signInWithPassword(creditionals)).pipe(
+      tap((data: AuthTokenResponsePassword) => {
+        this._session = data.data.session;
+      }),
+    );
   }
 
   /**

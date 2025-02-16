@@ -13,6 +13,7 @@ import { TuiThemeColorService } from '@taiga-ui/cdk';
 import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 import { links } from './links';
+import { SupabaseService } from '../../../services/supabase.service';
 
 @Component({
   imports: [
@@ -30,12 +31,16 @@ import { links } from './links';
 })
 export class MenuComponent {
   readonly #theme = inject(TuiThemeColorService);
+  readonly #supabase = inject(SupabaseService);
   destroyRef = inject(DestroyRef);
   router = inject(Router);
   isDrawerOpen = false;
   links = links;
   drawerToggle = viewChild<ElementRef<HTMLLabelElement>>('drawerToggle');
 
+  get userId() {
+    return this.#supabase.logged;
+  }
 
   constructor() {
     this.#theme.color = '#6c86e2';

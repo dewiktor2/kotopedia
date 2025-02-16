@@ -1,7 +1,6 @@
 export const environment = {
-    production: true,
-    supabaseUrl: '',
-    supabaseKey: '',
-    hCaptchaSecret: ''
-  };
-  
+  production: true,
+  supabaseUrl: '',
+  supabaseKey: '',
+  hCaptchaSecret: '',
+};

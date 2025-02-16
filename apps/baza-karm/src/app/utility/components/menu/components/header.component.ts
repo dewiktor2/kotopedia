@@ -7,9 +7,9 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
-import { TuiButton, TuiIcon, TuiLink } from '@taiga-ui/core';
+import { TuiButton, TuiLink } from '@taiga-ui/core';
 import { TuiBadge } from '@taiga-ui/kit';
 import { TuiNavigation } from '@taiga-ui/layout';
 
@@ -17,10 +17,8 @@ import { TuiNavigation } from '@taiga-ui/layout';
   selector: 'bk-menu-header',
   imports: [
     SvgIconComponent,
-    RouterLink,
     TuiButton,
     TuiLink,
-    TuiIcon,
     TuiBadge,
     TuiNavigation,
   ],

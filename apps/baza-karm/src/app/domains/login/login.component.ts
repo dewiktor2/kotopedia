@@ -28,7 +28,7 @@ import { catchError, of, tap } from 'rxjs';
         display: flex;
         justify-content: center;
         align-items: center;
-        background: url('/assets/img/image.png') no-repeat center center/cover;
+        background: #526ed3;
       }
 
       .login-container {

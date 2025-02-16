@@ -14,7 +14,7 @@ import { MobileDrawerComponent } from './components/mobile-nav.component';
 export class MenuComponent {
   readonly #theme = inject(TuiThemeColorService);
   readonly #supabase = inject(SupabaseService);
-  static readonly themeColor = '#6c86e2';
+  static readonly themeColor = '#1b1f3b';
 
   drawerToggle = viewChild<HeaderComponent>('header');
 

@@ -44,5 +44,5 @@ Thumbs.db
 
 svgGen
 
-# apps/baza-karm/src/env/environment.ts
-# apps/baza-karm/src/env/environment.prod.ts
+apps/baza-karm/src/env/environment.ts
+apps/baza-karm/src/env/environment.prod.ts

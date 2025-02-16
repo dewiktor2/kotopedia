@@ -17,6 +17,7 @@ import { TuiInputModule } from '@taiga-ui/legacy';
 import { SupabaseService } from '../../services/supabase.service';
 import { HCaptchaComponent } from './hcCaptcha.component';
 import { Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
 @Component({
   imports: [TuiInputModule, ReactiveFormsModule, TuiButton, HCaptchaComponent],
   templateUrl: './login.component.html',
@@ -82,10 +83,17 @@ export class LoginComponent implements OnInit {
             captchaToken: this.captcha()?.token,
           },
         })
-        .pipe(takeUntilDestroyed(this.#destroyRef))
-        .subscribe(() => {
-          this.#router.navigateByUrl('/');
-        });
+        .pipe(
+          tap(() => {
+            this.#router.navigateByUrl('/')
+          }),
+          catchError(() => {
+            this.captcha()?.resetCaptcha();
+            return of(null);
+          }),
+          takeUntilDestroyed(this.#destroyRef),
+        )
+        .subscribe();
     } else {
       console.error('Form is invalid or hCaptcha not completed');
     }

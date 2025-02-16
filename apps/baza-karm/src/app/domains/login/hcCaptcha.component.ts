@@ -40,6 +40,10 @@ export class HCaptchaComponent implements AfterViewInit {
     this.renderWidget();
   }
 
+  resetCaptcha() {
+    hcaptcha.reset(this.#widgetId);
+  }
+  
   private renderWidget() {
     this.#widgetId = hcaptcha.render(this.hcaptchaContainer()?.nativeElement, {
       sitekey: this.#hcaptchaSiteKey,
@@ -57,6 +61,7 @@ export class HCaptchaComponent implements AfterViewInit {
 
   private handleHCaptchaExpired(): void {
     this.#hcaptchaToken = null;
+    this.resetCaptcha();
     console.warn(
       'hCaptcha token expired, please complete the challenge again.',
     );

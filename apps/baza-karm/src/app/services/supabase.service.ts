@@ -59,9 +59,12 @@ export class SupabaseService {
 
   login(
     creditionals: SignInWithPasswordCredentials,
-  ): Observable<AuthTokenResponsePassword> {
+  ): Observable<AuthTokenResponsePassword | null> {
     return from(this.#supabase.auth.signInWithPassword(creditionals)).pipe(
       tap((data: AuthTokenResponsePassword) => {
+        if(data.error) {
+          throw new Error(`${data.error}`);
+        }
         this._session = data.data.session;
       }),
     );

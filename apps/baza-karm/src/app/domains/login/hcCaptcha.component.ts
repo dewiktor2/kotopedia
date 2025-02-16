@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, output, viewChild } from '@angular/core';
 import { environment } from '../../../env/environment';
 
 declare const hcaptcha: any; // Declare hcaptcha as any since it's loaded globall
@@ -14,6 +14,7 @@ export class HCaptchaComponent implements AfterViewInit {
   #widgetId: number | null = null;
 
   hcaptchaContainer = viewChild<ElementRef>('hcaptchaContainer');
+  captchaEntered = output<void>();
 
   get token() {
     return this.#hcaptchaToken;
@@ -43,7 +44,7 @@ export class HCaptchaComponent implements AfterViewInit {
   resetCaptcha() {
     hcaptcha.reset(this.#widgetId);
   }
-  
+
   private renderWidget() {
     this.#widgetId = hcaptcha.render(this.hcaptchaContainer()?.nativeElement, {
       sitekey: this.#hcaptchaSiteKey,
@@ -56,6 +57,9 @@ export class HCaptchaComponent implements AfterViewInit {
 
   private handleHCaptchaResponse(token: string): void {
     this.#hcaptchaToken = token;
+    if(token) {
+      this.captchaEntered.emit();
+    }
     console.log('hCaptcha token:', token);
   }
 

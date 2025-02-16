@@ -18,7 +18,7 @@
         <input tuiTextfieldLegacy type="password" />
       </tui-input>
 
-      <bk-captcha #captcha />
+      <bk-captcha #captcha (captchaEntered)="loginForm.markAllAsTouched()" />
 
       <button
         class="mt-2"

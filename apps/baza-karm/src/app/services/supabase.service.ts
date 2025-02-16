@@ -22,8 +22,8 @@ const globalSupabase = createClient(
   {
     auth: {
       persistSession: true,
-      autoRefreshToken:true,
-      storageKey: 'supabase-key'
+      autoRefreshToken: true,
+      storageKey: 'supabase-key',
     },
   },
 );
@@ -62,12 +62,18 @@ export class SupabaseService {
   ): Observable<AuthTokenResponsePassword | null> {
     return from(this.#supabase.auth.signInWithPassword(creditionals)).pipe(
       tap((data: AuthTokenResponsePassword) => {
-        if(data.error) {
+        if (data.error) {
           throw new Error(`${data.error}`);
         }
         this._session = data.data.session;
       }),
     );
+  }
+
+  async logout() {
+    await this.#supabase.auth.signOut().then(() => {
+      this._session = null;
+    });
   }
 
   /**

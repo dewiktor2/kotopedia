@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   inject,
+  input,
   viewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ import { SupabaseService } from '../../../services/supabase.service';
 export class MenuComponent {
   readonly #theme = inject(TuiThemeColorService);
   readonly #supabase = inject(SupabaseService);
+  isLoginPage = input<boolean>(false);
   destroyRef = inject(DestroyRef);
   router = inject(Router);
   isDrawerOpen = false;
@@ -47,6 +49,11 @@ export class MenuComponent {
   }
 
   linkClicked() {
+    this.drawerToggle()?.nativeElement.click();
+  }
+
+  logout() {
+    this.#supabase.logout();
     this.drawerToggle()?.nativeElement.click();
   }
 

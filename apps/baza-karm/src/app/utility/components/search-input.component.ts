@@ -42,7 +42,7 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
         </label>
         <div
           class="flex ml-2 tooltip tooltip-left"
-          data-tip="Szukaj po nazwie lub firmie"
+          title="Szukaj po nazwie lub firmie"
         >
           <svg-icon
             class="w-6 h-6 cursor-pointer text-blue-500"

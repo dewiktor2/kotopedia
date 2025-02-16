@@ -24,11 +24,11 @@ import { MenuComponent } from './utility/components/menu/menu.component';
   template: `
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       @defer {
-        <bk-menu>
+        <bk-menu [isLoginPage]="router.url === '/login'">
           <div
             [class]="
               router.url !== '/login'
-                ? 'mt-2 px-8 pb-8 flex-1 overflow-auto'
+                ? 'mt-2 px-10 pb-8 flex-1 overflow-auto'
                 : ''
             "
           >

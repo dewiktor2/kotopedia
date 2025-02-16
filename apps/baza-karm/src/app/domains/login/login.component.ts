@@ -76,26 +76,30 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid && this.captcha()?.token) {
-      this.#supabase
-        .login({
-          ...this.loginForm.value,
-          options: {
-            captchaToken: this.captcha()?.token,
-          },
-        })
-        .pipe(
-          tap(() => {
-            this.#router.navigateByUrl('/')
-          }),
-          catchError(() => {
-            this.captcha()?.resetCaptcha();
-            return of(null);
-          }),
-          takeUntilDestroyed(this.#destroyRef),
-        )
-        .subscribe();
+      this.login();
     } else {
       console.error('Form is invalid or hCaptcha not completed');
     }
+  }
+
+  private login() {
+    this.#supabase
+      .login({
+        ...this.loginForm.value,
+        options: {
+          captchaToken: this.captcha()?.token,
+        },
+      })
+      .pipe(
+        tap(() => {
+          this.#router.navigateByUrl('/');
+        }),
+        catchError(() => {
+          this.captcha()?.resetCaptcha();
+          return of(null);
+        }),
+        takeUntilDestroyed(this.#destroyRef),
+      )
+      .subscribe();
   }
 }

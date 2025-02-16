@@ -24,7 +24,7 @@ import { MenuComponent } from './utility/components/menu/menu.component';
   template: `
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       @defer {
-        <bk-menu [isLoginPage]="router.url === '/login'">
+        <bk-menu>
           <div
             [class]="
               router.url !== '/login'

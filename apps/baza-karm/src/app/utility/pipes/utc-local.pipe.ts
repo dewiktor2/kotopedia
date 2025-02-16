@@ -2,8 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Pipe({
-  name: 'utcToLocal',
-  standalone: true,
+  name: 'utcToLocal'
 })
 export class UtcToLocalPipe implements PipeTransform {
   transform(value: any): any {

@@ -5,7 +5,6 @@ declare const hcaptcha: any; // Declare hcaptcha as any since it's loaded global
 
 @Component({
   selector: 'bk-captcha',
-  standalone: true,
   template: ` <div #hcaptchaContainer class="hcaptcha-container"></div> `,
 })
 export class HCaptchaComponent implements AfterViewInit {

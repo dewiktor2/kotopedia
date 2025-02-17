@@ -15,8 +15,7 @@ export class CustomSupabaseAdaptor extends CustomDataAdaptor {
 
   handleSupabaseRequest = async (operation: any, option: any) => {
     try {
-      const response = await operation; // operation is a Supabase client call
-
+      const response = await operation;
       if (response.error) {
         throw response.error;
       }
@@ -25,11 +24,10 @@ export class CustomSupabaseAdaptor extends CustomDataAdaptor {
       option.onSuccess({ result: response.data, count: response.data.length });
     } catch (error) {
       console.error('Supabase error:', error);
-      option.onFailure(); // Pass relevant error information if needed
+      option.onFailure();
     }
   };
 
-  // Example usage for a 'getData' operation
   getData = (option: FetchOption) => {
     this.handleSupabaseRequest(this.#supabaseService.productsV2(), option);
   };

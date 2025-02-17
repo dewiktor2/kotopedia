@@ -44,7 +44,7 @@
     "@ngneat/svg-icon": "^7.1.6",
     "@ngxs/store": "^19.0.0-dev.master-934d9e1",
     "@nx/angular": "20.4.2",
-    "@supabase/supabase-js": "2.48.0",
+    "@supabase/supabase-js": "2.48.1",
     "@syncfusion/ej2-angular-grids": "28.2.3",
     "@taiga-ui/cdk": "^4.24.0",
     "@taiga-ui/core": "^4.24.0",

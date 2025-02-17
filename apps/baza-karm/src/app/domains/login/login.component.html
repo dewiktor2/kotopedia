@@ -1,7 +1,11 @@
 <div class="login-page">
   <div class="login-container">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <tui-input class="mb-4" formControlName="email">
+      <div class="icon-container">
+        <tui-icon icon="@tui.cat" />
+      </div>
+
+      <tui-input formControlName="email">
         Wpisz e-mail
         <span class="tui-required"></span>
         <input
@@ -11,12 +15,14 @@
           type="email"
         />
       </tui-input>
+      <tui-error class="mb-4" [error]="loginForm.invalidControl('email')" />
 
-      <tui-input class="mb-4" formControlName="password" translate="no">
+      <tui-input formControlName="password" translate="no">
         Wpisz hasło
         <span class="tui-required"></span>
         <input tuiTextfieldLegacy type="password" />
       </tui-input>
+      <tui-error class="mb-4" [error]="loginForm.invalidControl('password')" />
 
       <bk-captcha #captcha (captchaEntered)="loginForm.markAllAsTouched()" />
 

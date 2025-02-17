@@ -5,7 +5,7 @@ import {
   inject,
   OnInit,
   signal,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterOutlet } from '@angular/router';
@@ -25,13 +25,7 @@ import { MenuComponent } from './utility/components/menu/menu.component';
     <main class="max-h-full md:max-h-screen flex flex-col overflow-hidden">
       @defer {
         <bk-menu>
-          <div
-            [class]="
-              router.url !== '/login'
-                ? 'mt-2 px-10 pb-8 flex-1 overflow-auto'
-                : ''
-            "
-          >
+          <div [class]="containerClass">
             <router-outlet />
           </div>
         </bk-menu>
@@ -40,12 +34,13 @@ import { MenuComponent } from './utility/components/menu/menu.component';
   `,
 })
 export class AppComponent implements OnInit {
+  #destroyRef = inject(DestroyRef);
+  readonly #swUpdate = inject(SwUpdate);
+  readonly #loginUrl = '/login';
+
   title = 'baza-karm';
   showMenu = signal(true);
   router = inject(Router);
-
-  #destroyRef = inject(DestroyRef);
-  readonly #swUpdate = inject(SwUpdate);
 
   constructor(
     @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
@@ -53,6 +48,12 @@ export class AppComponent implements OnInit {
   ) {
     this.cultureHandler();
     this.seoHandler();
+  }
+
+  get containerClass(): string {
+    return this.router.url !== this.#loginUrl
+      ? 'mt-2 px-10 pb-8 flex-1 overflow-auto'
+      : '';
   }
 
   ngOnInit() {
@@ -66,12 +67,8 @@ export class AppComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.#destroyRef),
         filter((event: VersionEvent) => event?.type === 'VERSION_READY'),
-        tap(() => this.reloadPage()),
+        tap(() => window.location.reload()),
       )
       .subscribe();
-  }
-
-  reloadPage() {
-    window.location.reload();
   }
 }

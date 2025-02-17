@@ -33,7 +33,7 @@ const globalSupabase = createClient(
 })
 export class SupabaseService {
   #supabase: SupabaseClient = globalSupabase;
-  _session: AuthSession | null = null;
+  #session: AuthSession | null = null;
   readonly #store = inject(Store);
 
   constructor() {
@@ -41,20 +41,13 @@ export class SupabaseService {
   }
 
   private async restoreSession() {
-    this.#supabase.auth.getSession().then(({ data }: any) => {
-      this._session = data.session;
+    this.#supabase.auth.getSession().then(({ data }) => {
+      this.#session = data.session;
     });
   }
 
   get logged() {
-    return this._session?.user?.id;
-  }
-
-  get session() {
-    this.#supabase.auth.getSession().then(({ data }: any) => {
-      this._session = data.session;
-    });
-    return this._session;
+    return this.#session?.user?.id;
   }
 
   login(
@@ -65,14 +58,14 @@ export class SupabaseService {
         if (data.error) {
           throw new Error(`${data.error}`);
         }
-        this._session = data.data.session;
+        this.#session = data.data.session;
       }),
     );
   }
 
   async logout() {
     await this.#supabase.auth.signOut().then(() => {
-      this._session = null;
+      this.#session = null;
     });
   }
 

@@ -40,16 +40,16 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
             <span class="loading loading-ring loading-xs"></span>
           }
         </label>
-        <div
+        <span
           class="flex ml-2 tooltip tooltip-left"
-          title="Szukaj po nazwie lub firmie"
+          [attr.title]="'Szukaj po nazwie lub firmie'"
         >
           <svg-icon
             class="w-6 h-6 cursor-pointer text-blue-500"
             key="description"
             size="xl"
           />
-        </div>
+        </span>
       </div>
     </div>
   `,
@@ -64,13 +64,13 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
     `,
   ],
 })
-export class SearchInputComponent implements OnInit, OnDestroy {
-  readonly searchText = output<string>();
+export class SearchInputComponent implements OnInit {
+  readonly #store = inject(Store);
+  #searchSubject = new Subject<string>();
+  #destroyRef = inject(DestroyRef);
   disabled = input<boolean>(false);
 
-  #searchSubject = new Subject<string>();
-  readonly #store = inject(Store);
-  #destroyRef = inject(DestroyRef);
+  readonly searchText = output<string>();
   searchInProgress$ = of(false);
 
   ngOnInit() {
@@ -82,10 +82,6 @@ export class SearchInputComponent implements OnInit, OnDestroy {
         takeUntilDestroyed(this.#destroyRef),
       )
       .subscribe((value) => this.searchText.emit(value));
-  }
-
-  ngOnDestroy() {
-    this.#searchSubject.unsubscribe();
   }
 
   onSearchButtonClick(value: string): void {

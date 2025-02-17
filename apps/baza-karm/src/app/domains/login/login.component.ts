@@ -1,25 +1,23 @@
-import {
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  viewChild,
-} from '@angular/core';
+import { Component, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { TuiButton } from '@taiga-ui/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TuiButton, TuiError, TuiIcon } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
+import { catchError, of, tap } from 'rxjs';
 import { SupabaseService } from '../../services/supabase.service';
 import { HCaptchaComponent } from './hcCaptcha.component';
-import { Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
+import { LoginForm } from './model/login.model';
+
 @Component({
-  imports: [TuiInputModule, ReactiveFormsModule, TuiButton, HCaptchaComponent],
+  imports: [
+    TuiInputModule,
+    ReactiveFormsModule,
+    TuiButton,
+    HCaptchaComponent,
+    TuiError,
+    TuiIcon,
+  ],
   templateUrl: './login.component.html',
   styles: [
     `
@@ -40,6 +38,13 @@ import { catchError, of, tap } from 'rxjs';
         display: flex;
         flex-direction: column;
         gap: 1rem;
+
+        .icon-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 16px;
+        }
       }
 
       h1 {
@@ -53,26 +58,13 @@ import { catchError, of, tap } from 'rxjs';
     `,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   readonly #supabase = inject(SupabaseService);
   readonly #destroyRef = inject(DestroyRef);
   readonly #router = inject(Router);
 
   captcha = viewChild<HCaptchaComponent>('captcha');
-
-  loginForm!: FormGroup;
-
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl({ value: '', disabled: false }, [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl({ value: '', disabled: false }, [
-        Validators.required,
-      ]),
-    });
-  }
+  loginForm = new LoginForm();
 
   onSubmit(): void {
     if (this.loginForm.valid && this.captcha()?.token) {
@@ -85,15 +77,13 @@ export class LoginComponent implements OnInit {
   private login() {
     this.#supabase
       .login({
-        ...this.loginForm.value,
+        ...this.loginForm.getRawValue(),
         options: {
-          captchaToken: this.captcha()?.token,
+          captchaToken: this.captcha()?.token ?? '',
         },
       })
       .pipe(
-        tap(() => {
-          this.#router.navigateByUrl('/');
-        }),
+        tap(() => this.#router.navigateByUrl('/')),
         catchError(() => {
           this.captcha()?.resetCaptcha();
           return of(null);

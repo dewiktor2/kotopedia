@@ -1,6 +1,6 @@
 <div class="login-page">
   <div class="login-container">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm">
       <div class="icon-container">
         <tui-icon icon="@tui.cat" />
       </div>
@@ -32,7 +32,7 @@
         tuiButton
         type="button"
         [disabled]="loginForm.invalid || !this.captcha()?.token"
-        (click)="onSubmit()"
+        (click)="login()"
       >
         Zaloguj
       </button>

@@ -1,7 +1,14 @@
-import { Component, DestroyRef, inject, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignInWithPasswordCredentials } from '@supabase/supabase-js';
 import { TuiButton, TuiError, TuiIcon } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { catchError, of, tap } from 'rxjs';
@@ -64,32 +71,36 @@ export class LoginComponent {
   readonly #router = inject(Router);
 
   captcha = viewChild<HCaptchaComponent>('captcha');
+  loginValue = signal<SignInWithPasswordCredentials | null>(null);
   loginForm = new LoginForm();
 
-  onSubmit(): void {
-    if (this.loginForm.valid && this.captcha()?.token) {
-      this.login();
-    } else {
-      console.error('Form is invalid or hCaptcha not completed');
-    }
-  }
+  loginResource = rxResource({
+    request: () => ({ data: this.loginValue() }),
+    loader: ({ request }) => {
+      if (!request.data) {
+        return of(null);
+      }
 
-  private login() {
-    this.#supabase
-      .login({
-        ...this.loginForm.getRawValue(),
-        options: {
-          captchaToken: this.captcha()?.token ?? '',
-        },
-      })
-      .pipe(
+      return this.#supabase.login(request.data).pipe(
         tap(() => this.#router.navigateByUrl('/')),
         catchError(() => {
           this.captcha()?.resetCaptcha();
           return of(null);
         }),
         takeUntilDestroyed(this.#destroyRef),
-      )
-      .subscribe();
+      );
+    },
+  });
+
+  login(): void {
+    const canLogin = this.loginForm.valid && this.captcha()?.token;
+    if (canLogin) {
+      this.loginValue.set({
+        ...this.loginForm.getRawValue(),
+        options: {
+          captchaToken: this.captcha()?.token ?? '',
+        },
+      });
+    }
   }
 }

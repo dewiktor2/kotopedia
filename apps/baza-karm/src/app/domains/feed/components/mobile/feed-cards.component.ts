@@ -25,6 +25,7 @@ import { categories, category } from '../../models/category.model';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 import { DismissableModalComponent } from '../../../../utility/components/modal.ts/modal.component';
 
+// TODO refactor after adding crud
 @Component({
   selector: 'bk-feed-cards',
   templateUrl: './feed-cards.component.html',

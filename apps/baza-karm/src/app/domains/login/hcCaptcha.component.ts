@@ -1,7 +1,14 @@
-import { AfterViewInit, Component, ElementRef, output, viewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  output,
+  viewChild,
+} from '@angular/core';
 import { environment } from '../../../env/environment';
 
-declare const hcaptcha: any; // Declare hcaptcha as any since it's loaded globall
+// TODO add types
+declare const hcaptcha: any;
 
 @Component({
   selector: 'bk-captcha',
@@ -20,14 +27,11 @@ export class HCaptchaComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Wait until the hCaptcha API is available
     const isApiReady = typeof hcaptcha !== 'undefined';
     if (isApiReady) {
       this.renderHCaptcha();
     } else {
-      (window as any).onHCaptchaLoad = () => {
-        this.renderHCaptcha();
-      };
+      (window as any).onHCaptchaLoad = () => this.renderHCaptcha();
     }
   }
 
@@ -56,7 +60,7 @@ export class HCaptchaComponent implements AfterViewInit {
 
   private handleHCaptchaResponse(token: string): void {
     this.#hcaptchaToken = token;
-    if(token) {
+    if (token) {
       this.captchaEntered.emit();
     }
     console.log('hCaptcha token:', token);

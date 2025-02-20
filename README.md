@@ -8,6 +8,7 @@ Feed database
 Login page access to CRUD page (inprogress adding CRUD for admin)
 
 * NGXS
+* NX (Soon calculator (refactored) for cats on same repo)
 * Supabase (database, auth, hCaptcha)
 * Synfusion grid
 * Tailwind/Daisy - gonna be replace soon by TaigaUI (https://taiga-ui.dev/)

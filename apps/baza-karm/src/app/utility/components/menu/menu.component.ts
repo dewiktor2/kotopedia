@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, inject, viewChild } from '@angular/core';
-import { TuiThemeColorService } from '@taiga-ui/cdk';
 import { SupabaseService } from '../../../services/supabase.service';
 import { HeaderComponent } from './components/header.component';
 import { MobileDrawerComponent } from './components/mobile-nav.component';
@@ -12,18 +11,12 @@ import { MobileDrawerComponent } from './components/mobile-nav.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuComponent {
-  readonly #theme = inject(TuiThemeColorService);
   readonly #supabase = inject(SupabaseService);
-  static readonly themeColor = '#1b1f3b';
 
   drawerToggle = viewChild<HeaderComponent>('header');
 
   get userId() {
     return this.#supabase?.logged ?? '';
-  }
-
-  constructor() {
-    this.#theme.color = MenuComponent.themeColor;
   }
 
   closeDrawer() {

@@ -7,13 +7,13 @@ import {
   output,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { TuiBadge } from '@taiga-ui/kit';
+import { TuiBadge, TuiStatus } from '@taiga-ui/kit';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { links } from '../links';
 
 @Component({
   selector: 'bk-mobile-drawer',
-  imports: [TuiBadge, RouterModule],
+  imports: [TuiBadge, TuiStatus, RouterModule],
   template: ` <div class="drawer">
     <input type="checkbox" id="my-drawer" class="drawer-toggle" />
     <div class="drawer-side w-100" [style.z-index]="101">
@@ -77,13 +77,14 @@ import { links } from '../links';
           }
 
           @if (userId()) {
-            <tui-badge
+            <span
               [style.background]="'white'"
               appearance="positive"
+              tuiBadge
               tuiStatus
             >
               {{ userId() }}
-            </tui-badge>
+            </span>
           }
         </ul>
       </div>

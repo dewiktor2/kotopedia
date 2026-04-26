@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
-  Inject,
+  inject,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
@@ -21,25 +21,24 @@ import { FeedComponent } from '../components/desktop/feed.component';
     }`,
 })
 export class FeedViewComponent implements OnInit, OnDestroy {
+  readonly #platformId = inject(PLATFORM_ID);
   isMobile = false;
   #resizeListener: () => void;
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Record<string, string | number>,
-  ) {
+  constructor() {
     // Przechowujemy referencję do listenera, aby później móc go usunąć
     this.#resizeListener = () => this.checkIfMobile();
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.#platformId)) {
       this.checkIfMobile();
       window.addEventListener('resize', this.#resizeListener);
     }
   }
 
   ngOnDestroy(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.#platformId)) {
       window.removeEventListener('resize', this.#resizeListener);
     }
   }

@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 import { TuiButton, TuiLink } from '@taiga-ui/core';
-import { TuiBadge } from '@taiga-ui/kit';
+import { TuiBadge, TuiStatus } from '@taiga-ui/kit';
 import { TuiNavigation } from '@taiga-ui/layout';
 
 @Component({
@@ -20,6 +20,7 @@ import { TuiNavigation } from '@taiga-ui/layout';
     TuiButton,
     TuiLink,
     TuiBadge,
+    TuiStatus,
     TuiNavigation,
   ],
   template: ` <header tuiNavigationHeader>
@@ -62,9 +63,9 @@ import { TuiNavigation } from '@taiga-ui/layout';
     <hr />
     <span class="bk-sm-hidden">
       @if (userId()) {
-        <tui-badge appearance="positive" tuiStatus>
+        <span appearance="positive" tuiBadge tuiStatus>
           {{ userId() }}
-        </tui-badge>
+        </span>
       } @else {
         <button
           appearance="primary"
@@ -82,7 +83,7 @@ import { TuiNavigation } from '@taiga-ui/layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
-      header[tuiNavigationHeader][tuiNavigationHeader]tui-badge {
+      header[tuiNavigationHeader][tuiNavigationHeader] [tuiBadge] {
         max-inline-size: 20rem !important;
       }
     `,

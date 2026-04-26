@@ -1,27 +1,30 @@
 <div class="login-page">
   <div class="login-container">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="icon-container">
         <tui-icon icon="@tui.cat" />
       </div>
 
-      <tui-input formControlName="email">
-        Wpisz e-mail
-        <span class="tui-required"></span>
+      <tui-textfield>
+        <label tuiLabel>Wpisz e-mail</label>
         <input
-          autocomplete="new-password"
-          translate="nFo"
-          tuiTextfieldLegacy
+          autocomplete="username"
+          formControlName="email"
+          tuiInput
           type="email"
         />
-      </tui-input>
+      </tui-textfield>
       <tui-error class="mb-4" [error]="loginForm.invalidControl('email')" />
 
-      <tui-input formControlName="password" translate="no">
-        Wpisz hasło
-        <span class="tui-required"></span>
-        <input tuiTextfieldLegacy type="password" />
-      </tui-input>
+      <tui-textfield>
+        <label tuiLabel>Wpisz hasło</label>
+        <input
+          autocomplete="current-password"
+          formControlName="password"
+          tuiInput
+          type="password"
+        />
+      </tui-textfield>
       <tui-error class="mb-4" [error]="loginForm.invalidControl('password')" />
 
       <bk-captcha #captcha (captchaEntered)="loginForm.markAllAsTouched()" />
@@ -30,9 +33,8 @@
         class="mt-2"
         size="m"
         tuiButton
-        type="button"
+        type="submit"
         [disabled]="loginForm.invalid || !this.captcha()?.token"
-        (click)="login()"
       >
         Zaloguj
       </button>

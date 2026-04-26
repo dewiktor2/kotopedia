@@ -16,23 +16,25 @@ import {
   defaultQueryFetchValue,
 } from '../utility/syncfusion/query.model';
 
-const globalSupabase = createClient(
-  environment.supabaseUrl,
-  environment.supabaseKey,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      storageKey: 'supabase-key',
-    },
-  },
+const hasSupabaseConfig = Boolean(
+  environment.supabaseUrl && environment.supabaseKey,
 );
+
+const globalSupabase = hasSupabaseConfig
+  ? createClient(environment.supabaseUrl, environment.supabaseKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        storageKey: 'supabase-key',
+      },
+    })
+  : null;
 
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
-  #supabase: SupabaseClient = globalSupabase;
+  #supabase: SupabaseClient | null = globalSupabase;
   #session: AuthSession | null = null;
   readonly #store = inject(Store);
 
@@ -41,6 +43,10 @@ export class SupabaseService {
   }
 
   private async restoreSession() {
+    if (!this.#supabase) {
+      return;
+    }
+
     this.#supabase.auth.getSession().then(({ data }) => {
       this.#session = data.session;
     });
@@ -53,6 +59,10 @@ export class SupabaseService {
   login(
     creditionals: SignInWithPasswordCredentials,
   ): Observable<AuthTokenResponsePassword | null> {
+    if (!this.#supabase) {
+      return from(Promise.resolve(null));
+    }
+
     return from(this.#supabase.auth.signInWithPassword(creditionals)).pipe(
       tap((data: AuthTokenResponsePassword) => {
         if (data.error) {
@@ -64,6 +74,11 @@ export class SupabaseService {
   }
 
   async logout() {
+    if (!this.#supabase) {
+      this.#session = null;
+      return;
+    }
+
     await this.#supabase.auth.signOut().then(() => {
       this.#session = null;
     });
@@ -78,8 +93,18 @@ export class SupabaseService {
   async productsV2(
     options: ProductQueryFetch = defaultQueryFetchValue('brand_name'),
   ) {
+    if (!this.#supabase) {
+      return {
+        data: [],
+        error: null,
+        recordNumbers: { count: 0 },
+      };
+    }
+
+    const supabase = this.#supabase;
+
     // Inicjujemy zapytanie
-    let query = this.#supabase.from('v_products').select();
+    let query = supabase.from('v_products').select();
 
     // Filtrowanie po kategorii
     if (options.categoryFilter) {
@@ -93,9 +118,10 @@ export class SupabaseService {
 
     // Przygotowanie zapytania pobierającego liczbę rekordów (count)
     const countQuery = () => {
-      let queryCount = this.#supabase
-        .from('v_products')
-        .select('*', { count: 'exact', head: true });
+      let queryCount = supabase.from('v_products').select('*', {
+        count: 'exact',
+        head: true,
+      });
       if (options.categoryFilter) {
         queryCount = this.filterQueryByCategory(
           queryCount,

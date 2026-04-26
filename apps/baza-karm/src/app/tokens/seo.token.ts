@@ -5,7 +5,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs/operators';
 
-export const SEO_HANDLER = new InjectionToken<void>('SEO_HANDLER', {
+export const SEO_HANDLER = new InjectionToken<() => void>('SEO_HANDLER', {
   providedIn: 'root',
   factory: () => {
     const meta = inject(Meta);

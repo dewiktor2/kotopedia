@@ -2,23 +2,21 @@ import {
   Component,
   DestroyRef,
   inject,
-  signal,
   viewChild,
 } from '@angular/core';
-import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignInWithPasswordCredentials } from '@supabase/supabase-js';
-import { TuiButton, TuiError, TuiIcon } from '@taiga-ui/core';
-import { TuiInputModule } from '@taiga-ui/legacy';
-import { catchError, of, tap } from 'rxjs';
+import { TuiButton, TuiError, TuiIcon, TuiInput } from '@taiga-ui/core';
+import { EMPTY, catchError, tap } from 'rxjs';
 import { SupabaseService } from '../../services/supabase.service';
 import { HCaptchaComponent } from './hcCaptcha.component';
 import { LoginForm } from './model/login.model';
 
 @Component({
   imports: [
-    TuiInputModule,
+    TuiInput,
     ReactiveFormsModule,
     TuiButton,
     HCaptchaComponent,
@@ -71,36 +69,31 @@ export class LoginComponent {
   readonly #router = inject(Router);
 
   captcha = viewChild<HCaptchaComponent>('captcha');
-  loginValue = signal<SignInWithPasswordCredentials | null>(null);
   loginForm = new LoginForm();
-
-  loginResource = rxResource({
-    request: () => ({ data: this.loginValue() }),
-    loader: ({ request }) => {
-      if (!request.data) {
-        return of(null);
-      }
-
-      return this.#supabase.login(request.data).pipe(
-        tap(() => this.#router.navigateByUrl('/')),
-        catchError(() => {
-          this.captcha()?.resetCaptcha();
-          return of(null);
-        }),
-        takeUntilDestroyed(this.#destroyRef),
-      );
-    },
-  });
 
   login(): void {
     const canLogin = this.loginForm.valid && this.captcha()?.token;
-    if (canLogin) {
-      this.loginValue.set({
-        ...this.loginForm.getRawValue(),
-        options: {
-          captchaToken: this.captcha()?.token ?? '',
-        },
-      });
+    if (!canLogin) {
+      return;
     }
+
+    const credentials: SignInWithPasswordCredentials = {
+      ...this.loginForm.getRawValue(),
+      options: {
+        captchaToken: this.captcha()?.token ?? '',
+      },
+    };
+
+    this.#supabase
+      .login(credentials)
+      .pipe(
+        tap(() => this.#router.navigateByUrl('/')),
+        catchError(() => {
+          this.captcha()?.resetCaptcha();
+          return EMPTY;
+        }),
+        takeUntilDestroyed(this.#destroyRef),
+      )
+      .subscribe();
   }
 }

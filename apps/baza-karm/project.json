@@ -30,9 +30,8 @@
         ],
         "styles": [
           "apps/baza-karm/src/styles.scss",
-          "@taiga-ui/core/styles/taiga-ui-theme.less",
-          "@taiga-ui/core/styles/taiga-ui-fonts.less",
-          "@taiga-ui/styles/taiga-ui-global.less"
+          "@taiga-ui/styles/taiga-ui-theme.less",
+          "@taiga-ui/styles/taiga-ui-fonts.less"
         ],
         "scripts": [],
         "server": "apps/baza-karm/src/main.server.ts",
@@ -103,7 +102,8 @@
           "buildTarget": "baza-karm:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

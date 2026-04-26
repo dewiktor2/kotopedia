@@ -1,7 +1,6 @@
 import {
   Component,
   DestroyRef,
-  Inject,
   inject,
   OnInit,
   signal,
@@ -37,17 +36,16 @@ export class AppComponent implements OnInit {
   #destroyRef = inject(DestroyRef);
   readonly #swUpdate = inject(SwUpdate);
   readonly #loginUrl = '/login';
+  readonly #cultureHandler = inject(CULTURE_HANDLER);
+  readonly #seoHandler = inject(SEO_HANDLER);
 
   title = 'baza-karm';
   showMenu = signal(true);
   router = inject(Router);
 
-  constructor(
-    @Inject(CULTURE_HANDLER) private cultureHandler: () => void,
-    @Inject(SEO_HANDLER) private seoHandler: () => void,
-  ) {
-    this.cultureHandler();
-    this.seoHandler();
+  constructor() {
+    this.#cultureHandler();
+    this.#seoHandler();
   }
 
   get containerClass(): string {

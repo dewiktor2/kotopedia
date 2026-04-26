@@ -5,7 +5,6 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { environment } from '../../../env/environment';
 
 // TODO add types
 declare const hcaptcha: any;
@@ -31,7 +30,9 @@ export class HCaptchaComponent implements AfterViewInit {
     if (isApiReady) {
       this.renderHCaptcha();
     } else {
-      (window as any).onHCaptchaLoad = () => this.renderHCaptcha();
+      window.addEventListener('hcaptcha-load', () => this.renderHCaptcha(), {
+        once: true,
+      });
     }
   }
 
@@ -51,7 +52,6 @@ export class HCaptchaComponent implements AfterViewInit {
   private renderWidget() {
     this.#widgetId = hcaptcha.render(this.hcaptchaContainer()?.nativeElement, {
       sitekey: this.#hcaptchaSiteKey,
-      secret: environment.hCaptchaSecret,
       size: 'normal',
       callback: (token: string) => this.handleHCaptchaResponse(token),
       'expired-callback': () => this.handleHCaptchaExpired(),

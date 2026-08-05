@@ -2,7 +2,7 @@
 
 # Kotopedia - Feed database
 
-Angular 19
+Angular 22
 NGXS
 SSR
 Supabase

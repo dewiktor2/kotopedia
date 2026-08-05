@@ -10,7 +10,7 @@ module.exports = {
   coverageDirectory: '../../coverage/apps/kalkulator',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
-      'jest-preset-angular',
+      require.resolve('jest-preset-angular'),
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
         stringifyContentPathRegex: '\\.(html|svg)$',
@@ -19,8 +19,8 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
-    'jest-preset-angular/build/serializers/no-ng-attributes',
-    'jest-preset-angular/build/serializers/ng-snapshot',
-    'jest-preset-angular/build/serializers/html-comment',
+    require.resolve('jest-preset-angular/build/serializers/no-ng-attributes'),
+    require.resolve('jest-preset-angular/build/serializers/ng-snapshot'),
+    require.resolve('jest-preset-angular/build/serializers/html-comment'),
   ],
 };

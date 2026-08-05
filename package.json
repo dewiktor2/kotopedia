@@ -34,21 +34,23 @@
     "@angular/core": "^22.1.0",
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
-    "@angular/platform-browser-dynamic": "^22.1.0",
     "@angular/platform-server": "^22.1.0",
     "@angular/pwa": "^22.1.0",
     "@angular/router": "^22.1.0",
     "@angular/service-worker": "^22.1.0",
     "@angular/ssr": "^22.1.0",
     "@ng-web-apis/common": "^5.3.0",
+    "@ng-web-apis/intersection-observer": "^5.3.0",
     "@ng-web-apis/mutation-observer": "^5.3.0",
     "@ng-web-apis/platform": "^5.3.0",
+    "@ng-web-apis/resize-observer": "^5.3.0",
     "@ng-web-apis/universal": "^5.3.0",
     "@ngneat/svg-icon": "^7.1.6",
     "@ngxs/store": "21.0.0",
     "@nx/angular": "^23.1.1",
     "@supabase/supabase-js": "2.104.1",
     "@syncfusion/ej2-angular-grids": "28.2.3",
+    "@syncfusion/ej2-locale": "^34.1.29",
     "@taiga-ui/cdk": "5.3.0",
     "@taiga-ui/core": "5.3.0",
     "@taiga-ui/event-plugins": "5.0.0",
@@ -60,7 +62,6 @@
     "@taiga-ui/polymorpheus": "5.0.0",
     "@taiga-ui/styles": "5.3.0",
     "daisyui": "4.12.23",
-    "ej2-locale": "^17.1.48",
     "express": "4.22.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -99,6 +100,7 @@
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "jest-preset-angular": "^17.0.0",
+    "jest-util": "30.3.0",
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "^23.1.1",
     "postcss": "8.5.12",
@@ -106,8 +108,7 @@
     "tailwindcss": "3.4.17",
     "ts-jest": "29.4.9",
     "ts-node": "10.9.1",
-    "typescript": "^6.0.3",
-    "jest-util": "30.3.0"
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "flatted": "3.4.2",
@@ -117,7 +118,6 @@
     "cosmiconfig": {
       "yaml": "1.10.3"
     },
-
     "anymatch": {
       "picomatch": "2.3.2"
     },

@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NX_SKIP_NATIVE_FILE_CACHE: 'true'
 
     steps:
       - name: Checkout code

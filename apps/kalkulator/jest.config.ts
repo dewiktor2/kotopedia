@@ -1,4 +1,5 @@
-export default {
+/// <reference types="node" />
+module.exports = {
   displayName: 'kalkulator',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

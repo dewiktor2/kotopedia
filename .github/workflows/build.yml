@@ -26,7 +26,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --loglevel=error
+        run: npm install --no-fund --no-audit --loglevel=error
 
       - name: Test
         run: npx nx run baza-karm:test

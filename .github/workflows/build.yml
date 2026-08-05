@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm install --no-fund --no-audit --loglevel=error
 
+      - name: Force install Linux native bindings (npm bug workaround)
+        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 --no-save
+
       - name: Test
         run: npx nx run baza-karm:test
 

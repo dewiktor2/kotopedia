@@ -1,7 +1,9 @@
 /// <reference types="node" />
+const nxPreset = require('../../jest.preset.js');
+
 module.exports = {
+  ...nxPreset,
   displayName: 'kalkulator',
-  preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/apps/kalkulator',
   transform: {

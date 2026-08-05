@@ -1,8 +1,10 @@
 /* eslint-disable */
 /// <reference types="node" />
+const nxPreset = require('../../jest.preset.js');
+
 module.exports = {
+  ...nxPreset,
   displayName: 'baza-karm',
-  preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/apps/baza-karm',
   transform: {

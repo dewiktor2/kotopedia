@@ -17,10 +17,13 @@ export interface FeedStateModel {
   extraFilter: 'disabled' | 'off' | 'on';
 }
 
+const acceptableFeedsFilterName = $localize`:@@feed.filter.showAcceptable:Pokaż akceptowalne karmy`;
+const recommendedFeedsFilterName = $localize`:@@feed.filter.showRecommended:Pokaż polecane karmy`;
+
 export const extraFilters: SupabaseFilter[] = [
   {
     category: 'Polecane',
-    filterName: 'Pokaż akceptowalne karmy',
+    filterName: acceptableFeedsFilterName,
     filters: (query: any, canBeAccepted?: boolean) =>
       canBeAccepted
         ? query
@@ -30,7 +33,7 @@ export const extraFilters: SupabaseFilter[] = [
   },
   {
     category: 'Monobiałkowe',
-    filterName: 'Pokaż polecane karmy',
+    filterName: recommendedFeedsFilterName,
     filters: (query: any, recommended?: boolean) =>
       recommended
         ? query
@@ -46,7 +49,7 @@ export const extraFilters: SupabaseFilter[] = [
   },
   {
     category: 'Chore nerki',
-    filterName: 'Pokaż polecane karmy',
+    filterName: recommendedFeedsFilterName,
     filters: (query: any, recommended?: boolean) =>
       recommended
         ? query
@@ -58,7 +61,7 @@ export const extraFilters: SupabaseFilter[] = [
   },
   {
     category: 'Kocięta',
-    filterName: 'Pokaż akceptowalne karmy',
+    filterName: acceptableFeedsFilterName,
     filters: (query: any, canBeAccepted?: boolean) =>
       canBeAccepted
         ? query

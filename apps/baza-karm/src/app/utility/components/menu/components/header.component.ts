@@ -40,6 +40,7 @@ import { TuiNavigation } from '@taiga-ui/layout';
         iconEnd="@tui.cat"
         tuiLink
         type="button"
+        i18n="@@navigation.feedDatabase"
       >
         Baza karm dla kotów
       </button>
@@ -54,6 +55,7 @@ import { TuiNavigation } from '@taiga-ui/layout';
             [style.color]="'white'"
             [href]="'https://kalkulator.kotopedia.pl'"
             target="_blank"
+            i18n="@@navigation.calculator"
             >Kalkulator karmy</a
           >
         </button>
@@ -74,6 +76,7 @@ import { TuiNavigation } from '@taiga-ui/layout';
           iconStart="@tui.user"
           tuiButton
           type="button"
+          i18n="@@auth.signIn"
         >
           Zaloguj się
         </button>

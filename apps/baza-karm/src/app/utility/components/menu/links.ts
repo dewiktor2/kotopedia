@@ -1,18 +1,31 @@
+const navigationLinks = [
+  {
+    route: '/wszystkie',
+    name: $localize`:@@navigation.allFeeds:Wszystkie`,
+  },
+  {
+    route: '/polecane',
+    name: $localize`:@@navigation.recommendedFeeds:Polecane`,
+  },
+  {
+    route: '/monobialkowe',
+    name: $localize`:@@navigation.singleProteinFeeds:Monobiałkowe`,
+  },
+  {
+    route: '/chore-nerki',
+    name: $localize`:@@navigation.kidneyFeeds:Chore nerki`,
+  },
+  {
+    route: '/chora-trzustka',
+    name: $localize`:@@navigation.pancreasFeeds:Chora trzustka`,
+  },
+  {
+    route: '/kocieta',
+    name: $localize`:@@navigation.kittenFeeds:Kocięta`,
+  },
+];
+
 export const links = {
-  mobile: [
-    { route: '/wszystkie', name: 'Wszystkie' },
-    { route: '/polecane', name: 'Polecane' },
-    { route: '/monobialkowe', name: 'Monobiałkowe' },
-    { route: '/chore-nerki', name: 'Chore nerki' },
-    { route: '/chora-trzustka', name: 'Chora trzustka' },
-    { route: '/kocieta', name: 'Kocięta' },
-  ],
-  desktop: [
-    { route: '/wszystkie', name: 'Wszystkie' },
-    { route: '/polecane', name: 'Polecane' },
-    { route: '/monobialkowe', name: 'Monobiałkowe' },
-    { route: '/chore-nerki', name: 'Chore nerki' },
-    { route: '/chora-trzustka', name: 'Chora trzustka' },
-    { route: '/kocieta', name: 'Kocięta' },
-  ],
+  mobile: navigationLinks,
+  desktop: navigationLinks,
 };

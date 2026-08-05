@@ -15,9 +15,9 @@ export const SEO_HANDLER = new InjectionToken<() => void>('SEO_HANDLER', {
     const destroyRef = inject(DestroyRef);
     const document = inject(DOCUMENT);
 
-    const defaultDescription = 'Znajdź najlepsze karmy dla swojego kota.';
-    const defaultKeywords =
-      'kot, karma dla kota, karmy dla kotów, zdrowie kota';
+    const defaultDescription = $localize`:@@seo.default.description:Znajdź najlepsze karmy dla swojego kota.`;
+    const defaultKeywords = $localize`:@@seo.default.keywords:kot, karma dla kota, karmy dla kotów, zdrowie kota`;
+    const defaultTitle = $localize`:@@seo.default.title:Kotopedia - baza karm dla kotów`;
 
     const updateCanonicalUrl = (url: string) => {
       let link: HTMLLinkElement | null = document.querySelector(
@@ -48,7 +48,7 @@ export const SEO_HANDLER = new InjectionToken<() => void>('SEO_HANDLER', {
           switchMap((route) => route.data || {}),
         )
         .subscribe((data) => {
-          const title = data['title'] || 'Kotopedia - baza karm dla kotów';
+          const title = data['title'] || defaultTitle;
 
           titleService.setTitle(title);
 

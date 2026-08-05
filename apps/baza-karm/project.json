@@ -4,6 +4,9 @@
   "projectType": "application",
   "prefix": "bk",
   "sourceRoot": "apps/baza-karm/src",
+  "i18n": {
+    "sourceLocale": "pl"
+  },
   "tags": [],
   "targets": {
     "build": {
@@ -13,7 +16,7 @@
         "outputPath": "dist/apps/baza-karm",
         "index": "apps/baza-karm/src/index.html",
         "browser": "apps/baza-karm/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["@angular/localize/init", "zone.js"],
         "tsConfig": "apps/baza-karm/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -108,7 +111,9 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "baza-karm:build"
+        "buildTarget": "baza-karm:build",
+        "format": "xlf2",
+        "outputPath": "apps/baza-karm/src/locale"
       }
     }
   }

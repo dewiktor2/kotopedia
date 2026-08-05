@@ -11,15 +11,17 @@ import { RouterLink } from '@angular/router';
       <h1 class="text-9xl font-extrabold tracking-widest text-gray-900">404</h1>
       <div
         class="bg-blue-500 px-2 text-sm text-white rounded rotate-12 absolute"
+        i18n="@@notFound.title"
       >
         Strona nie znaleziona
       </div>
-      <p class="mt-4 text-xl text-gray-600">
+      <p class="mt-4 text-xl text-gray-600" i18n="@@notFound.description">
         Strona, której szukasz nie istnieje lub została przeniesiona
       </p>
       <a
         routerLink="/"
         class="mt-6 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition"
+        i18n="@@notFound.homeLink"
       >
         Strona główna
       </a>
@@ -36,8 +38,7 @@ export class NotFoundComponent implements OnInit {
     });
     this.#metaService.updateTag({
       name: 'description',
-      content:
-        'Kotopedia - Strona, której szukasz nie istnieje lub została przeniesiona',
+      content: $localize`:@@notFound.metaDescription:Kotopedia - Strona, której szukasz nie istnieje lub została przeniesiona`,
     });
   }
 }

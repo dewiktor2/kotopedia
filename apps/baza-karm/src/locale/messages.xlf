@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="pl">
+  <file id="ngi18n" original="ng.template">
+    <unit id="seo.all.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:4</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - karmy dla kota</source>
+      </segment>
+    </unit>
+    <unit id="seo.all.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:5</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota</source>
+      </segment>
+    </unit>
+    <unit id="seo.all.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:6</note>
+      </notes>
+      <segment>
+        <source>kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach</source>
+      </segment>
+    </unit>
+    <unit id="seo.singleProtein.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:10</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - karmy monobiałkowe</source>
+      </segment>
+    </unit>
+    <unit id="seo.singleProtein.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:11</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - polecane karmy monobiałkowe dla kotów.</source>
+      </segment>
+    </unit>
+    <unit id="seo.singleProtein.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:12</note>
+      </notes>
+      <segment>
+        <source>karmy monobiałkowe, dieta kota, jedzenie dla kota, zdrowa karma</source>
+      </segment>
+    </unit>
+    <unit id="seo.kidney.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:16</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - karmy dla kotów z chorymi nerkami</source>
+      </segment>
+    </unit>
+    <unit id="seo.kidney.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:17</note>
+      </notes>
+      <segment>
+        <source>Karmy dla kotów z problemami nerkowymi.</source>
+      </segment>
+    </unit>
+    <unit id="seo.kidney.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:18</note>
+      </notes>
+      <segment>
+        <source>kot z chorymi nerkami, dieta dla kota, karmy weterynaryjne, zdrowie kota</source>
+      </segment>
+    </unit>
+    <unit id="seo.recommended.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:22</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - polecane karmy</source>
+      </segment>
+    </unit>
+    <unit id="seo.recommended.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:23</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - nasze rekomendacje karm dla kotów.</source>
+      </segment>
+    </unit>
+    <unit id="seo.recommended.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:24</note>
+      </notes>
+      <segment>
+        <source>polecane karmy, najlepsze karmy, kot, jedzenie dla kota</source>
+      </segment>
+    </unit>
+    <unit id="seo.kitten.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:28</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - karmy dla kociąt</source>
+      </segment>
+    </unit>
+    <unit id="seo.kitten.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:29</note>
+      </notes>
+      <segment>
+        <source>Karmy dla młodych kotów - sprawdź najlepsze opcje.</source>
+      </segment>
+    </unit>
+    <unit id="seo.kitten.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:30</note>
+      </notes>
+      <segment>
+        <source>kocięta, karma dla kociąt, młody kot, najlepsze karmy dla młodych kotów</source>
+      </segment>
+    </unit>
+    <unit id="seo.notFound.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/app.routes.ts:125</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - Nie znaleziono podanej strony</source>
+      </segment>
+    </unit>
+    <unit id="feed.filter.showAcceptable">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/+state/feed.model.ts:20</note>
+      </notes>
+      <segment>
+        <source>Pokaż akceptowalne karmy</source>
+      </segment>
+    </unit>
+    <unit id="feed.filter.showRecommended">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/+state/feed.model.ts:21</note>
+      </notes>
+      <segment>
+        <source>Pokaż polecane karmy</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.company">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:63</note>
+      </notes>
+      <segment>
+        <source>Firma</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.name">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:77</note>
+      </notes>
+      <segment>
+        <source>Nazwa</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.flavor">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:91</note>
+      </notes>
+      <segment>
+        <source>Smak</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.carbohydrates">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:104,105</note>
+      </notes>
+      <segment>
+        <source>Węglowodany</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.protein">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:126</note>
+      </notes>
+      <segment>
+        <source>Białko</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.fat">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:144</note>
+      </notes>
+      <segment>
+        <source>Tłuszcz</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.phosphorus">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:162</note>
+      </notes>
+      <segment>
+        <source>Fosfor</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.calories">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:183,184</note>
+      </notes>
+      <segment>
+        <source>Kcal/100g</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.composition">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:196,197</note>
+      </notes>
+      <segment>
+        <source>Skład (Opis)</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.compositionLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:211,212</note>
+      </notes>
+      <segment>
+        <source>Skład karmy</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.notes">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:221</note>
+      </notes>
+      <segment>
+        <source>Uwagi</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.updatedAt">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:232,233</note>
+      </notes>
+      <segment>
+        <source>Data edycji</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.column.reportProblem">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:245,246</note>
+      </notes>
+      <segment>
+        <source>Zgłoś problem</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.reportProblem">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:259,261</note>
+      </notes>
+      <segment>
+        <source>Zgłoś</source>
+      </segment>
+    </unit>
+    <unit id="feed.desktop.loading">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/desktop/feed.component.html:274,276</note>
+      </notes>
+      <segment>
+        <source>Ładowanie</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.compositionLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:68,69</note>
+      </notes>
+      <segment>
+        <source>Skład karmy</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.nameLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:75,76</note>
+      </notes>
+      <segment>
+        <source>Nazwa:</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.flavorLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:79,80</note>
+      </notes>
+      <segment>
+        <source>Smak:</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.column.protein">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:91,92</note>
+      </notes>
+      <segment>
+        <source> Białko </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.column.carbohydrates">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:97,99</note>
+      </notes>
+      <segment>
+        <source> Węgle </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.column.fat">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:103,104</note>
+      </notes>
+      <segment>
+        <source> Tłuszcz </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.column.phosphorus">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:109,111</note>
+      </notes>
+      <segment>
+        <source> Fosfor </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.column.calories">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:115,116</note>
+      </notes>
+      <segment>
+        <source> Kcal/100g </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.loading">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:173,175</note>
+      </notes>
+      <segment>
+        <source>Ładowanie</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.paginationSummary">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:213,216</note>
+      </notes>
+      <segment>
+        <source> Strona <ph id="0" equiv="INTERPOLATION" disp="{{ currentPage() }}"/> z <ph id="1" equiv="INTERPOLATION_1" disp="{{ totalPages() }}"/> (Łącznie: <ph id="2" equiv="INTERPOLATION_2" disp="{{ totalCount() }}"/>) </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:242,244</note>
+      </notes>
+      <segment>
+        <source> Opcje sortowania </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.fieldLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:248,251</note>
+      </notes>
+      <segment>
+        <source>Sortuj według:</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.companyName">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:256,258</note>
+      </notes>
+      <segment>
+        <source> Nazwa firmy </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.productName">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:259,261</note>
+      </notes>
+      <segment>
+        <source> Nazwa produktu </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.protein">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:262,264</note>
+      </notes>
+      <segment>
+        <source> Białko </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.carbohydrates">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:265,267</note>
+      </notes>
+      <segment>
+        <source> Węgle </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.fat">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:268,270</note>
+      </notes>
+      <segment>
+        <source> Tłuszcz </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.phosphorus">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:271,273</note>
+      </notes>
+      <segment>
+        <source> Fosfor </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.orderLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:279,282</note>
+      </notes>
+      <segment>
+        <source>Kolejność:</source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.ascending">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:287,289</note>
+      </notes>
+      <segment>
+        <source> Rosnąco </source>
+      </segment>
+    </unit>
+    <unit id="feed.mobile.sort.descending">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:290,292</note>
+      </notes>
+      <segment>
+        <source> Malejąco </source>
+      </segment>
+    </unit>
+    <unit id="common.cancel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:299,300</note>
+      </notes>
+      <segment>
+        <source>Anuluj</source>
+      </segment>
+    </unit>
+    <unit id="common.apply">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/components/mobile/feed-cards.component.html:305,306</note>
+      </notes>
+      <segment>
+        <source>Zastosuj</source>
+      </segment>
+    </unit>
+    <unit id="feed.reportProblemMessage">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/feed/functions/show-problem-modal.ts:9</note>
+      </notes>
+      <segment>
+        <source>Prześlij napotkany błąd na adres mailowy pomoc@kotopedia.pl z dodatkowymi informacjami o karmie: kod: <ph id="0" equiv="feedId" disp="data.id"/>, firma: <ph id="1" equiv="brandName" disp="data.brand_name"/></source>
+      </segment>
+    </unit>
+    <unit id="login.emailLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/login/login.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>Wpisz e-mail</source>
+      </segment>
+    </unit>
+    <unit id="login.passwordLabel">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/login/login.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Wpisz hasło</source>
+      </segment>
+    </unit>
+    <unit id="login.submit">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/login/login.component.html:39,40</note>
+      </notes>
+      <segment>
+        <source>Zaloguj</source>
+      </segment>
+    </unit>
+    <unit id="notFound.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/not-found/not-found.component.ts:16,18</note>
+      </notes>
+      <segment>
+        <source> Strona nie znaleziona </source>
+      </segment>
+    </unit>
+    <unit id="notFound.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/not-found/not-found.component.ts:19,22</note>
+      </notes>
+      <segment>
+        <source> Strona, której szukasz nie istnieje lub została przeniesiona </source>
+      </segment>
+    </unit>
+    <unit id="notFound.homeLink">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/not-found/not-found.component.ts:26,29</note>
+      </notes>
+      <segment>
+        <source> Strona główna </source>
+      </segment>
+    </unit>
+    <unit id="notFound.metaDescription">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/domains/not-found/not-found.component.ts:41</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - Strona, której szukasz nie istnieje lub została przeniesiona</source>
+      </segment>
+    </unit>
+    <unit id="seo.default.description">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/tokens/seo.token.ts:18</note>
+      </notes>
+      <segment>
+        <source>Znajdź najlepsze karmy dla swojego kota.</source>
+      </segment>
+    </unit>
+    <unit id="seo.default.keywords">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/tokens/seo.token.ts:19</note>
+      </notes>
+      <segment>
+        <source>kot, karma dla kota, karmy dla kotów, zdrowie kota</source>
+      </segment>
+    </unit>
+    <unit id="seo.default.title">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/tokens/seo.token.ts:20</note>
+      </notes>
+      <segment>
+        <source>Kotopedia - baza karm dla kotów</source>
+      </segment>
+    </unit>
+    <unit id="navigation.feedDatabase">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/header.component.ts:45,47</note>
+      </notes>
+      <segment>
+        <source> Baza karm dla kotów </source>
+      </segment>
+    </unit>
+    <unit id="navigation.calculator">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/header.component.ts:59,62</note>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/mobile-nav.component.ts:50,54</note>
+      </notes>
+      <segment>
+        <source>Kalkulator karmy</source>
+      </segment>
+    </unit>
+    <unit id="auth.signIn">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/header.component.ts:81,82</note>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/mobile-nav.component.ts:65,66</note>
+      </notes>
+      <segment>
+        <source> Zaloguj się </source>
+      </segment>
+    </unit>
+    <unit id="navigation.feeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/mobile-nav.component.ts:26,28</note>
+      </notes>
+      <segment>
+        <source>Karmy</source>
+      </segment>
+    </unit>
+    <unit id="auth.signOut">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/components/mobile-nav.component.ts:77,78</note>
+      </notes>
+      <segment>
+        <source> Wyloguj się </source>
+      </segment>
+    </unit>
+    <unit id="navigation.allFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:4</note>
+      </notes>
+      <segment>
+        <source>Wszystkie</source>
+      </segment>
+    </unit>
+    <unit id="navigation.recommendedFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:8</note>
+      </notes>
+      <segment>
+        <source>Polecane</source>
+      </segment>
+    </unit>
+    <unit id="navigation.singleProteinFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:12</note>
+      </notes>
+      <segment>
+        <source>Monobiałkowe</source>
+      </segment>
+    </unit>
+    <unit id="navigation.kidneyFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:16</note>
+      </notes>
+      <segment>
+        <source>Chore nerki</source>
+      </segment>
+    </unit>
+    <unit id="navigation.pancreasFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:20</note>
+      </notes>
+      <segment>
+        <source>Chora trzustka</source>
+      </segment>
+    </unit>
+    <unit id="navigation.kittenFeeds">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/menu/links.ts:24</note>
+      </notes>
+      <segment>
+        <source>Kocięta</source>
+      </segment>
+    </unit>
+    <unit id="common.close">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/modal.ts/modal.component.ts:25,26</note>
+        <note category="location">apps/baza-karm/src/app/utility/components/tooltip/dismissable-tooltip.component.ts:32,33</note>
+      </notes>
+      <segment>
+        <source> Zamknij </source>
+      </segment>
+    </unit>
+    <unit id="search.placeholder">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/search-input.component.ts:30</note>
+      </notes>
+      <segment>
+        <source>Szukaj</source>
+      </segment>
+    </unit>
+    <unit id="search.iconDescription">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/search-input.component.ts:36,37</note>
+      </notes>
+      <segment>
+        <source>Ikona wyszukiwania</source>
+      </segment>
+    </unit>
+    <unit id="search.help">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/search-input.component.ts:47,48</note>
+      </notes>
+      <segment>
+        <source>Szukaj po nazwie lub firmie</source>
+      </segment>
+    </unit>
+    <unit id="common.noData">
+      <notes>
+        <note category="location">apps/baza-karm/src/app/utility/components/tooltip/dismissable-tooltip.component.ts:21,23</note>
+      </notes>
+      <segment>
+        <source>Brak danych</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

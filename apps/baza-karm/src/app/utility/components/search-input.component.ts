@@ -27,12 +27,14 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
             type="search"
             class="grow"
             placeholder="Szukaj"
+            i18n-placeholder="@@search.placeholder"
             (keydown.enter)="onSearchButtonClick(searchInput.value)"
           />
           @if ((searchInProgress$ | async) === false) {
             <svg-icon
               key="search"
-              aria-roledescription="Search Icon"
+              aria-roledescription="Ikona wyszukiwania"
+              i18n-aria-roledescription="@@search.iconDescription"
               size="xl"
               (click)="onSearchButtonClick(searchInput.value)"
             />
@@ -42,7 +44,8 @@ import { SvgIconComponent } from '@ngneat/svg-icon';
         </label>
         <span
           class="flex ml-2 tooltip tooltip-left"
-          [attr.title]="'Szukaj po nazwie lub firmie'"
+          title="Szukaj po nazwie lub firmie"
+          i18n-title="@@search.help"
         >
           <svg-icon
             class="w-6 h-6 cursor-pointer text-blue-500"

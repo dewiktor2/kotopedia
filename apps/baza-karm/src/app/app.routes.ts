@@ -1,5 +1,35 @@
 import { Route } from '@angular/router';
 
+const allFeedsSeo = {
+  title: $localize`:@@seo.all.title:Kotopedia - karmy dla kota`,
+  description: $localize`:@@seo.all.description:Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota`,
+  keywords: $localize`:@@seo.all.keywords:kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach`,
+};
+
+const singleProteinFeedsSeo = {
+  title: $localize`:@@seo.singleProtein.title:Kotopedia - karmy monobiałkowe`,
+  description: $localize`:@@seo.singleProtein.description:Kotopedia - polecane karmy monobiałkowe dla kotów.`,
+  keywords: $localize`:@@seo.singleProtein.keywords:karmy monobiałkowe, dieta kota, jedzenie dla kota, zdrowa karma`,
+};
+
+const kidneyFeedsSeo = {
+  title: $localize`:@@seo.kidney.title:Kotopedia - karmy dla kotów z chorymi nerkami`,
+  description: $localize`:@@seo.kidney.description:Karmy dla kotów z problemami nerkowymi.`,
+  keywords: $localize`:@@seo.kidney.keywords:kot z chorymi nerkami, dieta dla kota, karmy weterynaryjne, zdrowie kota`,
+};
+
+const recommendedFeedsSeo = {
+  title: $localize`:@@seo.recommended.title:Kotopedia - polecane karmy`,
+  description: $localize`:@@seo.recommended.description:Kotopedia - nasze rekomendacje karm dla kotów.`,
+  keywords: $localize`:@@seo.recommended.keywords:polecane karmy, najlepsze karmy, kot, jedzenie dla kota`,
+};
+
+const kittenFeedsSeo = {
+  title: $localize`:@@seo.kitten.title:Kotopedia - karmy dla kociąt`,
+  description: $localize`:@@seo.kitten.description:Karmy dla młodych kotów - sprawdź najlepsze opcje.`,
+  keywords: $localize`:@@seo.kitten.keywords:kocięta, karma dla kociąt, młody kot, najlepsze karmy dla młodych kotów`,
+};
+
 export const appRoutes: Route[] = [
   {
     path: '',
@@ -9,10 +39,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'wszystkie',
-      title: 'Kotopedia - karmy dla kota',
-      description:
-        'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota',
-      keywords: 'kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach',
+      ...allFeedsSeo,
     },
     pathMatch: 'full',
   },
@@ -24,10 +51,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'wszystkie',
-      title: 'Kotopedia - karmy dla kota',
-      description:
-        'Kotopedia - baza karm dla kotów, blog, kalkulator dla kotów, karmy dla kota',
-      keywords: 'kot, karmy dla kotów, zdrowe karmy, kotopedia, blog o kotach',
+      ...allFeedsSeo,
     },
   },
   {
@@ -38,10 +62,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'monobialkowe',
-      title: 'Kotopedia - karmy monobiałkowe',
-      description: 'Kotopedia - polecane karmy monobiałkowe dla kotów.',
-      keywords:
-        'karmy monobiałkowe, dieta kota, jedzenie dla kota, zdrowa karma',
+      ...singleProteinFeedsSeo,
     },
   },
   {
@@ -52,10 +73,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'chore-nerki',
-      title: 'Kotopedia - karmy dla kotów z chorymi nerkami',
-      description: 'Karmy dla kotów z problemami nerkowymi.',
-      keywords:
-        'kot z chorymi nerkami, dieta dla kota, karmy weterynaryjne, zdrowie kota',
+      ...kidneyFeedsSeo,
     },
   },
   {
@@ -66,9 +84,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'polecane',
-      title: 'Kotopedia - polecane karmy',
-      description: 'Kotopedia - nasze rekomendacje karm dla kotów.',
-      keywords: 'polecane karmy, najlepsze karmy, kot, jedzenie dla kota',
+      ...recommendedFeedsSeo,
     },
   },
   {
@@ -79,9 +95,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'polecane',
-      title: 'Kotopedia - polecane karmy',
-      description: 'Kotopedia - nasze rekomendacje karm dla kotów.',
-      keywords: 'polecane karmy, najlepsze karmy, kot, jedzenie dla kota',
+      ...recommendedFeedsSeo,
     },
   },
   {
@@ -92,10 +106,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'kocięta',
-      title: 'Kotopedia - karmy dla kociąt',
-      description: 'Karmy dla młodych kotów - sprawdź najlepsze opcje.',
-      keywords:
-        'kocięta, karma dla kociąt, młody kot, najlepsze karmy dla młodych kotów',
+      ...kittenFeedsSeo,
     },
   },
   {
@@ -111,7 +122,7 @@ export const appRoutes: Route[] = [
       ),
     data: {
       type: 'not-found',
-      title: 'Kotopedia - Nie znaleziono podanej strony',
+      title: $localize`:@@seo.notFound.title:Kotopedia - Nie znaleziono podanej strony`,
       noMeta: true,
     },
   },

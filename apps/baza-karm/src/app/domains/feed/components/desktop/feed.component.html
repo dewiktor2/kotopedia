@@ -60,6 +60,7 @@
         <e-column
           field="brand_name"
           headerText="Firma"
+          i18n-headerText="@@feed.desktop.column.company"
           headerTextAlign="left"
           textAlign="Left"
           width="150"
@@ -73,6 +74,7 @@
         <e-column
           field="nazwa"
           headerText="Nazwa"
+          i18n-headerText="@@feed.desktop.column.name"
           headerTextAlign="left"
           textAlign="Left"
           width="200"
@@ -86,6 +88,7 @@
         <e-column
           field="flavors"
           headerText="Smak"
+          i18n-headerText="@@feed.desktop.column.flavor"
           headerTextAlign="left"
           textAlign="Left"
           width="150"
@@ -99,6 +102,7 @@
         <e-column
           field="wegle_sucha"
           headerText="Węglowodany"
+          i18n-headerText="@@feed.desktop.column.carbohydrates"
           textAlign="right"
           width="150"
         >
@@ -119,6 +123,7 @@
         <e-column
           field="bialko_sucha"
           headerText="Białko"
+          i18n-headerText="@@feed.desktop.column.protein"
           textAlign="right"
           width="100"
         >
@@ -136,6 +141,7 @@
         <e-column
           field="tluszcz_w_suchej"
           headerText="Tłuszcz"
+          i18n-headerText="@@feed.desktop.column.fat"
           textAlign="right"
           width="100"
         >
@@ -153,6 +159,7 @@
         <e-column
           field="fosfor_sucha"
           headerText="Fosfor"
+          i18n-headerText="@@feed.desktop.column.phosphorus"
           textAlign="right"
           width="100"
         >
@@ -174,6 +181,7 @@
         <e-column
           field="kcal_100"
           headerText="Kcal/100g"
+          i18n-headerText="@@feed.desktop.column.calories"
           textAlign="right"
           width="150"
         >
@@ -186,6 +194,7 @@
         <e-column
           field="opis"
           headerText="Skład (Opis)"
+          i18n-headerText="@@feed.desktop.column.composition"
           headerTextAlign="left"
           textAlign="left"
           width="150"
@@ -200,6 +209,7 @@
                 [identifier]="data.id"
                 [text]="data.opis"
                 label="Skład karmy"
+                i18n-label="@@feed.desktop.compositionLabel"
               />
             </div>
           </ng-template>
@@ -208,6 +218,7 @@
           field="categories"
           headerTextAlign="left"
           headerText="Uwagi"
+          i18n-headerText="@@feed.desktop.column.notes"
           textAlign="Left"
           width="150"
         >
@@ -219,6 +230,7 @@
         </e-column>
         <e-column
           headerText="Data edycji"
+          i18n-headerText="@@feed.desktop.column.updatedAt"
           headerTextAlign="left"
           textAlign="Left"
           clipMode="EllipsisWithTooltip"
@@ -231,6 +243,7 @@
         </e-column>
         <e-column
           headerText="Zgłoś problem"
+          i18n-headerText="@@feed.desktop.column.reportProblem"
           headerTextAlign="left"
           textAlign="Left"
           clipMode="EllipsisWithTooltip"
@@ -242,7 +255,9 @@
               class="cursor-pointer text-blue-400"
               (click)="showProblem(data)"
             >
-              Zgłoś
+              <ng-container i18n="@@feed.desktop.reportProblem"
+                >Zgłoś</ng-container
+              >
             </span>
           </ng-template>
         </e-column>
@@ -253,7 +268,11 @@
       <div
         class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white"
       >
-        <span class="text-gray-600 text-sm font-medium">Ładowanie</span>
+        <span
+          class="text-gray-600 text-sm font-medium"
+          i18n="@@feed.desktop.loading"
+          >Ładowanie</span
+        >
         <span class="text-gray-600 animate-pulse">.</span>
         <span class="text-gray-600 animate-pulse delay-200">.</span>
         <span class="text-gray-600 animate-pulse delay-400">.</span>

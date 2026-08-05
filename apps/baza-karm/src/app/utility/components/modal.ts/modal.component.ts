@@ -20,6 +20,7 @@ import { Component, inject, input } from '@angular/core';
                 class="btn text-white bg-blue-300   hover:bg-blue-500
                   focus:bg-blue-500   
                   active:bg-blue-600  px-4 py-2 rounded"
+                i18n="@@common.close"
               >
                 Zamknij
               </button>

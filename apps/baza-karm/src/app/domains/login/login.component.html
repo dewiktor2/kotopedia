@@ -6,7 +6,7 @@
       </div>
 
       <tui-textfield>
-        <label tuiLabel>Wpisz e-mail</label>
+        <label tuiLabel i18n="@@login.emailLabel">Wpisz e-mail</label>
         <input
           autocomplete="username"
           formControlName="email"
@@ -17,7 +17,7 @@
       <tui-error class="mb-4" [error]="loginForm.invalidControl('email')" />
 
       <tui-textfield>
-        <label tuiLabel>Wpisz hasło</label>
+        <label tuiLabel i18n="@@login.passwordLabel">Wpisz hasło</label>
         <input
           autocomplete="current-password"
           formControlName="password"
@@ -36,7 +36,7 @@
         type="submit"
         [disabled]="loginForm.invalid || !this.captcha()?.token"
       >
-        Zaloguj
+        <ng-container i18n="@@login.submit">Zaloguj</ng-container>
       </button>
     </form>
   </div>

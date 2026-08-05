@@ -66,12 +66,19 @@
                   [identifier]="card.id"
                   [text]="card.opis"
                   label="Skład karmy"
+                  i18n-label="@@feed.mobile.compositionLabel"
                 />
               </div>
             </div>
           </div>
-          <p class="text-sm"><strong>Nazwa:</strong> {{ card.nazwa }}</p>
-          <p class="text-sm"><strong>Smak:</strong> {{ card.flavors }}</p>
+          <p class="text-sm">
+            <strong i18n="@@feed.mobile.nameLabel">Nazwa:</strong>
+            {{ card.nazwa }}
+          </p>
+          <p class="text-sm">
+            <strong i18n="@@feed.mobile.flavorLabel">Smak:</strong>
+            {{ card.flavors }}
+          </p>
           <!-- Tabela z danymi: węgle, tłuszcz, fosfor, kcal -->
           <div class="overflow-x-auto mt-2">
             <table class="w-full border-collapse text-xs md:text-sm">
@@ -79,26 +86,31 @@
                 <tr>
                   <th
                     class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700"
+                    i18n="@@feed.mobile.column.protein"
                   >
                     Białko
                   </th>
                   <th
                     class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700"
+                    i18n="@@feed.mobile.column.carbohydrates"
                   >
                     Węgle
                   </th>
                   <th
                     class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700"
+                    i18n="@@feed.mobile.column.fat"
                   >
                     Tłuszcz
                   </th>
                   <th
                     class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700"
+                    i18n="@@feed.mobile.column.phosphorus"
                   >
                     Fosfor
                   </th>
                   <th
                     class="px-1 py-1 md:px-2 md:py-1 text-left font-medium text-gray-700"
+                    i18n="@@feed.mobile.column.calories"
                   >
                     Kcal/100g
                   </th>
@@ -155,7 +167,11 @@
         <div
           class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded shadow bg-white"
         >
-          <span class="text-gray-600 text-sm font-medium">Ładowanie</span>
+          <span
+            class="text-gray-600 text-sm font-medium"
+            i18n="@@feed.mobile.loading"
+            >Ładowanie</span
+          >
           <span class="text-gray-600 animate-pulse">.</span>
           <span class="text-gray-600 animate-pulse delay-200">.</span>
           <span class="text-gray-600 animate-pulse delay-400">.</span>
@@ -190,7 +206,10 @@
         />
       </svg>
     </button>
-    <span class="text-sm text-gray-700 font-semibold">
+    <span
+      class="text-sm text-gray-700 font-semibold"
+      i18n="@@feed.mobile.paginationSummary"
+    >
       Strona {{ currentPage() }} z {{ totalPages() }} (Łącznie:
       {{ totalCount() }})
     </span>
@@ -219,9 +238,13 @@
 
   <!-- Sorting Modal -->
   <bk-base-modal #modal [identifier]="'modal'" [showDefaultButtons]="false">
-    <h2 class="text-lg font-bold mb-4">Opcje sortowania</h2>
+    <h2 class="text-lg font-bold mb-4" i18n="@@feed.mobile.sort.title">
+      Opcje sortowania
+    </h2>
     <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700"
+      <label
+        class="block text-sm font-medium text-gray-700"
+        i18n="@@feed.mobile.sort.fieldLabel"
         >Sortuj według:</label
       >
       <select
@@ -229,23 +252,43 @@
         (change)="onSortFieldChange($event)"
         class="mt-1 block w-full border border-gray-300 rounded p-2"
       >
-        <option value="brand_name">Nazwa firmy</option>
-        <option value="nazwa">Nazwa produktu</option>
-        <option value="bialko_sucha">Białko</option>
-        <option value="wegle_sucha">Węgle</option>
-        <option value="tluszcz_w_suchej">Tłuszcz</option>
-        <option value="fosfor_sucha">Fosfor</option>
+        <option value="brand_name" i18n="@@feed.mobile.sort.companyName">
+          Nazwa firmy
+        </option>
+        <option value="nazwa" i18n="@@feed.mobile.sort.productName">
+          Nazwa produktu
+        </option>
+        <option value="bialko_sucha" i18n="@@feed.mobile.sort.protein">
+          Białko
+        </option>
+        <option value="wegle_sucha" i18n="@@feed.mobile.sort.carbohydrates">
+          Węgle
+        </option>
+        <option value="tluszcz_w_suchej" i18n="@@feed.mobile.sort.fat">
+          Tłuszcz
+        </option>
+        <option value="fosfor_sucha" i18n="@@feed.mobile.sort.phosphorus">
+          Fosfor
+        </option>
       </select>
     </div>
     <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700">Kolejność:</label>
+      <label
+        class="block text-sm font-medium text-gray-700"
+        i18n="@@feed.mobile.sort.orderLabel"
+        >Kolejność:</label
+      >
       <select
         [value]="sortOption().order"
         (change)="onSortOrderChange($event)"
         class="mt-1 block w-full border border-gray-300 rounded p-2"
       >
-        <option value="ascending">Rosnąco</option>
-        <option value="descending">Malejąco</option>
+        <option value="ascending" i18n="@@feed.mobile.sort.ascending">
+          Rosnąco
+        </option>
+        <option value="descending" i18n="@@feed.mobile.sort.descending">
+          Malejąco
+        </option>
       </select>
     </div>
     <div class="flex justify-end space-x-2">
@@ -253,13 +296,13 @@
         (click)="closeSortDialog()"
         class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-white font-bold rounded"
       >
-        Anuluj
+        <ng-container i18n="@@common.cancel">Anuluj</ng-container>
       </button>
       <button
         (click)="applySort()"
         class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded"
       >
-        Zastosuj
+        <ng-container i18n="@@common.apply">Zastosuj</ng-container>
       </button>
     </div>
   </bk-base-modal>

@@ -18,7 +18,7 @@ import { Component, inject, input } from '@angular/core';
               }
             </ul>
           } @else {
-            Brak danych
+            <ng-container i18n="@@common.noData">Brak danych</ng-container>
           }
         </div>
         <div class="modal-action">
@@ -27,6 +27,7 @@ import { Component, inject, input } from '@angular/core';
               class="btn text-white bg-blue-300   hover:bg-blue-500
                   focus:bg-blue-500   
                   active:bg-blue-600  px-4 py-2 rounded"
+              i18n="@@common.close"
             >
               Zamknij
             </button>

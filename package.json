@@ -76,6 +76,7 @@
     "@angular/cli": "^22.1.0",
     "@angular/compiler-cli": "^22.1.0",
     "@angular/language-service": "^22.1.0",
+    "@angular/localize": "^22.1.0",
     "@ngneat/svg-generator": "^7.0.3",
     "@nx/eslint": "^23.1.1",
     "@nx/eslint-plugin": "^23.1.1",

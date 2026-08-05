@@ -23,7 +23,7 @@ import { links } from '../links';
         class="menu p-4 overflow-y-auto mt-16 lg:mt-0"
         [style.background]="'#1b1f3b'"
       >
-        <span [style.color]="'white'">Karmy</span>
+        <span [style.color]="'white'" i18n="@@navigation.feeds">Karmy</span>
 
         <ul class="mt-2" [style.width]="'20rem'">
           <li>
@@ -46,6 +46,7 @@ import { links } from '../links';
               [style.color]="'white'"
               [href]="'https://kalkulator.kotopedia.pl'"
               [target]="'_blank'"
+              i18n="@@navigation.calculator"
               >Kalkulator karmy</a
             >
           </li>
@@ -59,6 +60,7 @@ import { links } from '../links';
                 [class.active-link]="router.url === '/login'"
                 [style.color]="'white'"
                 [routerLink]="'/login'"
+                i18n="@@auth.signIn"
               >
                 Zaloguj się
               </a>
@@ -70,6 +72,7 @@ import { links } from '../links';
                 (click)="logout()"
                 iconStart="@tui.log-out"
                 [style.color]="'white'"
+                i18n="@@auth.signOut"
               >
                 Wyloguj się
               </a>

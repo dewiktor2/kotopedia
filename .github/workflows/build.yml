@@ -29,10 +29,16 @@ jobs:
         run: npm install --no-fund --no-audit --loglevel=error
 
       - name: Force install Linux native bindings (npm bug workaround)
-        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 --no-save
+        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 --no-save --legacy-peer-deps
 
-      - name: Debug Jest Preset Angular
-        run: node -e "try { require('jest-preset-angular/build/index.js'); console.log('jest-preset-angular loaded successfully'); } catch(e) { console.error('jest-preset-angular failed to load:', e); process.exit(1); }"
+      - name: Verify node_modules integrity
+        run: |
+          echo "=== jest-preset-angular from root ==="
+          node -e "console.log(require.resolve('jest-preset-angular'))"
+          echo "=== jest-preset-angular from rootDir ==="
+          node -e "console.log(require.resolve('jest-preset-angular', { paths: [process.cwd() + '/apps/baza-karm'] }))"
+          echo "=== ts-jest ==="
+          node -e "console.log(require.resolve('ts-jest'))"
 
       - name: Test
         run: npx nx run baza-karm:test

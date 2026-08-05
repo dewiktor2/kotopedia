@@ -3,6 +3,7 @@ const nxPreset = require('../../jest.preset.js');
 
 module.exports = {
   ...nxPreset,
+  resolver: require.resolve('@nx/jest/plugins/resolver'),
   displayName: 'kalkulator',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/apps/kalkulator',

@@ -31,6 +31,9 @@ jobs:
       - name: Force install Linux native bindings (npm bug workaround)
         run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 --no-save
 
+      - name: Debug Jest Preset Angular
+        run: node -e "try { require('jest-preset-angular/build/index.js'); console.log('jest-preset-angular loaded successfully'); } catch(e) { console.error('jest-preset-angular failed to load:', e); process.exit(1); }"
+
       - name: Test
         run: npx nx run baza-karm:test
 

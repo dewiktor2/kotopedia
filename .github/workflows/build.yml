@@ -28,9 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm install --no-fund --no-audit --loglevel=error
 
-      - name: Force install Linux native bindings (npm bug workaround)
-        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 @unrs/resolver-binding-linux-x64-gnu@1.12.2 --no-save --legacy-peer-deps
-
       - name: Verify node_modules integrity
         run: |
           echo "=== jest-preset-angular from root ==="

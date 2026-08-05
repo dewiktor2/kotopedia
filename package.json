@@ -117,34 +117,7 @@
     "cosmiconfig": {
       "yaml": "1.10.3"
     },
-    "eslint": {
-      "minimatch": "3.1.4",
-      "brace-expansion": "1.1.14"
-    },
-    "@eslint/eslintrc": {
-      "minimatch": "3.1.4",
-      "brace-expansion": "1.1.14"
-    },
-    "@humanwhocodes/config-array": {
-      "minimatch": "3.1.4",
-      "brace-expansion": "1.1.14"
-    },
-    "multimatch": {
-      "minimatch": "3.1.4"
-    },
-    "express@4.22.1": {
-      "body-parser": "1.20.5",
-      "path-to-regexp": "0.1.13"
-    },
-    "glob@8.0.3": {
-      "minimatch": "5.1.8"
-    },
-    "glob@7.2.3": {
-      "minimatch": "3.1.4"
-    },
-    "minimatch@3.1.4": {
-      "brace-expansion": "1.1.14"
-    },
+
     "anymatch": {
       "picomatch": "2.3.2"
     },

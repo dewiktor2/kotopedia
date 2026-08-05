@@ -38,6 +38,9 @@ jobs:
           node -e "console.log(require.resolve('ts-jest'))"
           echo "=== unrs Linux resolver binding ==="
           node -e "console.log(require.resolve('@unrs/resolver-binding-linux-x64-gnu'))"
+          echo "=== Angular build native bindings ==="
+          node -e "require('oxc-parser'); console.log('oxc-parser loaded')"
+          node -e "import('rolldown').then(() => console.log('rolldown loaded'))"
 
       - name: Test
         run: npx nx run baza-karm:test

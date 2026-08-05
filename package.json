@@ -153,6 +153,7 @@
   "optionalDependencies": {
     "@nx/nx-linux-x64-gnu": "23.1.1",
     "@swc/core-linux-x64-gnu": "1.15.8",
-    "@esbuild/linux-x64": "0.28.1"
+    "@esbuild/linux-x64": "0.28.1",
+    "@unrs/resolver-binding-linux-x64-gnu": "1.12.2"
   }
 }

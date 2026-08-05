@@ -29,7 +29,7 @@ jobs:
         run: npm install --no-fund --no-audit --loglevel=error
 
       - name: Force install Linux native bindings (npm bug workaround)
-        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 --no-save --legacy-peer-deps
+        run: npm install @esbuild/linux-x64@0.28.1 @swc/core-linux-x64-gnu@1.15.8 @nx/nx-linux-x64-gnu@23.1.1 @unrs/resolver-binding-linux-x64-gnu@1.12.2 --no-save --legacy-peer-deps
 
       - name: Verify node_modules integrity
         run: |
@@ -39,6 +39,8 @@ jobs:
           node -e "console.log(require.resolve('jest-preset-angular', { paths: [process.cwd() + '/apps/baza-karm'] }))"
           echo "=== ts-jest ==="
           node -e "console.log(require.resolve('ts-jest'))"
+          echo "=== unrs Linux resolver binding ==="
+          node -e "console.log(require.resolve('@unrs/resolver-binding-linux-x64-gnu'))"
 
       - name: Test
         run: npx nx run baza-karm:test
